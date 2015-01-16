@@ -24,7 +24,7 @@
 bl_info = {
     "name": "Console Prompt",
     "author": "Dealga McArdle",
-    "version": (0, 1, 0),
+    "version": (0, 1, 3),
     "blender": (2, 7, 4),
     "location": "Console - keystrokes",
     "description": "Adds feature to intercept console input and parse accordingly.",
