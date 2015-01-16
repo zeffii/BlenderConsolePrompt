@@ -38,7 +38,9 @@ import bpy
 console.do_action can be added to:
   UserPreferences/input/Console/
 using the ' + new ', i find ctrl+Enter a convenient key combo.
+Possible blender bug when adding keycombos for console specifically.
 
+https://github.com/zeffii/BlenderConsolePrompt/issues/1
 
 '''
 
@@ -50,6 +52,9 @@ class ConsoleDoAction(bpy.types.Operator):
     def execute(self, context):
         m = bpy.context.space_data.history[-1].body
         print(m)
+        if m.strip() == "cen":
+            bpy.ops.view3d.snap_cursor_to_center()
+
         return {'FINISHED'}
 
 
