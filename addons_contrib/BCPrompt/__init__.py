@@ -51,9 +51,16 @@ class ConsoleDoAction(bpy.types.Operator):
 
     def execute(self, context):
         m = bpy.context.space_data.history[-1].body
-        print(m)
-        if m.strip() == "cen":
-            bpy.ops.view3d.snap_cursor_to_center()
+        m = m.strip()
+        if m == "cen":
+            '''cursor to center'''
+            context.scene.cursor_location = (0.0, 0.0, 0.0)
+
+        elif m.endswith('!'):
+            '''copy current line to clipboard'''
+            m = m[:-1]
+            context.window_manager.clipboard = m
+            print('copied: "{0}"'.format(m))
 
         return {'FINISHED'}
 
