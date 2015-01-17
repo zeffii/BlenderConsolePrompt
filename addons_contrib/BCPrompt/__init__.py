@@ -62,6 +62,10 @@ class ConsoleDoAction(bpy.types.Operator):
             context.window_manager.clipboard = m
             print('copied: "{0}"'.format(m))
 
+        elif m == 'vtx':
+            if hasattr(bpy.ops.view3d, 'autovtx'):
+                bpy.ops.view3d.autovtx()
+
         return {'FINISHED'}
 
 
