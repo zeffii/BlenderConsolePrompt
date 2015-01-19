@@ -34,6 +34,9 @@ bl_info = {
 
 import bpy
 
+from console_python import add_scrollback
+
+
 '''
 console.do_action can be added to:
   UserPreferences/input/Console/
@@ -61,10 +64,15 @@ class ConsoleDoAction(bpy.types.Operator):
             m = m[:-1]
             context.window_manager.clipboard = m
             print('copied: "{0}"'.format(m))
+            add_scrollback('added to clipboard', 'OUTPUT')
 
         elif m == 'vtx':
             if hasattr(bpy.ops.view3d, 'autovtx'):
                 bpy.ops.view3d.autovtx()
+
+        elif m == 'xl':
+            if hasattr(bpy.ops.mesh, 'intersectall'):
+                bpy.ops.mesh.intersectall()
 
         return {'FINISHED'}
 
