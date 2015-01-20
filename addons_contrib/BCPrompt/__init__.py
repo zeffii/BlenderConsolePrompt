@@ -48,6 +48,29 @@ https://github.com/zeffii/BlenderConsolePrompt/issues/1
 '''
 
 
+# def align_all_3dviews():
+
+#     def get_reference(a, b, c):
+#         return (x for x in getattr(a, b) if x.type == c)
+
+#     for window in bpy.context.window_manager.windows:
+#         screen = window.screen
+#         areas = get_reference(screen, 'areas', 'VIEW_3D')
+#         for area in areas:
+#             print([region.type for region in area.regions])
+#             # ['HEADER', 'TOOLS', 'TOOL_PROPS', 'UI', 'WINDOW']
+#             regions = get_reference(area, 'regions', 'TOOL_PROPS')
+#             for region in regions:
+#                 ctx = {
+#                     'window': window,
+#                     'screen': screen,
+#                     'area': area,
+#                     'region': region}
+
+#                 # bpy.ops.view3d.view_center_cursor(override=ctx)
+#                 bpy.ops.view3d.zoom(override=ctx, delta=1)
+
+
 class ConsoleDoAction(bpy.types.Operator):
     bl_label = "ConsoleDoAction"
     bl_idname = "console.do_action"
@@ -58,6 +81,11 @@ class ConsoleDoAction(bpy.types.Operator):
         if m == "cen":
             '''cursor to center'''
             context.scene.cursor_location = (0.0, 0.0, 0.0)
+
+        # if m == "cenv":
+        #     '''cursor to center'''
+        #     context.scene.cursor_location = (0.0, 0.0, 0.0)
+        #     align_all_3dviews()
 
         elif m.endswith('!'):
             '''copy current line to clipboard'''
