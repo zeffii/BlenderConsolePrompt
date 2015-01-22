@@ -71,6 +71,27 @@ https://github.com/zeffii/BlenderConsolePrompt/issues/1
 #                 bpy.ops.view3d.zoom(override=ctx, delta=1)
 
 
+def vtx_specials(self, m):
+    ''' this first checks if the addon is enabled by testing
+    view3d.ops for the presence of autvtx operator, if it's not
+    present it tries to enable it. If it fails to enable the addon
+    the function returns early. If the function is found, it calls
+    the specific tinyCAD function.
+    '''
+    addon_enabled = hasattr(bpy.ops.view3d, 'autovtx')
+    if not addon_enabled:
+        try:
+            bpy.ops.wm.addon_enable(module="mesh_tinyCAD")
+        except:
+            print('tinyCAD addon not found.')
+            return
+
+    if m == 'vtx':
+        bpy.ops.view3d.autovtx()
+    elif m == 'xl':
+        bpy.ops.mesh.intersectall()
+
+
 class ConsoleDoAction(bpy.types.Operator):
     bl_label = "ConsoleDoAction"
     bl_idname = "console.do_action"
@@ -94,13 +115,8 @@ class ConsoleDoAction(bpy.types.Operator):
             print('copied: "{0}"'.format(m))
             add_scrollback('added to clipboard', 'OUTPUT')
 
-        elif m == 'vtx':
-            if hasattr(bpy.ops.view3d, 'autovtx'):
-                bpy.ops.view3d.autovtx()
-
-        elif m == 'xl':
-            if hasattr(bpy.ops.mesh, 'intersectall'):
-                bpy.ops.mesh.intersectall()
+        elif m in {'vtx', 'xl'}:
+            vtx_specials(self, m)
 
         elif m == 'ico':
             try:
