@@ -102,6 +102,12 @@ class ConsoleDoAction(bpy.types.Operator):
             if hasattr(bpy.ops.mesh, 'intersectall'):
                 bpy.ops.mesh.intersectall()
 
+        elif m == 'ico':
+            try:
+                bpy.ops.wm.addon_enable(module="development_icon_get")
+            except:
+                self.report("ico addon not present!")
+
         return {'FINISHED'}
 
 
