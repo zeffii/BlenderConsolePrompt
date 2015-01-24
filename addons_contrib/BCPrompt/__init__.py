@@ -82,13 +82,16 @@ class TextSyncPanel(bpy.types.Panel):
 
         row = layout.row()
         row.scale_y = 4
+
+        # show the operator if the text has
+        # changed on disk.
         if context.edit_text.is_modified:
             row.operator("text.text_upsync")
 
 
 def vtx_specials(self, m):
     '''
-    [1] checks if the addon is enabled by testing a known operator 
+    [1] checks if the addon is enabled by testing a known operator
     [2] if operator is not present, tries to enable the addon. 
     [3] If it fails to enable the addon the function returns early. 
         [ arguably this should suggest download + install + enable ]
