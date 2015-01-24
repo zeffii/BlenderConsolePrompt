@@ -49,8 +49,45 @@ FFA3AC
 '''
 
 
+class TextSyncOps(bpy.types.Operator):
+
+    bl_idname = "text.text_upsync"
+    bl_label = "Upsyncs Text from disk changes"
+
+    def execute(self, context):
+        text_block = context.edit_text
+        # print('is modified:', text_block.is_modified)
+        # print('is updated:', text_block.is_updated)
+        # print('is updated data:', text_block.is_updated_data)
+        bpy.ops.text.resolve_conflict(resolution='RELOAD')
+        return{'FINISHED'}
+
+
+class TextSyncPanel(bpy.types.Panel):
+    """Creates a Panel in the Object properties window"""
+    bl_idname = "TextSyncPanel"
+    bl_label = "text sync checker"
+    bl_space_type = "TEXT_EDITOR"
+    bl_region_type = "UI"
+
+    # def poll(self, context):
+    #     text_block = context.edit_text
+    #     print(dir(context))
+    #     return True
+
+    def draw(self, context):
+        layout = self.layout
+        row = layout.row()
+        scn = bpy.context.scene
+
+        row = layout.row()
+        row.scale_y = 4
+        if context.edit_text.is_modified:
+            row.operator("text.text_upsync")
+
+
 def vtx_specials(self, m):
-    ''' 
+    '''
     [1] checks if the addon is enabled by testing a known operator 
     [2] if operator is not present, tries to enable the addon. 
     [3] If it fails to enable the addon the function returns early. 
@@ -102,11 +139,13 @@ class ConsoleDoAction(bpy.types.Operator):
 
 def register():
     bpy.utils.register_module(__name__)
-
+#    bpy.utils.register_class(TextSyncOps)
+#    bpy.utils.register_class(TextSyncPanel)
 
 def unregister():
     bpy.utils.unregister_module(__name__)
-
+#    bpy.utils.unregister_class(TextSyncOps)
+#    bpy.utils.unregister_class(TextSyncPanel)
 
 if __name__ == "__main__":
     register()
