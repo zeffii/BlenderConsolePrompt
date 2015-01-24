@@ -50,11 +50,12 @@ FFA3AC
 
 
 def vtx_specials(self, m):
-    ''' this first checks if the addon is enabled by testing
-    view3d.ops for the presence of autvtx operator, if it's not
-    present it tries to enable it. If it fails to enable the addon
-    the function returns early. If the function is found, it calls
-    the specific tinyCAD function.
+    ''' 
+    [1] checks if the addon is enabled by testing a known operator 
+    [2] if operator is not present, tries to enable the addon. 
+    [3] If it fails to enable the addon the function returns early. 
+        [ arguably this should suggest download + install + enable ]
+    [4] If the function is found, it calls the specified function.
     '''
     addon_enabled = hasattr(bpy.ops.view3d, 'autovtx')
     if not addon_enabled:
