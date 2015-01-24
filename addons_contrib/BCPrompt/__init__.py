@@ -49,29 +49,6 @@ FFA3AC
 '''
 
 
-# def align_all_3dviews():
-
-#     def get_reference(a, b, c):
-#         return (x for x in getattr(a, b) if x.type == c)
-
-#     for window in bpy.context.window_manager.windows:
-#         screen = window.screen
-#         areas = get_reference(screen, 'areas', 'VIEW_3D')
-#         for area in areas:
-#             print([region.type for region in area.regions])
-#             # ['HEADER', 'TOOLS', 'TOOL_PROPS', 'UI', 'WINDOW']
-#             regions = get_reference(area, 'regions', 'TOOL_PROPS')
-#             for region in regions:
-#                 ctx = {
-#                     'window': window,
-#                     'screen': screen,
-#                     'area': area,
-#                     'region': region}
-
-#                 # bpy.ops.view3d.view_center_cursor(override=ctx)
-#                 bpy.ops.view3d.zoom(override=ctx, delta=1)
-
-
 def vtx_specials(self, m):
     ''' this first checks if the addon is enabled by testing
     view3d.ops for the presence of autvtx operator, if it's not
@@ -104,16 +81,10 @@ class ConsoleDoAction(bpy.types.Operator):
             '''cursor to center'''
             context.scene.cursor_location = (0.0, 0.0, 0.0)
 
-        # if m == "cenv":
-        #     '''cursor to center'''
-        #     context.scene.cursor_location = (0.0, 0.0, 0.0)
-        #     align_all_3dviews()
-
         elif m.endswith('!'):
             '''copy current line to clipboard'''
             m = m[:-1]
             context.window_manager.clipboard = m
-            print('copied: "{0}"'.format(m))
             add_scrollback('added to clipboard', 'OUTPUT')
 
         elif m in {'vtx', 'xl'}:
