@@ -45,6 +45,7 @@ Possible blender bug when adding keycombos for console specifically.
 
 https://github.com/zeffii/BlenderConsolePrompt/issues/1
 
+FFA3AC
 '''
 
 
@@ -122,7 +123,7 @@ class ConsoleDoAction(bpy.types.Operator):
             try:
                 bpy.ops.wm.addon_enable(module="development_icon_get")
             except:
-                self.report("ico addon not present!")
+                self.report({'INFO'}, "ico addon not present!")
 
         return {'FINISHED'}
 
