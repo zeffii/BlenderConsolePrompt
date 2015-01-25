@@ -36,6 +36,7 @@ import bpy
 
 from console_python import add_scrollback
 
+history_append = bpy.ops.console.history_append
 
 '''
 console.do_action can be added to:
@@ -92,8 +93,8 @@ class TextSyncPanel(bpy.types.Panel):
 def vtx_specials(self, m):
     '''
     [1] checks if the addon is enabled by testing a known operator
-    [2] if operator is not present, tries to enable the addon. 
-    [3] If it fails to enable the addon the function returns early. 
+    [2] if operator is not present, tries to enable the addon.
+    [3] If it fails to enable the addon the function returns early.
         [ arguably this should suggest download + install + enable ]
     [4] If the function is found, it calls the specified function.
     '''
@@ -109,6 +110,18 @@ def vtx_specials(self, m):
         bpy.ops.view3d.autovtx()
     elif m == 'xl':
         bpy.ops.mesh.intersectall()
+
+
+def remove_obj_and_mesh(context):
+    scene = context.scene
+    objs = bpy.data.objects
+    meshes = bpy.data.meshes
+    for obj in objs:
+        if obj.type == 'MESH':
+            scene.objects.unlink(obj)
+            objs.remove(obj)
+    for mesh in meshes:
+        meshes.remove(mesh)
 
 
 class ConsoleDoAction(bpy.types.Operator):
@@ -137,18 +150,18 @@ class ConsoleDoAction(bpy.types.Operator):
             except:
                 self.report({'INFO'}, "ico addon not present!")
 
+        elif m == 'wipe':
+            remove_obj_and_mesh(context)
+            add_scrollback('wiped objects and meshes', 'OUTPUT')
+            # history_append(text=m, current_character=0, remove_duplicates=True)
+            history_append(text=m, remove_duplicates=True)
+
         return {'FINISHED'}
 
 
 def register():
     bpy.utils.register_module(__name__)
-#    bpy.utils.register_class(TextSyncOps)
-#    bpy.utils.register_class(TextSyncPanel)
+
 
 def unregister():
     bpy.utils.unregister_module(__name__)
-#    bpy.utils.unregister_class(TextSyncOps)
-#    bpy.utils.unregister_class(TextSyncPanel)
-
-if __name__ == "__main__":
-    register()
