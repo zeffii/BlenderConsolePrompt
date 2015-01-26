@@ -1,3 +1,5 @@
+This is much cooler than you think.
+
 # BlenderConsolePrompt
 use the console to execute commands, instead of key-combos which might otherwise be difficult to remember or not allow certain expressiveness
 
