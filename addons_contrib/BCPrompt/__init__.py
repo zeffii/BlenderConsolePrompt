@@ -160,6 +160,8 @@ class ConsoleDoAction(bpy.types.Operator):
             prefs = context.user_preferences
             method = {'tb': 'TRACKBALL', 'tt': 'TURNTABLE'}.get(m)
             prefs.inputs.view_rotate_method = method
+            msg = 'set rotation_method to {0} ({1})'.format(method, m)
+            add_scrollback(msg, 'OUTPUT')
 
         return {'FINISHED'}
 
