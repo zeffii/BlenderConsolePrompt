@@ -156,6 +156,11 @@ class ConsoleDoAction(bpy.types.Operator):
             # history_append(text=m, current_character=0, remove_duplicates=True)
             history_append(text=m, remove_duplicates=True)
 
+        elif m in {'tt', 'tb'}:
+            prefs = context.user_preferences
+            method = {'tb': 'TRACKBALL', 'tt': 'TURNTABLE'}.get(m)
+            prefs.inputs.view_rotate_method = method
+
         return {'FINISHED'}
 
 
