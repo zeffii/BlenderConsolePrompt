@@ -50,6 +50,34 @@ FFA3AC
 '''
 
 
+def set_keymap():
+
+    # script to map 1, 2, 3 to vertex, edge, face selection for 3dview
+    wm = bpy.context.window_manager
+
+    if True:
+        deactivate_list = ['ONE', 'TWO', 'THREE']
+        view3d_km_items = wm.keyconfigs.default.keymaps['3D View'].keymap_items
+        for j in view3d_km_items:
+            if j.type in deactivate_list and j.name == 'Layers':
+                j.active = False
+
+    if True:
+        my_keymap = {
+            'ONE': "True, False, False",
+            'TWO': "False, True, False",
+            'THREE': "False, False, True"
+        }
+
+        km = wm.keyconfigs.default.keymaps['Mesh']
+        for k, v in my_keymap.items():
+            new_shortcut = km.keymap_items.new('wm.context_set_value', k, 'PRESS')
+            new_shortcut.properties.data_path = 'tool_settings.mesh_select_mode'
+            new_shortcut.properties.value = v
+
+    print('complete')
+
+
 class TextSyncOps(bpy.types.Operator):
 
     bl_idname = "text.text_upsync"
@@ -162,6 +190,9 @@ class ConsoleDoAction(bpy.types.Operator):
             prefs.inputs.view_rotate_method = method
             msg = 'set rotation_method to {0} ({1})'.format(method, m)
             add_scrollback(msg, 'OUTPUT')
+
+        elif m == '123':
+            set_keymap()
 
         return {'FINISHED'}
 
