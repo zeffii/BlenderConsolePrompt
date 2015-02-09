@@ -163,6 +163,11 @@ class ConsoleDoAction(bpy.types.Operator):
             '''cursor to center'''
             context.scene.cursor_location = (0.0, 0.0, 0.0)
 
+        if m.startswith("cen="):
+            '''cursor to coordinate'''
+            right = m.split('=')[1]
+            context.scene.cursor_location = eval(right)
+
         elif m.endswith('!'):
             '''copy current line to clipboard'''
             m = m[:-1]
