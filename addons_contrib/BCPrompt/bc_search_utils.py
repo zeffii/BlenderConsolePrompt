@@ -41,6 +41,8 @@ def search_pydocs(input_string):
 def search_stack(input_string):
     try:
         import webbrowser
+        # http://blender.stackexchange.com/ x?se
+        # http://stackoverflow.com/  x??se
         search_string = 'http://stackoverflow.com/search?q={}'
         input_string = input_string.replace(' ', '+')
         webbrowser.open(search_string.format(input_string))
