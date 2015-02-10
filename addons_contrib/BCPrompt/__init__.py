@@ -33,11 +33,10 @@ bl_info = {
     "category": "Console"}
 
 if 'bpy' in globals():
-    print('reload event detectetd by blender console prompt! cool.')
-
-    print(globals())
+    print(__package__, 'detected reload event! cool.')
 
     if 'bc_operators' in globals():
+        print('doing reloads')
         import imp
         imp.reload(bc_operators)
         imp.reload(bc_panels)
