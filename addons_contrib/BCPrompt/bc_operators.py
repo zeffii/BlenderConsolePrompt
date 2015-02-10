@@ -1,11 +1,20 @@
 import bpy
 from console_python import add_scrollback
+
 from BCPrompt.bc_utils import (
     do_text_glam,
     set_keymap,
     vtx_specials,
     remove_obj_and_mesh
 )
+
+from BCPrompt.bc_search_utils import (
+    search_blenderscripting,
+    search_bpydocs,
+    search_pydocs,
+    search_stack
+)
+
 
 history_append = bpy.ops.console.history_append
 
@@ -78,6 +87,10 @@ class ConsoleDoAction(bpy.types.Operator):
 
         elif m == 'syntax':
             do_text_glam()
+
+        elif m.endswith('?bs'):
+            search_blenderscripting(m[:-3])
+            # // other 3 searches to be added
 
         return {'FINISHED'}
 
