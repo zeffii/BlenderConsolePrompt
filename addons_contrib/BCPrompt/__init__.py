@@ -164,7 +164,11 @@ class ConsoleDoAction(bpy.types.Operator):
             context.scene.cursor_location = (0.0, 0.0, 0.0)
 
         if m.startswith("cen="):
-            '''cursor to coordinate'''
+            '''
+            cursor to coordinate
+            eg: cen=bpy.data.objects[1].data.verts[1].co
+
+            '''
             right = m.split('=')[1]
             context.scene.cursor_location = eval(right)
 
