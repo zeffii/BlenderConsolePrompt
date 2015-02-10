@@ -61,12 +61,8 @@ FFA3AC
 
 
 def register():
-    # bc_operators.register()
-    # bc_panels.register()
     bpy.utils.register_module(__name__)
 
 
 def unregister():
     bpy.utils.unregister_module(__name__)
-    # bc_panels.unregister()
-    # bc_operators.unregister()
