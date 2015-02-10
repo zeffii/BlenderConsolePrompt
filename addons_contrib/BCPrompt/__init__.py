@@ -50,6 +50,26 @@ FFA3AC
 '''
 
 
+def do_text_glam():
+
+    def set_props(s):
+        # s = context.space_data
+        s.show_line_numbers = True
+        s.show_word_wrap = True
+        s.show_syntax_highlight = True
+        s.show_margin = True
+
+    for window in bpy.context.window_manager.windows:
+        for area in window.screen.areas:
+
+            if not area.type == 'TEXT_EDITOR':
+                continue
+
+            for s in area.spaces:
+                if s.type == 'TEXT_EDITOR':
+                    set_props(s)
+
+
 def set_keymap():
 
     # script to map 1, 2, 3 to vertex, edge, face selection for 3dview
@@ -202,6 +222,9 @@ class ConsoleDoAction(bpy.types.Operator):
 
         elif m == '123':
             set_keymap()
+
+        elif m == 'syntax':
+            do_text_glam()
 
         return {'FINISHED'}
 
