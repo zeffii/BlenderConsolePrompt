@@ -92,6 +92,15 @@ class ConsoleDoAction(bpy.types.Operator):
             search_blenderscripting(m[:-3])
             # // other 3 searches to be added
 
+        elif m.endswith('?se'):
+            if m.endswith('??se'):
+                mode = 2
+                search_str = m[:-4]
+            else:
+                mode = 1
+                search_str = m[:-3]
+            search_stack(search_str, mode)
+
         return {'FINISHED'}
 
 

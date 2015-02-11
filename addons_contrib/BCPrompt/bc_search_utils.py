@@ -38,12 +38,17 @@ def search_pydocs(input_string):
         print('unable to browse docs online')
 
 
-def search_stack(input_string):
+def search_stack(input_string, mode):
     try:
         import webbrowser
-        # http://blender.stackexchange.com/ x?se
-        # http://stackoverflow.com/  x??se
-        search_string = 'http://stackoverflow.com/search?q={}'
+        if mode == 1:
+            # <string>?se
+            base_url = 'http://blender.stackexchange.com'
+        else:
+            # <string>??se
+            base_url = 'http://stackoverflow.com'
+
+        search_string = base_url + '/search?q={}'
         input_string = input_string.replace(' ', '+')
         webbrowser.open(search_string.format(input_string))
     except:
