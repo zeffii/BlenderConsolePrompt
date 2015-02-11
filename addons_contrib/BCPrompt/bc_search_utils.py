@@ -51,6 +51,8 @@ def search_stack(input_string, mode):
         search_string = base_url + '/search?q={}'
         input_string = input_string.replace(' ', '+')
         webbrowser.open(search_string.format(input_string))
+
+        print('doing mode:', mode)
     except:
         print('unable to locate stachoverflow')
 
