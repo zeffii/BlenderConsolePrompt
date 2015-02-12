@@ -1,7 +1,7 @@
 This is much cooler than you think.
 
 # BlenderConsolePrompt
-A small project to add features to blender's python console. We can use the console to execute commands, instead of key-combos. Sometimes we run out of sane key combos or find that they get complex. At the moment only one-shot commands are implemented, but future implementations will be modal/interactive.
+A small project to add features to blender's python console. We can use the console to execute commands, instead of key-combos. Sometimes we run out of sane key combos or find that they get complex. At the moment only one-shot commands are implemented, but future implementations will be modal/interactive and possibly a bpm (Blender package manager).
 
 these are the non modal, one shot commands
 
