@@ -30,29 +30,21 @@ def search_bpydocs(input_string):
 def search_pydocs(input_string):
     try:
         import webbrowser
-        search_head = 'http://docs.python.org/py3k/search.html?q='
-        search_tail = '&check_keywords=yes&area=default'
+        search_head = 'http://docs.python.org/3/search.html?q='
+        search_tail = ''  # &check_keywords=yes&area=default'
         search_term = input_string
         webbrowser.open(''.join([search_head, search_term, search_tail]))
     except:
         print('unable to browse docs online')
 
 
-def search_stack(input_string, mode):
+def search_stack(input_string, site):
     try:
         import webbrowser
-        if mode == 1:
-            # <string>?se
-            base_url = 'http://blender.stackexchange.com'
-        else:
-            # <string>??se
-            base_url = 'http://stackoverflow.com'
-
-        search_string = base_url + '/search?q={}'
+        search_string = 'http://' + site + '.com/search?q={}'
         input_string = input_string.replace(' ', '+')
         webbrowser.open(search_string.format(input_string))
-
-        print('doing mode:', mode)
+        print('searching {0} for {1}'.format(site, input_string))
     except:
         print('unable to locate stachoverflow')
 

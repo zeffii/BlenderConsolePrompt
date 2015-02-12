@@ -88,18 +88,26 @@ class ConsoleDoAction(bpy.types.Operator):
         elif m == 'syntax':
             do_text_glam()
 
+        # Searches!
+
         elif m.endswith('?bs'):
             search_blenderscripting(m[:-3])
-            # // other 3 searches to be added
 
         elif m.endswith('?se'):
             if m.endswith('??se'):
-                mode = 2
+                site = 'stackoverflow'
                 search_str = m[:-4]
             else:
-                mode = 1
+                site = 'blender.stackexchange'
                 search_str = m[:-3]
-            search_stack(search_str, mode)
+            search_stack(search_str, site)
+
+        elif m.endswith('?py'):
+            # no immediate search yet.
+            search_pydocs(m[:-3])
+
+        elif m.endswith('?bpy'):
+            search_bpydocs(m[:-4])
 
         return {'FINISHED'}
 
