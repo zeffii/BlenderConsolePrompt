@@ -21,5 +21,6 @@ string?se | search blender.stackexchange for everything infront of the ?
 string??se | search stackoverflow for everything infront of the ??
 string?py | search py docs ..
 string?bpy | search blender bpy docs ..
+_svc | checking recent sverchok commits (github api) [image](https://github.com/zeffii/BlenderConsolePrompt/issues/3#issuecomment-74256330)
 
 ![img](https://cloud.githubusercontent.com/assets/619340/5883599/368909cc-a354-11e4-9a8e-f442ebb8621e.gif)
