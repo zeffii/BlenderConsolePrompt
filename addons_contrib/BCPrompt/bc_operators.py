@@ -6,7 +6,8 @@ from BCPrompt.bc_utils import (
     set_keymap,
     vtx_specials,
     remove_obj_and_mesh,
-    github_commits
+    github_commits,
+    get_sv_times
 )
 
 from BCPrompt.bc_search_utils import (
@@ -114,6 +115,9 @@ class ConsoleDoAction(bpy.types.Operator):
             # sv commits
             url = "https://api.github.com/repos/nortikin/sverchok/commits"
             github_commits(url, 5)
+
+        elif m == 'times':
+            get_sv_times()
 
         return {'FINISHED'}
 

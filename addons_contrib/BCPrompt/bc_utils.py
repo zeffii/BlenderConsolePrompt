@@ -1,7 +1,21 @@
 import bpy
 
+import os
 import json
 from urllib.request import urlopen
+
+
+def get_sv_times():
+    path_init = os.getcwd()
+    temp_root = os.path.dirname(__file__)
+    temp_html = os.path.join(temp_root, 'tmp')
+    os.chdir(temp_html)
+
+    import webbrowser
+    webbrowser.open('index.html')
+
+    # revert to init dir
+    os.chdir(path_init)
 
 
 def github_commits(url, num_items):
