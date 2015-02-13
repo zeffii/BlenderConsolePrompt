@@ -1,14 +1,6 @@
 var data = [];
 var rawdata = [];
-var localfile = 'sverchok_times.json'
 
-// https://github.com/mrdoob/three.js/wiki/How-to-run-things-locally
-
-// d3.json(localfile, function(data) {
-//     console.log(data.items);
-//     rawdata = data.items;
-//     draw_content(rawdata)
-// });
 
 function getArray(obj) {
   for(var prop in obj) {
