@@ -5,7 +5,8 @@ from BCPrompt.bc_utils import (
     do_text_glam,
     set_keymap,
     vtx_specials,
-    remove_obj_and_mesh
+    remove_obj_and_mesh,
+    github_commits
 )
 
 from BCPrompt.bc_search_utils import (
@@ -108,6 +109,11 @@ class ConsoleDoAction(bpy.types.Operator):
 
         elif m.endswith('?bpy'):
             search_bpydocs(m[:-4])
+
+        elif m.startswith('_svc'):
+            # sv commits
+            url = "https://api.github.com/repos/nortikin/sverchok/commits"
+            github_commits(url, 5)
 
         return {'FINISHED'}
 

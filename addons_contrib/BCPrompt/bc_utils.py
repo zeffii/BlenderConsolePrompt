@@ -1,5 +1,26 @@
 import bpy
 
+import json
+from urllib.request import urlopen
+
+
+def github_commits(url, num_items):
+    found_json = urlopen(url).readall().decode()
+
+    wfile = json.JSONDecoder()
+    wjson = wfile.decode(found_json)
+    for idx, i in enumerate(wjson):
+        commit = i['commit']
+
+        print(commit['committer']['name'])
+        for line in commit['message'].split('\n'):
+            if not line:
+                continue
+            print('  ' + line)
+        print()
+        if idx > num_items:
+            break
+
 
 def do_text_glam():
 
