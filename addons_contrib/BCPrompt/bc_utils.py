@@ -2,20 +2,26 @@ import bpy
 
 import os
 import json
+import webbrowser
 from urllib.request import urlopen
 
 
-def get_sv_times():
+def bcp_webbrowser(local_path):
+    '''sets current dir to tmp, starts the browser, reverts dir.'''
     path_init = os.getcwd()
     temp_root = os.path.dirname(__file__)
     temp_html = os.path.join(temp_root, 'tmp')
     os.chdir(temp_html)
-
-    import webbrowser
     webbrowser.open('index.html')
-
-    # revert to init dir
     os.chdir(path_init)
+
+
+def bcp_justbrowse(destination):
+    webbrowser.open(destination)
+
+
+def get_sv_times():
+    bcp_webbrowser('index.html')
 
 
 def github_commits(url, num_items):

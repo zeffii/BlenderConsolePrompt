@@ -7,7 +7,8 @@ from BCPrompt.bc_utils import (
     vtx_specials,
     remove_obj_and_mesh,
     github_commits,
-    get_sv_times
+    get_sv_times,
+    bcp_justbrowse
 )
 
 from BCPrompt.bc_search_utils import (
@@ -110,6 +111,9 @@ class ConsoleDoAction(bpy.types.Operator):
 
         elif m.endswith('?bpy'):
             search_bpydocs(m[:-4])
+
+        elif m.startswith('_svc_'):
+            bcp_justbrowse('https://github.com/nortikin/sverchok/commits/master')
 
         elif m.startswith('_svc'):
             # sv commits
