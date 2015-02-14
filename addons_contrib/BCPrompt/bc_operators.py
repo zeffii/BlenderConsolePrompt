@@ -139,6 +139,7 @@ class ConsoleDoAction(bpy.types.Operator):
                 # like:  "-gist -o test_gist"
                 # send all visible, try naming it.
                 gname = m[9:].strip()
+                gname = gname.replace(' ', '_')
                 file_names = find_filenames()
                 to_gist(file_names, project_name=gname, public_switch=True)
 
