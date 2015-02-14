@@ -18,6 +18,11 @@ from BCPrompt.bc_search_utils import (
     search_stack
 )
 
+from BCPrompt.bc_gist_utils import (
+    find_filenames,
+    to_gist
+)
+
 
 history_append = bpy.ops.console.history_append
 
@@ -122,6 +127,21 @@ class ConsoleDoAction(bpy.types.Operator):
 
         elif m == 'times':
             get_sv_times()
+
+        elif m.startswith('-gist '):
+            # will not upload duplicates of the same file, placed in Set first.
+
+            if m == '-gist -o':
+                # send all visible, unnamed.
+                pass
+
+            if m.startswith('-gist -o '):
+                # like:  "-gist -o test_gist"
+                # send all visible, try naming it.
+                gname = m[9:].strip()
+                file_names = find_filenames()
+                to_gist(file_names, project_name=gname, public_switch=True)
+
 
         return {'FINISHED'}
 

@@ -42,6 +42,7 @@ if 'bpy' in globals():
         imp.reload(bc_panels)
         imp.reload(bc_utils)
         imp.reload(bc_search_utils)
+        imp.reload(bc_gist_utils)
 
 else:
     from BCPrompt import bc_operators
