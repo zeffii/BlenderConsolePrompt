@@ -22,6 +22,7 @@ string??se | search stackoverflow for everything infront of the ??
 string?py | search py docs ..
 string?bpy | search blender bpy docs ..
 _svc | checking recent sverchok commits (github api) [image](https://github.com/zeffii/BlenderConsolePrompt/issues/3#issuecomment-74256330)
--gist -o somename | will upload all visible text blocks as a unified github anonymous public gist, and open in a browser.
+-gist -o somename | will upload all visible text blocks as a unified github anonymous public gist, and open in a browser. "-gist -o somename"
+-sel somename | is select=true for all data.objects .name.startswith(somename)
 
 ![img](https://cloud.githubusercontent.com/assets/619340/5883599/368909cc-a354-11e4-9a8e-f442ebb8621e.gif)
