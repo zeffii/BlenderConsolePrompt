@@ -146,9 +146,19 @@ class ConsoleDoAction(bpy.types.Operator):
                 file_names = find_filenames()
                 to_gist(file_names, project_name=gname, public_switch=True)
 
+        elif m.startswith('-sel -t '):
+            # starting2 not implemented yet
+            # accepts:
+            # '-sel -t CU CurveObj56'
+            # '-sel -t CU CurveObj 56'
+            # '-sel -t CURVE CurveObj 56'
+            _type, *find_str = m[8:].split()
+            select_starting2(' '.join(find_str), _type)
+
         elif m.startswith('-sel '):
             find_str = m[5:]
             select_starting(find_str)
+
 
         return {'FINISHED'}
 
