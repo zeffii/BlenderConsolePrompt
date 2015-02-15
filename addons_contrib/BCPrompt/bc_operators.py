@@ -19,8 +19,11 @@ from BCPrompt.bc_search_utils import (
 )
 
 from BCPrompt.bc_gist_utils import (
-    find_filenames,
-    to_gist
+    find_filenames, to_gist
+)
+
+from BCPrompt.bc_scene_utils import (
+    select_starting, select_starting2
 )
 
 
@@ -143,6 +146,9 @@ class ConsoleDoAction(bpy.types.Operator):
                 file_names = find_filenames()
                 to_gist(file_names, project_name=gname, public_switch=True)
 
+        elif m.startswith('-sel '):
+            find_str = m[5:]
+            select_starting(find_str)
 
         return {'FINISHED'}
 
