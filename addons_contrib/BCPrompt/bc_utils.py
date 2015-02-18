@@ -48,7 +48,19 @@ def bcp_justbrowse(destination):
 
 
 def get_sv_times():
-    bcp_webbrowser('index.html')
+    try:
+
+        ng = bpy.data.node_groups
+
+        for g in ng:
+            if g.bl_idname == 'SverchCustomTreeType':
+                print(g.name)
+
+        if ng:
+            bcp_webbrowser('index.html')
+
+    except:
+        print('no node SV groups!')
 
 
 def github_commits(url, num_items):
