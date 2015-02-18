@@ -6,13 +6,34 @@ import webbrowser
 from urllib.request import urlopen
 
 
+def throw_manual():
+    # if i want to do own parsing + stylesheet
+    # ul = "https://raw.githubusercontent.com/zeffii/BlenderConsolePrompt/master/README.md"
+    # ul2 = "https://github.com/zeffii/BlenderConsolePrompt/blob/master/README.md"
+    # webbrowser.open(ul2)
+
+    # path_init = os.getcwd()
+    # temp_root = os.path.dirname(__file__)
+    # temp_html = os.path.join(temp_root, 'tmp')
+    # os.chdir(temp_html)
+
+    # generate the markdown json obj first.
+    # with open(fp) as mdfile:
+    #     md_str = repr(''.join(mdfile.readlines()))
+    #     json_str = """var jsonObject = {{"items": {0}}}""".format(md_str)
+
+    # webbrowser.open('README.html')
+    # os.chdir(path_init)
+    bcp_webbrowser("README.html")
+
+
 def bcp_webbrowser(local_path):
     '''sets current dir to tmp, starts the browser, reverts dir.'''
     path_init = os.getcwd()
     temp_root = os.path.dirname(__file__)
     temp_html = os.path.join(temp_root, 'tmp')
     os.chdir(temp_html)
-    webbrowser.open('index.html')
+    webbrowser.open(local_path)
     os.chdir(path_init)
 
 

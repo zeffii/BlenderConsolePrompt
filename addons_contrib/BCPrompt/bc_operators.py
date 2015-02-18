@@ -8,14 +8,15 @@ from BCPrompt.bc_utils import (
     remove_obj_and_mesh,
     github_commits,
     get_sv_times,
-    bcp_justbrowse
+    bcp_justbrowse,
+    throw_manual
 )
 
 from BCPrompt.bc_search_utils import (
     search_blenderscripting,
     search_bpydocs,
     search_pydocs,
-    search_stack
+    search_stack,
 )
 
 from BCPrompt.bc_gist_utils import (
@@ -159,6 +160,8 @@ class ConsoleDoAction(bpy.types.Operator):
             find_str = m[5:]
             select_starting(find_str)
 
+        elif m == "-man":
+            throw_manual()
 
         return {'FINISHED'}
 
