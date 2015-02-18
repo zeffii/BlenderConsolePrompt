@@ -49,7 +49,7 @@ def bcp_justbrowse(destination):
 
 def get_sv_times():
     try:
-
+        # github.com/nortikin/sverchok/issues/500#issuecomment-67337023
         ng = bpy.data.node_groups
 
         for g in ng:
