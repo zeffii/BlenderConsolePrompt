@@ -1,0 +1,27 @@
+body {
+  font: 11px sans-serif;
+}
+
+.markdown_doc {
+    width: 600px;
+    margin: 30px 30px 30px 30px;
+    /*border: 1px solid red;*/
+
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+#chunk line {
+  fill: none;
+  stroke: #bad2d3;
+  shape-rendering: crispEdges;
+}

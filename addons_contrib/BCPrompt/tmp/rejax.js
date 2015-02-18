@@ -11,7 +11,7 @@ marked.setOptions({
 
 // console.log(marked('I am using __markdown__.'));
 function draw_content(rawhtml){
-    var _div4 = d3.select("#display");
+    var _div4 = d3.select(".markdown_doc");
     _div4.html(rawhtml);
 }
 
