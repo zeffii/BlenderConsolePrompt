@@ -1,9 +1,9 @@
 body {
-  font: 14px sans-serif;
+  font: 1.0em sans-serif;
 }
 
 .markdown_doc {
-    width: 600px;
+    width: 700px;
     margin: 30px 30px 30px 30px;
     /*border: 1px solid red;*/
 
@@ -24,4 +24,24 @@ body {
   fill: none;
   stroke: #bad2d3;
   shape-rendering: crispEdges;
+}
+
+
+table {
+  color: #444;
+  background: #eee;
+  border: 1px solid #82c5ed;
+  border-spacing: 0;
+}
+
+table tbody td{
+  color: #848484;
+  padding: 5px;
+  border: 2px solid #82c5ed;
+}
+
+table thead th{
+  color: #848484;
+  padding: 5px;
+  border: 2px solid #82c5ed;
 }
