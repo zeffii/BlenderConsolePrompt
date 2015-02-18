@@ -11,7 +11,7 @@ cen | centers 3d cursor
 cen=some_value | where some value can be evalled, 3d cursor will be placed at it
 vtx | sees if tinyCAD is enabled and performs VTX, (or first enables it)
 xl (XL) | sees if tinyCAD is enabled and performs XALL, (or first enables it)
-ico | sees if developers icons addon is enabled (enables if not)
+ico | sees if developers icons addon is enabled (enables if not) [image](https://cloud.githubusercontent.com/assets/619340/5883599/368909cc-a354-11e4-9a8e-f442ebb8621e.gif)
 wipe | un-links and removes objects, and all meshes
 tt | turntable
 tb | trackball
@@ -22,8 +22,8 @@ string??se | search stackoverflow for everything infront of the ??
 string?py | search py docs ..
 string?bpy | search blender bpy docs ..
 _svc | checking recent sverchok commits (github api) [image](https://github.com/zeffii/BlenderConsolePrompt/issues/3#issuecomment-74256330)
--gist -o somename | will upload all visible text blocks as a unified github anonymous public gist, and open in a browser.<br>"-gist -o somename"
+-gist -o somename | will upload all visible text blocks as a unified github anonymous public gist, and open in a browser.<br>`-gist -o somename`
 -sel somename | is select=True for all data.objects where `.name.startswith(somename)`
 -man | opens github readme.md for the addon
 
-![img](https://cloud.githubusercontent.com/assets/619340/5883599/368909cc-a354-11e4-9a8e-f442ebb8621e.gif)
+

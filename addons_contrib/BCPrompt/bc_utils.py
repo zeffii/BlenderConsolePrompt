@@ -3,28 +3,34 @@ import bpy
 import os
 import json
 import webbrowser
-from urllib.request import urlopen
+from urllib.request import (urlopen, urlretrieve)
 
+
+# def throw_manual():
+#     bcp_webbrowser("README.html")
 
 def throw_manual():
     # if i want to do own parsing + stylesheet
-    # ul = "https://raw.githubusercontent.com/zeffii/BlenderConsolePrompt/master/README.md"
-    # ul2 = "https://github.com/zeffii/BlenderConsolePrompt/blob/master/README.md"
-    # webbrowser.open(ul2)
+    zef = "https://raw.githubusercontent.com/zeffii/"
+    ul = zef + "BlenderConsolePrompt/master/README.md"
 
-    # path_init = os.getcwd()
-    # temp_root = os.path.dirname(__file__)
-    # temp_html = os.path.join(temp_root, 'tmp')
-    # os.chdir(temp_html)
+    path_init = os.getcwd()
+    temp_root = os.path.dirname(__file__)
+    tmp = os.path.join(temp_root, 'tmp')
+    os.chdir(tmp)
+
+    readme_path = os.path.join(tmp, 'README.md')
+    urlretrieve(ul, readme_path)
 
     # generate the markdown json obj first.
-    # with open(fp) as mdfile:
-    #     md_str = repr(''.join(mdfile.readlines()))
-    #     json_str = """var jsonObject = {{"items": {0}}}""".format(md_str)
+    with open(readme_path) as mdfile:
+        md_str = repr(''.join(mdfile.readlines()))
+        json_str = """var jsonObject = {{"items": {0}}}""".format(md_str)
+        with open("bcp_readme.json", 'w') as destjson:
+            destjson.writelines(json_str)
 
-    # webbrowser.open('README.html')
-    # os.chdir(path_init)
-    bcp_webbrowser("README.html")
+    webbrowser.open('README.html')
+    os.chdir(path_init)
 
 
 def bcp_webbrowser(local_path):
