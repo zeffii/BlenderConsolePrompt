@@ -4,10 +4,13 @@ import os
 import json
 import webbrowser
 from urllib.request import (urlopen, urlretrieve)
+import sys
+import traceback
 
 
 # def throw_manual():
 #     bcp_webbrowser("README.html")
+
 
 def throw_manual():
     # if i want to do own parsing + stylesheet
@@ -49,18 +52,54 @@ def bcp_justbrowse(destination):
 
 def get_sv_times():
     try:
-        # github.com/nortikin/sverchok/issues/500#issuecomment-67337023
         ng = bpy.data.node_groups
-
-        for g in ng:
-            if g.bl_idname == 'SverchCustomTreeType':
-                print(g.name)
-
-        if ng:
-            bcp_webbrowser('index.html')
-
     except:
         print('no node SV groups!')
+        return
+
+    sv_present = 'sverchok' in globals()
+    if not sv_present:
+        try:
+            import sverchok
+            print('Sverchok is now in globals')
+        except:
+            print('failed to import sverchok')
+            return
+
+    # at this point sverchok should be available.
+    # github.com/nortikin/sverchok/issues/500#issuecomment-67337023
+    def write_time_graph_json(destination_path):
+        m = sverchok.core.update_system.graphs
+        print(m)
+
+        atk = {}
+        for idx, event in enumerate(m[0]):
+            atk[idx] = event
+
+        tk = dict(items=atk)
+        tkjson = json.dumps(tk, sort_keys=True, indent=2)
+        print('tkjson: ', type(tkjson))
+        # import pprint
+        # pprint.pprint(tkjson)
+        with open(destination_path, 'w') as time_graph:
+
+            # this augments the first line of the json with a var
+            # transporming it into a valid .js file which can be
+            # called from the inlet.js
+            final_write = "var jsonObject = " + tkjson
+            time_graph.writelines(final_write)
+
+    for g in ng:
+        if g.bl_idname == 'SverchCustomTreeType':
+            print(g.name)
+
+    if ng:
+        _root = os.path.dirname(__file__)
+        fp = os.path.join(_root, 'tmp', 'sverchok_times.json')
+        write_time_graph_json(fp)
+        bcp_webbrowser('index.html')
+    else:
+        print(ng, 'node_groups not found..')
 
 
 def github_commits(url, num_items):
