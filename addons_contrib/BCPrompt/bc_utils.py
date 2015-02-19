@@ -71,6 +71,13 @@ def get_sv_times():
     def write_time_graph_json(destination_path, dp2):
 
         # trigger a final update.
+        '''
+        sv_ngs = filter(lambda ng:ng.bl_idname == 'SverchCustomTreeType', bpy.data.node_groups)
+        for ng in sv_ngs:
+            ng.unfreeze(hard=True)
+        build_update_list()
+        process_tree()
+        '''
         bpy.ops.node.sverchok_update_all()
 
         m = sverchok.core.update_system.graphs
