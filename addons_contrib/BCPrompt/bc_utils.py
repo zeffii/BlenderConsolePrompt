@@ -81,8 +81,8 @@ def get_sv_times():
         bpy.ops.node.sverchok_update_all()
 
         m = sverchok.core.update_system.graphs
-        mn = sverchok.core.update_system.graph_names
-        print('graph names:', mn)
+        # mn = sverchok.core.update_system.graph_names
+        # print('graph names:', mn)
 
         ''' Original single shot file'''
         if True:
