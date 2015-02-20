@@ -125,28 +125,28 @@ def get_sv_times_all():
 
     ''' Augmented full node tree and subtree json'''
 
-    # _root = os.path.dirname(__file__)
-    # fp_full = ''  # os.path.join(_root, 'tmp', 'sverchok_times_full.json')
-    # if True:
-    #     full_atk = {}
-    #     print('number of subgraphs:', len(m))
-    #     for index, (graph, graph_name) in enumerate(zip(m, mn)):
-    #         print('-----', index, graph, graph_name, '<<<<')
+    _root = os.path.dirname(__file__)
+    fp_full = os.path.join(_root, 'tmp', 'sverchok_times_full.json')
 
-    #         atk = {idx: event for idx, event in enumerate(graph)}
-    #         gtk = dict(items=atk, name=graph_name)
-    #         full_atk[index] = gtk
+    # full_atk = {}
+    # print('number of subgraphs:', len(m))
+    # for index, (graph, graph_name) in enumerate(zip(m, mn)):
+    #     print('-----', index, graph, graph_name, '<<<<')
 
-    #     print(full_atk)
+    #     atk = {idx: event for idx, event in enumerate(graph)}
+    #     gtk = dict(items=atk, name=graph_name)
+    #     full_atk[index] = gtk
 
-    #     tkjson_full = json.dumps(full_atk, sort_keys=True, indent=2)
-    #     with open(dp2, 'w') as time_graph:
+    # print(full_atk)
 
-    #         # this augments the first line of the json with a var
-    #         # transporming it into a valid .js file which can be
-    #         # called from the inlet.js
-    #         final_write = "var jsonObject = " + tkjson_full
-    #         time_graph.writelines(final_write)
+    # tkjson_full = json.dumps(full_atk, sort_keys=True, indent=2)
+    # with open(dp2, 'w') as time_graph:
+
+    #     # this augments the first line of the json with a var
+    #     # transporming it into a valid .js file which can be
+    #     # called from the inlet.js
+    #     final_write = "var jsonObject = " + tkjson_full
+    #     time_graph.writelines(final_write)
     pass
 
 
