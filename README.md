@@ -26,5 +26,8 @@ _svc | checking recent sverchok commits (github api) [image](https://github.com/
                   | and open in a browser. `-gist -o somename`
 -sel somename | is select=True for all data.objects where `.name.startswith(somename)`
 -man | opens github readme.md for the addon
+times treename | treename must be a valid Sverchok Tree name, will spawn a browser with visualization. F.ex `times NodeTree.002`
+
+
 
 
