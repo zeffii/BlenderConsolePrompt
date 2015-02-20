@@ -50,7 +50,7 @@ def bcp_justbrowse(destination):
     webbrowser.open(destination)
 
 
-def get_sv_times():
+def get_sv_times(named_group):
     try:
         ng = bpy.data.node_groups
     except:
@@ -78,25 +78,19 @@ def get_sv_times():
         build_update_list()
         process_tree()
         '''
-        bpy.ops.node.sverchok_update_all()
+        # bpy.ops.node.sverchok_update_all()
 
         m = sverchok.core.update_system.graphs
-        # mn = sverchok.core.update_system.graph_names
-        # print('graph names:', mn)
 
         ''' Original single shot file'''
         if True:
 
             atk = {}
-            print('len m:', len(m))
             for idx, event in enumerate(m[0]):
                 atk[idx] = event
 
             tk = dict(items=atk)
             tkjson = json.dumps(tk, sort_keys=True, indent=2)
-
-            # import pprint
-            # pprint.pprint(tkjson)
             with open(destination_path, 'w') as time_graph:
 
                 # this augments the first line of the json with a var
@@ -128,16 +122,22 @@ def get_sv_times():
         #         final_write = "var jsonObject = " + tkjson_full
         #         time_graph.writelines(final_write)
 
-    # for g in ng:
-    #     if g.bl_idname == 'SverchCustomTreeType':
-    #         print('----', g.name)
-
     if ng:
+        upd = bpy.ops.node.sverchok_update_current
+
         _root = os.path.dirname(__file__)
         fp = os.path.join(_root, 'tmp', 'sverchok_times.json')
-        fp_full = '' # os.path.join(_root, 'tmp', 'sverchok_times_full.json')
-        write_time_graph_json(fp, fp_full)
-        bcp_webbrowser('index.html')
+        fp_full = ''  # os.path.join(_root, 'tmp', 'sverchok_times_full.json')
+
+        for g in ng:
+            if g.bl_idname == 'SverchCustomTreeType':
+                if g.name == named_group:
+                    upd(node_group=named_group)
+                    print('updating for:', named_group)
+                    write_time_graph_json(fp, fp_full)
+                    bcp_webbrowser('index.html')
+                    break
+
     else:
         print(ng, 'node_groups not found..')
 

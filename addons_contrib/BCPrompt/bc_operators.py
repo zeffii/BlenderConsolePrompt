@@ -129,8 +129,12 @@ class ConsoleDoAction(bpy.types.Operator):
             url = "https://api.github.com/repos/nortikin/sverchok/commits"
             github_commits(url, 5)
 
-        elif m == 'times':
-            get_sv_times()
+        elif m.startswith('times '):
+            command, named_group = m.split(' ')
+            if not (named_group in bpy.data.node_groups):
+                pass
+            else:
+                get_sv_times(named_group)
 
         elif m.startswith('-gist '):
             # will not upload duplicates of the same file, placed in Set first.
