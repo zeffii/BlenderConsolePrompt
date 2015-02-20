@@ -1,6 +1,8 @@
 This is much cooler than you think.
 
 # BlenderConsolePrompt
+
+[![Join the chat at https://gitter.im/zeffii/BlenderConsolePrompt](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zeffii/BlenderConsolePrompt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 A small project to add features to blender's python console. We can use the console to execute commands, instead of key-combos. Sometimes we run out of sane key combos or find that they get complex. At the moment only one-shot commands are implemented, but future implementations will be modal/interactive and possibly a bpm (Blender package manager).
 
 these are the non modal, one shot commands
