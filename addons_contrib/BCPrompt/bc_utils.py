@@ -112,6 +112,9 @@ def get_sv_times_all():
     if not sv_test():
         return
 
+    grandlist = []
+    mn = []
+
     import sverchok
     ng = bpy.data.node_groups
     upd = bpy.ops.node.sverchok_update_current
@@ -121,6 +124,8 @@ def get_sv_times_all():
             m = sverchok.core.update_system.graphs
             print(g.name)
             print(m)
+            mn.append(g.name)
+            grandlist.extend(m.copy())
             print('::::')
 
     ''' Augmented full node tree and subtree json'''
@@ -128,16 +133,15 @@ def get_sv_times_all():
     _root = os.path.dirname(__file__)
     fp_full = os.path.join(_root, 'tmp', 'sverchok_times_full.json')
 
-    # full_atk = {}
-    # print('number of subgraphs:', len(m))
-    # for index, (graph, graph_name) in enumerate(zip(m, mn)):
-    #     print('-----', index, graph, graph_name, '<<<<')
+    full_atk = {}
+    print('number of subgraphs:', len(grandlist))
+    for index, (graph, graph_name) in enumerate(zip(grandlist, mn)):
+        atk = {idx: event for idx, event in enumerate(graph)}
+        gtk = dict(items=atk, name=graph_name)
+        full_atk[index] = gtk
 
-    #     atk = {idx: event for idx, event in enumerate(graph)}
-    #     gtk = dict(items=atk, name=graph_name)
-    #     full_atk[index] = gtk
-
-    # print(full_atk)
+    import pprint
+    pprint.pprint(full_atk)
 
     # tkjson_full = json.dumps(full_atk, sort_keys=True, indent=2)
     # with open(dp2, 'w') as time_graph:
