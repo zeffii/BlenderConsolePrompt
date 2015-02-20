@@ -88,6 +88,7 @@ def get_sv_times():
         if True:
 
             atk = {}
+            print('len m:', len(m))
             for idx, event in enumerate(m[0]):
                 atk[idx] = event
 
@@ -106,35 +107,35 @@ def get_sv_times():
 
         ''' Augmented full node tree and subtree json'''
 
-        if True:
-            full_atk = {}
-            print('number of subgraphs:', len(m))
-            for index, (graph, graph_name) in enumerate(zip(m, mn)):
-                print('-----', index, graph, graph_name, '<<<<')
+        # if True:
+        #     full_atk = {}
+        #     print('number of subgraphs:', len(m))
+        #     for index, (graph, graph_name) in enumerate(zip(m, mn)):
+        #         print('-----', index, graph, graph_name, '<<<<')
 
-                atk = {idx: event for idx, event in enumerate(graph)}
-                gtk = dict(items=atk, name=graph_name)
-                full_atk[index] = gtk
+        #         atk = {idx: event for idx, event in enumerate(graph)}
+        #         gtk = dict(items=atk, name=graph_name)
+        #         full_atk[index] = gtk
 
-            print(full_atk)
+        #     print(full_atk)
 
-            tkjson_full = json.dumps(full_atk, sort_keys=True, indent=2)
-            with open(dp2, 'w') as time_graph:
+        #     tkjson_full = json.dumps(full_atk, sort_keys=True, indent=2)
+        #     with open(dp2, 'w') as time_graph:
 
-                # this augments the first line of the json with a var
-                # transporming it into a valid .js file which can be
-                # called from the inlet.js
-                final_write = "var jsonObject = " + tkjson_full
-                time_graph.writelines(final_write)
+        #         # this augments the first line of the json with a var
+        #         # transporming it into a valid .js file which can be
+        #         # called from the inlet.js
+        #         final_write = "var jsonObject = " + tkjson_full
+        #         time_graph.writelines(final_write)
 
-    for g in ng:
-        if g.bl_idname == 'SverchCustomTreeType':
-            print(g.name)
+    # for g in ng:
+    #     if g.bl_idname == 'SverchCustomTreeType':
+    #         print('----', g.name)
 
     if ng:
         _root = os.path.dirname(__file__)
         fp = os.path.join(_root, 'tmp', 'sverchok_times.json')
-        fp_full = os.path.join(_root, 'tmp', 'sverchok_times_full.json')
+        fp_full = '' # os.path.join(_root, 'tmp', 'sverchok_times_full.json')
         write_time_graph_json(fp, fp_full)
         bcp_webbrowser('index.html')
     else:
