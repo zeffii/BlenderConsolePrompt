@@ -140,18 +140,12 @@ def get_sv_times_all():
         gtk = dict(items=atk, name=graph_name)
         full_atk[index] = gtk
 
-    import pprint
-    pprint.pprint(full_atk)
+    final_atk = dict(graphs=full_atk)
 
-    # tkjson_full = json.dumps(full_atk, sort_keys=True, indent=2)
-    # with open(dp2, 'w') as time_graph:
-
-    #     # this augments the first line of the json with a var
-    #     # transporming it into a valid .js file which can be
-    #     # called from the inlet.js
-    #     final_write = "var jsonObject = " + tkjson_full
-    #     time_graph.writelines(final_write)
-    pass
+    tkjson_full = json.dumps(final_atk, sort_keys=True, indent=2)
+    with open(fp_full, 'w') as time_graph:
+        final_write = "var jsonObject = " + tkjson_full
+        time_graph.writelines(final_write)
 
 
 def github_commits(url, num_items):
