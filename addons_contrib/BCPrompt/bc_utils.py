@@ -50,7 +50,7 @@ def bcp_justbrowse(destination):
     webbrowser.open(destination)
 
 
-def get_sv_times(named_group):
+def sv_test():
     try:
         ng = bpy.data.node_groups
     except:
@@ -66,80 +66,88 @@ def get_sv_times(named_group):
             print('failed to import sverchok')
             return
 
+    return True
+
+
+def get_sv_times(named_group):
+
+    if not sv_test():
+        return
+
+    import sverchok
+    ng = bpy.data.node_groups
+    upd = bpy.ops.node.sverchok_update_current
+
     # at this point sverchok should be available.
     # github.com/nortikin/sverchok/issues/500#issuecomment-67337023
-    def write_time_graph_json(destination_path, dp2):
-
-        # trigger a final update.
-        '''
-        sv_ngs = filter(lambda ng:ng.bl_idname == 'SverchCustomTreeType', bpy.data.node_groups)
-        for ng in sv_ngs:
-            ng.unfreeze(hard=True)
-        build_update_list()
-        process_tree()
-        '''
-        # bpy.ops.node.sverchok_update_all()
-
+    def write_time_graph_json(destination_path):
         m = sverchok.core.update_system.graphs
+        atk = {}
+        for idx, event in enumerate(m[0]):
+            atk[idx] = event
 
-        ''' Original single shot file'''
-        if True:
+        tk = dict(items=atk)
+        tkjson = json.dumps(tk, sort_keys=True, indent=2)
+        with open(destination_path, 'w') as time_graph:
+            # this augments the first line of the json with a var
+            # transforming it into a valid .js file which can be
+            # called from the inlet.js
+            final_write = "var jsonObject = " + tkjson
+            time_graph.writelines(final_write)
 
-            atk = {}
-            for idx, event in enumerate(m[0]):
-                atk[idx] = event
+    _root = os.path.dirname(__file__)
+    fp = os.path.join(_root, 'tmp', 'sverchok_times.json')
 
-            tk = dict(items=atk)
-            tkjson = json.dumps(tk, sort_keys=True, indent=2)
-            with open(destination_path, 'w') as time_graph:
+    for g in ng:
+        if g.bl_idname == 'SverchCustomTreeType':
+            if g.name == named_group:
+                upd(node_group=named_group)
+                print('updating for:', named_group)
+                write_time_graph_json(fp)
+                bcp_webbrowser('index.html')
+                break
 
-                # this augments the first line of the json with a var
-                # transporming it into a valid .js file which can be
-                # called from the inlet.js
-                final_write = "var jsonObject = " + tkjson
-                time_graph.writelines(final_write)
 
-        ''' Augmented full node tree and subtree json'''
+def get_sv_times_all():
+    if not sv_test():
+        return
 
-        # if True:
-        #     full_atk = {}
-        #     print('number of subgraphs:', len(m))
-        #     for index, (graph, graph_name) in enumerate(zip(m, mn)):
-        #         print('-----', index, graph, graph_name, '<<<<')
+    import sverchok
+    ng = bpy.data.node_groups
+    upd = bpy.ops.node.sverchok_update_current
+    for g in ng:
+        if g.bl_idname == 'SverchCustomTreeType':
+            upd(node_group=g.name)
+            m = sverchok.core.update_system.graphs
+            print(g.name)
+            print(m)
+            print('::::')
 
-        #         atk = {idx: event for idx, event in enumerate(graph)}
-        #         gtk = dict(items=atk, name=graph_name)
-        #         full_atk[index] = gtk
+    ''' Augmented full node tree and subtree json'''
 
-        #     print(full_atk)
+    # _root = os.path.dirname(__file__)
+    # fp_full = ''  # os.path.join(_root, 'tmp', 'sverchok_times_full.json')
+    # if True:
+    #     full_atk = {}
+    #     print('number of subgraphs:', len(m))
+    #     for index, (graph, graph_name) in enumerate(zip(m, mn)):
+    #         print('-----', index, graph, graph_name, '<<<<')
 
-        #     tkjson_full = json.dumps(full_atk, sort_keys=True, indent=2)
-        #     with open(dp2, 'w') as time_graph:
+    #         atk = {idx: event for idx, event in enumerate(graph)}
+    #         gtk = dict(items=atk, name=graph_name)
+    #         full_atk[index] = gtk
 
-        #         # this augments the first line of the json with a var
-        #         # transporming it into a valid .js file which can be
-        #         # called from the inlet.js
-        #         final_write = "var jsonObject = " + tkjson_full
-        #         time_graph.writelines(final_write)
+    #     print(full_atk)
 
-    if ng:
-        upd = bpy.ops.node.sverchok_update_current
+    #     tkjson_full = json.dumps(full_atk, sort_keys=True, indent=2)
+    #     with open(dp2, 'w') as time_graph:
 
-        _root = os.path.dirname(__file__)
-        fp = os.path.join(_root, 'tmp', 'sverchok_times.json')
-        fp_full = ''  # os.path.join(_root, 'tmp', 'sverchok_times_full.json')
-
-        for g in ng:
-            if g.bl_idname == 'SverchCustomTreeType':
-                if g.name == named_group:
-                    upd(node_group=named_group)
-                    print('updating for:', named_group)
-                    write_time_graph_json(fp, fp_full)
-                    bcp_webbrowser('index.html')
-                    break
-
-    else:
-        print(ng, 'node_groups not found..')
+    #         # this augments the first line of the json with a var
+    #         # transporming it into a valid .js file which can be
+    #         # called from the inlet.js
+    #         final_write = "var jsonObject = " + tkjson_full
+    #         time_graph.writelines(final_write)
+    pass
 
 
 def github_commits(url, num_items):

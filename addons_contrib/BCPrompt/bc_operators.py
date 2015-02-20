@@ -7,7 +7,7 @@ from BCPrompt.bc_utils import (
     vtx_specials,
     remove_obj_and_mesh,
     github_commits,
-    get_sv_times,
+    get_sv_times, get_sv_times_all,
     bcp_justbrowse,
     throw_manual
 )
@@ -135,6 +135,9 @@ class ConsoleDoAction(bpy.types.Operator):
                 pass
             else:
                 get_sv_times(named_group)
+
+        elif m == 'times':
+            get_sv_times_all()
 
         elif m.startswith('-gist '):
             # will not upload duplicates of the same file, placed in Set first.
