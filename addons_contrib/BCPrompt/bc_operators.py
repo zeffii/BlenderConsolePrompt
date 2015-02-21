@@ -170,6 +170,15 @@ class ConsoleDoAction(bpy.types.Operator):
         elif m == "-man":
             throw_manual()
 
+        elif m.startswith("-theme "):
+            result = m.strip().split(' ')
+            if len(result) == 2:
+                if result[1] == 'loc':
+                    # "C:\\blender_trunk\\2.73\\scripts\\presets\\interface_theme\\back_to_black.xml"
+                    pass  # print local location of theme
+                if result[1] == 'togist':
+                    pass  # uploads current xml to gist
+
         return {'FINISHED'}
 
 
