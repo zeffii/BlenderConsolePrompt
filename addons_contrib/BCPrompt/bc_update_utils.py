@@ -41,12 +41,6 @@ def peek_builder_org(search_target):
     d = d.read().decode('utf8')
     d = d.split('\n')
 
-    # #print(d)
-
-    # #rpath = r'C:\Users\dealga\Desktop\panz.html'
-    # #with open(rpath) as f:
-    # #    d = f.readlines()
-
     hrefs = []
     pattern = 'href=\"(.*)\"\>'
 
@@ -58,7 +52,7 @@ def peek_builder_org(search_target):
                 href_str = match.group(1)
                 hrefs.append(href_str)
 
-    return hrefs if hrefs else None
+    return hrefs
 
 # if True:
 #     f = peek_builder_org(['win32', '>ble'])
