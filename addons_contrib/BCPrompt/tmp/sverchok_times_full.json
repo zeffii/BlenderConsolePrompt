@@ -3,78 +3,37 @@ var jsonObject = {
     "0": {
       "items": {
         "0": {
-          "bl_idname": "SvGenFloatRange",
-          "duration": 0.00010203810819531256,
-          "name": "Float Series",
-          "start": 2.624644403129448
+          "bl_idname": "SvScriptNode",
+          "duration": 0.0004965016505593667,
+          "name": "Script Generator",
+          "start": 3445.160019010796
         },
         "1": {
-          "bl_idname": "ScalarMathNode",
-          "duration": 0.00022125717095322628,
-          "name": "function",
-          "start": 2.6247534253655145
+          "bl_idname": "SvGenFloatRange",
+          "duration": 0.00020791748647752684,
+          "name": "Float Series",
+          "start": 3445.160538979116
         },
         "2": {
-          "bl_idname": "ScalarMathNode",
-          "duration": 0.00018102859441659902,
-          "name": "function.001",
-          "start": 2.624980758727715
+          "bl_idname": "GenVectorsNode",
+          "duration": 0.0002677016213965544,
+          "name": "Vectors in",
+          "start": 3445.1607629600967
         },
         "3": {
-          "bl_idname": "GenVectorsNode",
-          "duration": 0.00013528255686123813,
-          "name": "Vectors in",
-          "start": 2.625167514306986
+          "bl_idname": "MatrixGenNode",
+          "duration": 0.0004306413247832097,
+          "name": "Matrix in",
+          "start": 3445.1610468648946
         },
         "4": {
-          "bl_idname": "ViewerNode2",
-          "duration": 0.00014540954227415526,
-          "name": "Viewer Draw2",
-          "start": 2.625308942896374
+          "bl_idname": "SvTypeViewerNode",
+          "duration": 0.0008913143988138472,
+          "name": "Type Draw",
+          "start": 3445.161493709396
         }
       },
       "name": "NodeTree"
-    },
-    "1": {
-      "items": {
-        "0": {
-          "bl_idname": "SvGenFloatRange",
-          "duration": 6.53714368725744e-05,
-          "name": "Float Series",
-          "start": 2.6261603779251272
-        },
-        "1": {
-          "bl_idname": "GenVectorsNode",
-          "duration": 8.5695248977391e-05,
-          "name": "Vectors in",
-          "start": 2.6262328033311495
-        },
-        "2": {
-          "bl_idname": "MatrixGenNode",
-          "duration": 0.00015867938522928782,
-          "name": "Matrix in",
-          "start": 2.6263248541364894
-        },
-        "3": {
-          "bl_idname": "GenListRangeIntNode",
-          "duration": 5.838730900142863e-05,
-          "name": "List Range Int",
-          "start": 2.626488981141458
-        },
-        "4": {
-          "bl_idname": "SvCircleNode",
-          "duration": 0.00030716194376667616,
-          "name": "Circle",
-          "start": 2.6265529557527563
-        },
-        "5": {
-          "bl_idname": "ViewerNode2",
-          "duration": 0.00025282542893023674,
-          "name": "Viewer Draw2",
-          "start": 2.626866543094164
-        }
-      },
-      "name": "NodeTree.001"
     }
   }
 }

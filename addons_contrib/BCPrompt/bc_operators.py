@@ -27,6 +27,10 @@ from BCPrompt.bc_scene_utils import (
     select_starting, select_starting2
 )
 
+from BCPrompt.bc_update_utils import (
+    peek_builder_org
+)
+
 
 history_append = bpy.ops.console.history_append
 
@@ -115,7 +119,6 @@ class ConsoleDoAction(bpy.types.Operator):
             search_stack(search_str, site)
 
         elif m.endswith('?py'):
-            # no immediate search yet.
             search_pydocs(m[:-3])
 
         elif m.endswith('?bpy'):
@@ -171,13 +174,23 @@ class ConsoleDoAction(bpy.types.Operator):
             throw_manual()
 
         elif m.startswith("-theme "):
+            # UNFINISHED WORK.
             result = m.strip().split(' ')
             if len(result) == 2:
                 if result[1] == 'loc':
-                    # "C:\\blender_trunk\\2.73\\scripts\\presets\\interface_theme\\back_to_black.xml"
+                    # "C:\\blender_trunk\\2.73\\scripts\\presets
+                    # \\interface_theme\\back_to_black.xml"
                     pass  # print local location of theme
                 if result[1] == 'togist':
                     pass  # uploads current xml to gist
+
+        elif m.startswith("-up "):
+            # inputs            | argument result
+            # ------------------+-------------------
+            # -up win32         | option = ['win32']
+            # -up win64 berry   | option = ['win64', 'berry']
+            cmd, *option = m.split(' ')
+            peek_builder_org(option)
 
         return {'FINISHED'}
 

@@ -23,5 +23,8 @@ class TextSyncPanel(bpy.types.Panel):
 
         # show the operator if the text has
         # changed on disk.
-        if context.edit_text.is_modified:
-            row.operator("text.text_upsync")
+        try:
+            if context.edit_text.is_modified:
+                row.operator("text.text_upsync")
+        except:
+            print('no \'is_modified\' to check yet')
