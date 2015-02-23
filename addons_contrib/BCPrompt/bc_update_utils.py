@@ -25,3 +25,5 @@ def peek_builder_org(search_target):
 
         for ref in hrefs:
             print(ref)
+
+        return hrefs if hrefs else None

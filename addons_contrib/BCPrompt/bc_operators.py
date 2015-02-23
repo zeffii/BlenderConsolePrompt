@@ -190,7 +190,11 @@ class ConsoleDoAction(bpy.types.Operator):
             # -up win32         | option = ['win32']
             # -up win64 berry   | option = ['win64', 'berry']
             cmd, *option = m.split(' ')
-            peek_builder_org(option)
+            res = peek_builder_org(option)
+            if res:
+                for line in res:
+                    add_scrollback(line, 'OUTPUT')
+                add_scrollback('', 'OUTPUT')
 
         return {'FINISHED'}
 
