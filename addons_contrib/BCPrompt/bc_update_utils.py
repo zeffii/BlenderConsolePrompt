@@ -44,6 +44,13 @@ def peek_builder_org(search_target):
     hrefs = []
     pattern = 'href=\"(.*)\"\>'
 
+    if len(search_target) == 1:
+        ''' 
+        this allows user to type:  -up win32
+        by adding >ble, the result will only be blender master, not a branch.
+        '''
+        search_target.append('>ble')
+
     for line in d:
         if ('href=' in line):
             if all([(target in line) for target in search_target]):
