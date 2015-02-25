@@ -24,7 +24,9 @@ from BCPrompt.bc_gist_utils import (
 )
 
 from BCPrompt.bc_scene_utils import (
-    select_starting, select_starting2
+    select_starting,
+    select_starting2,
+    distance_check
 )
 
 from BCPrompt.bc_update_utils import (
@@ -203,8 +205,8 @@ class ConsoleDoAction(bpy.types.Operator):
                 add_scrollback(msg, 'INFO')
 
         elif m == '-dist':
-            # (v1-v2).length
-            pass
+            msg = distance_check()
+            add_scrollback(msg, 'INFO')
 
         return {'FINISHED'}
 
