@@ -20,18 +20,32 @@ I think the process should be
 - close blender
 - zip all files in the executable folder
 - read whitelist of addons to remove from the download zip before copy
-in my case
-    - addons/sverchok
-    - addons_contrib/BioBlender
-    - addons_contrib/tinyCAD
-    - addons_contrib/BCPrompt
-    - any more?
 - remove all whitelisted folders from the download.zip
 - unpack download.zip into correct place
 - start blender
 - end longrunning python thread
 
 '''
+
+
+def get_whitelist():
+    # this whitelist allows users to prevent an overwrite of certain files
+    # or folders inside
+    folders = {
+        "addons": [
+            "/Flow",
+            "/sverchok"
+        ],
+        "addons_contrib": [
+            "/mesh_tinyCAD",
+            "/BioBlender",
+            "/BCPrompt"
+        ],
+        "addons_extern": [
+
+        ]
+    }
+    return dict(items=folders)
 
 
 def peek_builder_org(search_target):
@@ -45,7 +59,7 @@ def peek_builder_org(search_target):
     pattern = 'href=\"(.*)\"\>'
 
     if len(search_target) == 1:
-        ''' 
+        '''
         this allows user to type:  -up win32
         by adding >ble, the result will only be blender master, not a branch.
         '''
@@ -57,10 +71,21 @@ def peek_builder_org(search_target):
                 full_line = line.strip()
                 match = re.search(pattern, full_line)
                 href_str = match.group(1)
-                hrefs.append(href_str)
+                hrefs.append(base_url + href_str)
 
     return hrefs
 
 # if True:
 #     f = peek_builder_org(['win32', '>ble'])
-#     print(f
+#     print(f)
+
+
+def process_zip(url):
+    wl = get_whitelist()
+    print(url)
+
+    for k, v in wl['items'].items():
+        for f in v:
+            print(k + f)
+
+    pass

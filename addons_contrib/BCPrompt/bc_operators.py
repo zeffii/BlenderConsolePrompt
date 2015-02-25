@@ -28,7 +28,7 @@ from BCPrompt.bc_scene_utils import (
 )
 
 from BCPrompt.bc_update_utils import (
-    peek_builder_org
+    peek_builder_org, process_zip
 )
 
 
@@ -195,6 +195,12 @@ class ConsoleDoAction(bpy.types.Operator):
                 for line in res:
                     add_scrollback(line, 'OUTPUT')
                 add_scrollback('', 'OUTPUT')
+
+            if len(res) == 1:
+                process_zip(res[0])
+            else:
+                msg = 'too many zips, narrow down!'
+                add_scrollback(msg, 'INFO')
 
         return {'FINISHED'}
 
