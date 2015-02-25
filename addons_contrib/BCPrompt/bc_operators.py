@@ -202,6 +202,10 @@ class ConsoleDoAction(bpy.types.Operator):
                 msg = 'too many zips, narrow down!'
                 add_scrollback(msg, 'INFO')
 
+        elif m == '-dist':
+            # (v1-v2).length
+            pass
+
         return {'FINISHED'}
 
 
