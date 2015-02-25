@@ -41,5 +41,4 @@ def distance_check():
         return 'select 2 only'
     else:
         dist = (verts[0]-verts[1]).length
-        bm.free()
-        return dist
+        return str(dist)
