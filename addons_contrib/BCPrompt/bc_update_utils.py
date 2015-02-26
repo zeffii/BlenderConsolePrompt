@@ -134,4 +134,4 @@ def process_zip(url):
     archive_path = r'C:\Users\dealga\Desktop\bzip_test\blender-2.73-d9fa9bf-win32.zip'
     remove_whitelisted_from_zip(archive_path, wl)
 
-process_zip(url=None)
+# process_zip(url=None)
