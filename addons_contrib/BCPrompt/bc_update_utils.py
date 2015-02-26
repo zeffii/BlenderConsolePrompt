@@ -18,6 +18,7 @@ link to local git repository of addons in development.
 I think the process should be
 - [x] locate download zip (After narrow down)
 - [ ] remove whitelisted from zip
+- [ ] strip out python by default
 - [ ] start external python thread
 - [ ] tell it where the current .exe is
 - [ ] close blender
@@ -82,40 +83,54 @@ def peek_builder_org(search_target):
 #     f = peek_builder_org(['win32', '>ble'])
 #     print(f)
 
+
 def remove_whitelisted_from_zip(archive_path, whitelist):
 
     archive_name = os.path.basename(archive_path)
     if not archive_name.endswith('.zip'):
         return  # end early
 
+    # version_pattern = r'blender-(\d\.\d\d)-'
+    version = '2.73'
+
     _dir = os.path.dirname(archive_path)
     new_archive_name = archive_name.replace('.zip', '_new.zip')
     new_archive_path = os.path.join(_dir, new_archive_name)
 
+    archive_less_ext = archive_name[:-4]
+    internal_path = archive_less_ext + '/' + version
+    zipped_py = internal_path + '/python'
+    scripts = internal_path + '/scripts'
 
     zin = zipfile.ZipFile(archive_path, 'r')
-    # zout = zipfile.ZipFile (new_archive_path, 'w')
+    # # zout = zipfile.ZipFile (new_archive_path, 'w')
     for item in zin.infolist():
-        buffer = zin.read(item.filename)
-        print(item.filename)
-        # if cool
-        #    zout.writestr(item, buffer)
-    #zout.close()
-    zin.close()    
+        curfile = item.filename
 
+        if curfile.startswith(zipped_py) or in_whitelist(scripts, curfile, whitelist):
+            continue
+
+        # buffer = zin.read(curfile)
+        print(curfile)
+    #     # if cool
+    #     #    zout.writestr(item, buffer)
+    # #zout.close()
+    zin.close()
+
+
+def in_whitelist(scripts, curfile, wl):
+    for k, v in wl['items'].items():
+        for f in v:
+            if curfile.startswith(scripts + '/' + k + f):
+                print('skipping:', curfile)
+                return True
+    return False
 
 
 def process_zip(url):
     wl = get_whitelist()
     print(url)
-
-    for k, v in wl['items'].items():
-        for f in v:
-            print(k + f)
-
     archive_path = r'C:\Users\dealga\Desktop\bzip_test\blender-2.73-d9fa9bf-win32.zip'
     remove_whitelisted_from_zip(archive_path, wl)
 
 process_zip(url=None)
-
-
