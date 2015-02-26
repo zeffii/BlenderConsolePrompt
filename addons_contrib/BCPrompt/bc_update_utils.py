@@ -1,5 +1,7 @@
 # import bpy
 import re
+import os
+import zipfile
 from urllib.request import urlopen
 
 '''
@@ -15,6 +17,7 @@ link to local git repository of addons in development.
 
 I think the process should be
 - [x] locate download zip (After narrow down)
+- [ ] remove whitelisted from zip
 - [ ] start external python thread
 - [ ] tell it where the current .exe is
 - [ ] close blender
@@ -79,6 +82,28 @@ def peek_builder_org(search_target):
 #     f = peek_builder_org(['win32', '>ble'])
 #     print(f)
 
+def remove_whitelisted_from_zip(archive_path, whitelist):
+
+    archive_name = os.path.basename(archive_path)
+    if not archive_name.endswith('.zip'):
+        return  # end early
+
+    _dir = os.path.dirname(archive_path)
+    new_archive_name = archive_name.replace('.zip', '_new.zip')
+    new_archive_path = os.path.join(_dir, new_archive_name)
+
+
+    zin = zipfile.ZipFile(archive_path, 'r')
+    # zout = zipfile.ZipFile (new_archive_path, 'w')
+    for item in zin.infolist():
+        buffer = zin.read(item.filename)
+        print(item.filename)
+        # if cool
+        #    zout.writestr(item, buffer)
+    #zout.close()
+    zin.close()    
+
+
 
 def process_zip(url):
     wl = get_whitelist()
@@ -88,4 +113,9 @@ def process_zip(url):
         for f in v:
             print(k + f)
 
-    pass
+    archive_path = r'C:\Users\dealga\Desktop\bzip_test\blender-2.73-d9fa9bf-win32.zip'
+    remove_whitelisted_from_zip(archive_path, wl)
+
+process_zip(url=None)
+
+
