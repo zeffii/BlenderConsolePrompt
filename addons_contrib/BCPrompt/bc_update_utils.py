@@ -103,19 +103,20 @@ def remove_whitelisted_from_zip(archive_path, whitelist):
     scripts = internal_path + '/scripts'
 
     zin = zipfile.ZipFile(archive_path, 'r')
-    # # zout = zipfile.ZipFile (new_archive_path, 'w')
+    zout = zipfile.ZipFile(new_archive_path, 'w')
     for item in zin.infolist():
         curfile = item.filename
 
         if curfile.startswith(zipped_py) or in_whitelist(scripts, curfile, whitelist):
             continue
 
-        # buffer = zin.read(curfile)
-        print(curfile)
-    #     # if cool
-    #     #    zout.writestr(item, buffer)
-    # #zout.close()
+        # only reaches here if the file is not /python or not in /whitelist
+        buffer = zin.read(curfile)
+        zout.writestr(item, buffer)
+
+    zout.close()
     zin.close()
+    print('filtered! ')
 
 
 def in_whitelist(scripts, curfile, wl):
