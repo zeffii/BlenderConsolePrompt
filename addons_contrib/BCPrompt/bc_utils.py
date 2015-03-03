@@ -1,15 +1,12 @@
 import bpy
 
 import os
+import sys
 import json
+import shutil
+import traceback
 import webbrowser
 from urllib.request import (urlopen, urlretrieve)
-import sys
-import traceback
-
-
-# def throw_manual():
-#     bcp_webbrowser("README.html")
 
 
 def throw_manual():
@@ -277,16 +274,33 @@ def test_dl_run(packaged):
         except:
             print('\'{0}\' addon not found.'.format(_module))
             print('will attempt download: ')
-            # bpy.utils.refresh_script_paths()
 
             # I only want the shortest path.
             script_paths = bpy.utils.script_paths()
             sp = list(sorted(script_paths, key=len))[0]
             contrib_path = os.path.join(sp, 'addons_contrib')
             #
-            #
-            #
-            pass
+            if not os.path.isdir(contrib_path):
+                print('attempting to make path...')
+                shutil.os.mkdir(contrib_path)
+
+            # path should exist now.
+            print('downloading from:', _url)
+            filename = _url.split('/')[-1]
+            py_destination = os.path.join(contrib_path, filename)
+            urlretrieve(_url, py_destination)
+
+            # must happen or the new script isn't found.
+            bpy.utils.refresh_script_paths()
+
+        # try one last time to enable and run.
+        try:
+            bpy.ops.wm.addon_enable(module=_module)
+            getattr(_ops, _name)()
+            return
+        except:
+            msg = 'blender console has failed miserably, let me know'
+            print(msg)
 
     else:
         # the ops is present, just call it.

@@ -214,7 +214,7 @@ class ConsoleDoAction(bpy.types.Operator):
             module_to_enable = 'mesh_add_steps'
             url_prefix = 'https://raw.githubusercontent.com/zeffii/'
             url_repo = 'rawr/master/blender/scripts/addons_contrib/'
-            file_name = 'mesh_add_steps_to_angled_quad.py'
+            file_name = 'mesh_add_steps.py'
             dl_url = url_prefix + url_repo + file_name
 
             packaged = dict(
