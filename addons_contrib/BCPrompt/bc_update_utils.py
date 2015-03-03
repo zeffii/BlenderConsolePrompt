@@ -17,8 +17,8 @@ link to local git repository of addons in development.
 
 I think the process should be
 - [x] locate download zip (After narrow down)
-- [ ] remove whitelisted from zip
-- [ ] strip out python by default
+- [x] remove whitelisted from zip
+- [x] strip out python by default
 - [ ] start external python thread
 - [ ] tell it where the current .exe is
 - [ ] close blender

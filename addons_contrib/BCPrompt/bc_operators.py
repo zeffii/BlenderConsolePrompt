@@ -5,6 +5,7 @@ from BCPrompt.bc_utils import (
     do_text_glam,
     set_keymap,
     vtx_specials,
+    test_dl_run,
     remove_obj_and_mesh,
     github_commits,
     get_sv_times, get_sv_times_all,
@@ -207,6 +208,28 @@ class ConsoleDoAction(bpy.types.Operator):
         elif m == '-dist':
             msg = distance_check()
             add_scrollback(msg, 'INFO')
+
+        elif m == '-steps':
+            registers_operator = [bpy.ops.mesh, 'steps_add']
+            module_to_enable = 'mesh_add_steps'
+            url_prefix = 'https://raw.githubusercontent.com/zeffii/'
+            url_repo = 'rawr/master/blender/scripts/addons_contrib/'
+            file_name = 'mesh_add_steps_to_angled_quad.py'
+            dl_url = url_prefix + url_repo + file_name
+
+            packaged = dict(
+                operator=registers_operator,
+                module_to_enable=module_to_enable,
+                url=dl_url
+            )
+
+            test_dl_run(packaged)
+
+        elif m == 'gh':
+            import subprocess
+            f = [r'C:\Users\dealga\AppData\Local\GitHub\GitHub.appref-ms']
+            # f = [r'C:\Users\dealga\AppData\Local\GitHub\GitHub']
+            subprocess.call(f)
 
         return {'FINISHED'}
 
