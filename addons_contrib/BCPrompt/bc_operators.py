@@ -225,10 +225,11 @@ class ConsoleDoAction(bpy.types.Operator):
 
             test_dl_run(packaged)
 
-        elif m == 'gh':
+        elif m == '-gh':
+            import os
             import subprocess
-            f = [r'C:\Users\dealga\AppData\Local\GitHub\GitHub.appref-ms']
-            # f = [r'C:\Users\dealga\AppData\Local\GitHub\GitHub']
+            _root = os.path.dirname(__file__)
+            f = [os.path.join(_root, 'tmp', 'github_start.bat')]
             subprocess.call(f)
 
         return {'FINISHED'}
