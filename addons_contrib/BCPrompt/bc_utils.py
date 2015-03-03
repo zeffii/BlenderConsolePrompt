@@ -250,27 +250,43 @@ def remove_obj_and_mesh(context):
 
 
 def test_dl_run(packaged):
-    # very similar to original vtx_specials function.. but downloads the file if needed
-    # bpy.ops.wm.addon_enable(module="mesh_add_steps")
+    '''
+    This implementation:
+    - test if the operator already exists in bpy.ops.xxxx
+    - if yes, run
+    - if no, try (enable and run).
+    - if failed to enable then the packaged dict includes a download url
+    - attempts a download and then (enable and run)
+
+    Restrictions:
+    - Expects only a single download file not a folder structure yet.
+    '''
+
     _ops, _name = packaged['operator']
     _module = packaged['module_to_enable']
     _url = packaged['url']
 
     # first check if the operator exists.
     addon_enabled = _name in dir(_ops)
-    print('STEP 0 -', addon_enabled)
 
     if not addon_enabled:
         try:
-            print('STEP 1 attempt enable')
             bpy.ops.wm.addon_enable(module=_module)
-            print('STEP 2 enabled OK')
             getattr(_ops, _name)()
-            print('STEP 3 called OK')
             return
         except:
             print('\'{0}\' addon not found.'.format(_module))
             print('will attempt download: ')
+            # bpy.utils.refresh_script_paths()
+
+            # I only want the shortest path.
+            script_paths = bpy.utils.script_paths()
+            sp = list(sorted(script_paths, key=len))[0]
+            contrib_path = os.path.join(sp, 'addons_contrib')
+            #
+            #
+            #
+            pass
 
     else:
         # the ops is present, just call it.
