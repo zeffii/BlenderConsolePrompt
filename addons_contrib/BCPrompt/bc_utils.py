@@ -275,23 +275,34 @@ def test_dl_run(packaged):
             print('\'{0}\' addon not found.'.format(_module))
             print('will attempt download: ')
 
+            # wm = bpy.data.window_managers[0]
+            # wm.progress_begin(0, 100)
+
             # I only want the shortest path.
             script_paths = bpy.utils.script_paths()
             sp = list(sorted(script_paths, key=len))[0]
             contrib_path = os.path.join(sp, 'addons_contrib')
+
+            # wm.progress_update(10)
+
             #
             if not os.path.isdir(contrib_path):
                 print('attempting to make path...')
                 shutil.os.mkdir(contrib_path)
+
+            # wm.progress_update(10)
 
             # path should exist now.
             print('downloading from:', _url)
             filename = _url.split('/')[-1]
             py_destination = os.path.join(contrib_path, filename)
             urlretrieve(_url, py_destination)
+            # wm.progress_update(70)
 
             # must happen or the new script isn't found.
             bpy.utils.refresh_script_paths()
+            # wm.progress_update(10)
+            # wm.progress_end()
 
         # try one last time to enable and run.
         try:
