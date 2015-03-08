@@ -34,6 +34,8 @@ from BCPrompt.bc_update_utils import (
     peek_builder_org, process_zip
 )
 
+from BCPrompt.bc_CAD_utils import perform_face_intersection
+
 
 history_append = bpy.ops.console.history_append
 
@@ -231,6 +233,9 @@ class ConsoleDoAction(bpy.types.Operator):
             _root = os.path.dirname(__file__)
             f = [os.path.join(_root, 'tmp', 'github_start.bat')]
             subprocess.call(f)
+
+        elif m == '-itx':
+            perform_face_intersection()
 
         return {'FINISHED'}
 
