@@ -20,8 +20,8 @@ def perform_face_intersection():
     def triangulated(face):
         return tessellate([[v.co for v in face.verts]])
 
-    def get_selected_minus_active(bm_faces):
-        return [f for f in bm_faces if f.select and not (f.index == active.index)]
+    def get_selected_minus_active(bm_faces, active_idx):
+        return [f for f in bm_faces if f.select and not (f.index == active_idx)]
 
     # Get the active mesh
     obj = bpy.context.edit_object
@@ -34,22 +34,27 @@ def perform_face_intersection():
     active = bm_faces.active
 
     test_rays = rays_from_active_face(active)
-    faces_to_intersect = get_selected_minus_active(bm_faces)
+    faces_to_intersect = get_selected_minus_active(bm_faces, active.index)
 
     vert_set = set()
+    ct = 0
     for f in faces_to_intersect:
         print('intersect test')
         for tri in triangulated(f):
+            print(ct, tri)
+            ct += 1
             idx1, idx2, idx3 = tri
-            v1, v2, v3 = bm_verts[idx1].co, bm_verts[idx2].co, bm_verts[idx3].co
+            v1, v2, v3 = f.verts[idx1].co, f.verts[idx2].co, f.verts[idx3].co
             for ray_idx, orig_idx in test_rays:
                 orig = bm_verts[orig_idx].co
-                ray = bm_verts[ray_idx].co - orig
-                res = intersect_ray_tri(v1, v2, v3, ray.normalized(), orig)
+                ray = (bm_verts[ray_idx].co - orig).normalized()
+                res = intersect_ray_tri(v1, v2, v3, ray, orig)
                 if res:
+                    print('res:', res)
                     vert_set.add(res[:])
+        print('----')
 
-    print('found {0} unique verts'.format(vert_set))
+    print('found {0} unique verts'.format(len(vert_set)))
 
     for v in vert_set:
         bm.verts.new(v)
