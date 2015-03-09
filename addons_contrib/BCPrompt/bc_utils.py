@@ -1,4 +1,6 @@
 import bpy
+import bmesh
+from mathutils import Vector
 
 import os
 import sys
@@ -7,6 +9,24 @@ import shutil
 import traceback
 import webbrowser
 from urllib.request import (urlopen, urlretrieve)
+
+
+def center_to_selected(context):
+
+    obj = bpy.context.edit_object
+    me = obj.data
+    bm = bmesh.from_edit_mesh(me)
+
+    print(dir(bm.verts))
+    loc = [v.co for v in bm.verts if v.select]
+    if len(loc) == 1:
+        loc = loc[0]
+    else:
+        median = Vector()
+        for v in loc:
+            median = Vector((median.x + v.x, median.y + v.y, median.z + v.z))
+        loc = median / len(loc)
+    context.scene.cursor_location = loc
 
 
 def throw_manual():

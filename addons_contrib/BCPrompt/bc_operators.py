@@ -10,7 +10,8 @@ from BCPrompt.bc_utils import (
     github_commits,
     get_sv_times, get_sv_times_all,
     bcp_justbrowse,
-    throw_manual
+    throw_manual,
+    center_to_selected
 )
 
 from BCPrompt.bc_search_utils import (
@@ -64,6 +65,9 @@ class ConsoleDoAction(bpy.types.Operator):
         if m == "cen":
             '''cursor to center'''
             context.scene.cursor_location = (0.0, 0.0, 0.0)
+
+        if m == 'cento':
+            center_to_selected(context)
 
         if m.startswith("cen="):
             '''
