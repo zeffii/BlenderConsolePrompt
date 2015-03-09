@@ -26,7 +26,7 @@ def center_to_selected(context):
         for v in loc:
             median = Vector((median.x + v.x, median.y + v.y, median.z + v.z))
         loc = median / len(loc)
-    context.scene.cursor_location = loc
+    context.scene.cursor_location = obj.matrix_world * loc
 
 
 def throw_manual():

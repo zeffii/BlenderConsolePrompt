@@ -6,11 +6,13 @@ from mathutils.geometry import tessellate_polygon as tessellate
 
 
 def perform_face_intersection():
-    
     '''
     (currently) only points that are found on the face that is active, are accepted
     - In practice this means the last selected face will be used to receive
       intersection points.
+
+    - step 2 (not implemented)
+      will do the reverse... thus completing the loop.
     '''
 
     def rays_from_face(face):
