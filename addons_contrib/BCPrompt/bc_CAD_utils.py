@@ -6,6 +6,12 @@ from mathutils.geometry import tessellate_polygon as tessellate
 
 
 def perform_face_intersection():
+    
+    '''
+    (currently) only points that are found on the face that is active, are accepted
+    - In practice this means the last selected face will be used to receive
+      intersection points.
+    '''
 
     def rays_from_face(face):
         '''
@@ -64,13 +70,10 @@ def perform_face_intersection():
             ray = (bm_verts[ray_idx].co - orig).normalized()
             pt = intersect_ray_tri(v1, v2, v3, ray, orig)
             if pt:
-                # print('res:', pt)
-
-                # filter new verts, they must lie on the edges of the
-                # if res lies on line described by (origin, ray_original) then add.
+                # filter new verts,
+                # they must lie on the line described by (origin, ray_original) then add.
                 itx_res = intersect_point_line(pt, ray_original, orig)
                 if itx_res:
-                    # print(itx_res)
                     v, dist = itx_res
                     if (0.0 < dist < 1.0):
                         vert_set.add(pt[:])
@@ -79,6 +82,5 @@ def perform_face_intersection():
 
     for v in vert_set:
         bm.verts.new(v)
-    bm.verts.ensure_lookup_table()  # get 2.73+
 
     bmesh.update_edit_mesh(me, True)
