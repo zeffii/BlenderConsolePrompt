@@ -53,20 +53,19 @@ else:
 
 import bpy
 
-'''
-console.do_action can be added to:
-  UserPreferences/input/Console/
-using the ' + new ', i find ctrl+Enter a convenient key combo.
-Possible blender bug when adding keycombos for console specifically.
+def add_keymap():
+    wm = bpy.context.window_manager
 
-https://github.com/zeffii/BlenderConsolePrompt/issues/1
-
-FFA3AC
-'''
+    console = wm.keyconfigs.default.keymaps.get('Console')
+    if console:
+        keymaps = console.keymap_items
+        if not ('console.do_action' in keymaps):
+            keymaps.new('console.do_action', 'RET', 'PRESS', ctrl=True)    
 
 
 def register():
     bpy.utils.register_module(__name__)
+    add_keymap()
 
 
 def unregister():
