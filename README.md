@@ -1,4 +1,4 @@
-This is much cooler than you think. tests
+This is much cooler than you think. tests - and uploads
 
 # BlenderConsolePrompt
 
