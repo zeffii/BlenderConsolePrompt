@@ -46,10 +46,12 @@ if 'bpy' in globals():
         imp.reload(bc_scene_utils)
         imp.reload(bc_update_utils)
         imp.reload(bc_CAD_utils)
+        imp.reload(bc_TEXT_utils)
 
 else:
     from BCPrompt import bc_operators
     from BCPrompt import bc_panels
+    from BCPrompt import bc_TEXT_utils
 
 import bpy
 
