@@ -13,7 +13,35 @@ class TEXT_OT_do_comment(bpy.types.Operator):
 
         edit_text = bpy.context.edit_text
         strs = edit_text.as_string()
-        print(strs)
+
+        wm = bpy.context.window_manager
+
+        bpy.ops.text.copy()
+        copied_text = wm.clipboard
+        copied_lines = copied_text.split('\n')
+        
+        # find least indent
+        num_spaces = []
+        for idx, l in enumerate(copied_lines):
+            if '\t' in l:
+                print('mixing tabs..')
+                return {'FINISHED'}
+            else:
+                g = l.lstrip()
+                indent_size = len(l) - len(g)
+                num_spaces.append(indent_size)
+
+        min_space = min(num_spaces)
+        print('minspace:', min_space)
+
+        indent = ' ' * min_space
+        for idx, l in enumerate(copied_lines):
+            copied_lines[idx] = indent + "# " + l[min_space:]
+
+        lines_to_paste = '\n'.join(copied_lines)
+        wm.clipboard = lines_to_paste
+        bpy.ops.text.paste()
+
 
         return {'FINISHED'}
 
