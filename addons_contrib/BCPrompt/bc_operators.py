@@ -231,6 +231,22 @@ class ConsoleDoAction(bpy.types.Operator):
 
             test_dl_run(packaged)
 
+        elif m == '-debug_mesh':
+            registers_operator = [bpy.ops.view3d, 'index_visualiser']
+            module_to_enable = 'view3d_idx_view'
+            url_prefix = 'https://gist.githubusercontent.com/zeffii/9451340/raw'
+            hasher = '/205610d27968305dfd88b0a521fe35aced83db32/'
+            file_name = 'view3d_idx_view.py'
+            dl_url = url_prefix + hasher + file_name
+
+            packaged = dict(
+                operator=registers_operator,
+                module_to_enable=module_to_enable,
+                url=dl_url
+            )
+
+            test_dl_run(packaged)            
+
         elif m == '-gh':
             import os
             import subprocess

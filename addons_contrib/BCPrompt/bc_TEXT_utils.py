@@ -1,6 +1,19 @@
 import bpy
 
 
+
+def detect_comments(lines):
+    for line in lines:
+        if len(line.strip()) == 0:
+            # just spaces..
+            continue
+        elif line.strip().startswith("#"):
+            # line starts with #
+            continue
+        else:
+            return False
+    return True
+
 class TEXT_OT_do_comment(bpy.types.Operator):
 
     bl_idname = "text.do_comment"
@@ -19,28 +32,37 @@ class TEXT_OT_do_comment(bpy.types.Operator):
         bpy.ops.text.copy()
         copied_text = wm.clipboard
         copied_lines = copied_text.split('\n')
-        
-        # find least indent
-        num_spaces = []
-        for idx, l in enumerate(copied_lines):
-            if '\t' in l:
-                print('mixing tabs..')
-                return {'FINISHED'}
-            else:
-                g = l.lstrip()
-                indent_size = len(l) - len(g)
-                num_spaces.append(indent_size)
 
-        min_space = min(num_spaces)
-        print('minspace:', min_space)
+        # are all lines essentially comments?
+        comment_mode = detect_comments(copied_lines)
 
-        indent = ' ' * min_space
-        for idx, l in enumerate(copied_lines):
-            copied_lines[idx] = indent + "# " + l[min_space:]
+        if comment_mode:
+            ''' lines are all comments '''
+            pass
 
-        lines_to_paste = '\n'.join(copied_lines)
-        wm.clipboard = lines_to_paste
-        bpy.ops.text.paste()
+        else:
+            ''' lines need to be commented '''        
+            # find least indent
+            num_spaces = []
+            for idx, l in enumerate(copied_lines):
+                if '\t' in l:
+                    print('mixing tabs..')
+                    return {'FINISHED'}
+                else:
+                    g = l.lstrip()
+                    indent_size = len(l) - len(g)
+                    num_spaces.append(indent_size)
+
+            min_space = min(num_spaces)
+            print('minspace:', min_space)
+
+            indent = ' ' * min_space
+            for idx, l in enumerate(copied_lines):
+                copied_lines[idx] = indent + "# " + l[min_space:]
+
+            lines_to_paste = '\n'.join(copied_lines)
+            wm.clipboard = lines_to_paste
+            bpy.ops.text.paste()
 
 
         return {'FINISHED'}
