@@ -1,4 +1,4 @@
-This is much cooler than you think.
+This is much cooler than you think. tests - and uploads
 
 # BlenderConsolePrompt
 
@@ -19,6 +19,7 @@ ico | sees if developers icons addon is enabled (enables if not) [image](https:/
 wipe | un-links and removes objects, and all meshes
 tt | turntable
 tb | trackball
+-debug_mesh | downloads / enables index visualizer with polygon bg
 syntax | sets text editor to syntax highlighting, wrap, linenumber, margin
 string! | anything followed by an exclamation mark is copied to buffer
 string?se | search blender.stackexchange for everything infront of the ?
