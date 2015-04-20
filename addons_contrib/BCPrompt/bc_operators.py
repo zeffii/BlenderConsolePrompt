@@ -39,6 +39,41 @@ from BCPrompt.bc_CAD_utils import perform_face_intersection
 
 
 history_append = bpy.ops.console.history_append
+addon_enable = bpy.ops.wm.addon_enable
+
+# use this for one shot - function calls
+
+lazy_dict = {
+    '-imgp': [addon_enable, "io_import_images_as_planes"]
+}
+
+
+def print_most_useful():
+    content = '''\
+
+for full verbose descriptor use -man
+
+command    |  description
+-----------+----------------
+tt / tb    |  turntable / trackball nav.
+cen        |  centers 3d cursor
+cento      |  centers to selected
+cen=<  >   |  center to eval , eg: cen = 2,3,2
+endswith!  |  copy current console line if ends with exclm.
+x?bpy      |  search blender python for x
+x?bs       |  search blenderscripting.blogspot for x
+x?py       |  search python docs for x
+x?(?)se,   |  x??se searches B3D stackexchange, x?se just regular SE
+vtx, xl    |  enable or trigger tinyCAD vtx (will download)
+ico        |  enables icon addon in texteditor panel (Dev)
+123        |  use 1 2 3 to select vert, edge, face
+-steps     |  download + enable steps script
+-dist      |  gives local distance between two selected verts
+-gist -o x |  uploads all open text views as x to anon gist.
+-debug     |  dl + enable extended mesh index visualiser. it's awesome.
+
+    '''
+    add_scrollback(content, 'OUTPUT')
 
 
 class TextSyncOps(bpy.types.Operator):
@@ -272,6 +307,18 @@ class ConsoleDoAction(bpy.types.Operator):
 
         elif m == '-itx':
             perform_face_intersection()
+
+        elif m == '-ls':
+            print_most_useful()
+
+        elif m in lazy_dict:
+            try:
+                f, cmd = lazy_dict[m]
+                f(module=cmd)
+                msg = 'enabled: ' + cmd
+                add_scrollback(msg, 'OUTPUT')
+            except:
+                rt = 'failed to do: ' + str(lazy_dict[m])
 
         return {'FINISHED'}
 
