@@ -231,7 +231,7 @@ class ConsoleDoAction(bpy.types.Operator):
 
             test_dl_run(packaged)
 
-        elif m == '-debug_mesh':
+        elif m == '-debug':  # formerly -debug_mesh
             registers_operator = [bpy.ops.view3d, 'index_visualiser']
             module_to_enable = 'view3d_idx_view'
             url_prefix = 'https://gist.githubusercontent.com/zeffii/9451340/raw'
@@ -245,7 +245,23 @@ class ConsoleDoAction(bpy.types.Operator):
                 url=dl_url
             )
 
-            test_dl_run(packaged)            
+            test_dl_run(packaged)
+
+        elif m == '-snaps':
+            # https://raw.githubusercontent.com/Mano-Wii/Snap-Utilities-Line/master/mesh_snap_utilities_line.py
+            url_prefix = "https://raw.githubusercontent.com/Mano-Wii/Snap-Utilities-Line/master/"
+            module_to_enable = "mesh_snap_utilities_line"
+            dl_url = url_prefix + (module_to_enable + '.py')
+
+            registers_operator = [bpy.ops.mesh, 'snap_utilities_line']
+
+            packaged = dict(
+                operator=registers_operator,
+                module_to_enable=module_to_enable,
+                url=dl_url
+            )
+
+            test_dl_run(packaged)
 
         elif m == '-gh':
             import os
