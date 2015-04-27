@@ -70,9 +70,8 @@ ico        |  enables icon addon in texteditor panel (Dev)
 -steps     |  download + enable steps script
 -dist      |  gives local distance between two selected verts
 -gist -o x |  uploads all open text views as x to anon gist.
--debug     |  dl + enable extended mesh index visualiser. it's awesome.
+-debug     |  dl + enable extended mesh index visualiser. it's awesome.'''
 
-    '''
     add_scrollback(content, 'OUTPUT')
 
 

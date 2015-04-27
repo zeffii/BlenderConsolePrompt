@@ -1,7 +1,6 @@
 import bpy
 
 
-
 def detect_comments(lines):
     for line in lines:
         if len(line.strip()) == 0:
@@ -13,6 +12,7 @@ def detect_comments(lines):
         else:
             return False
     return True
+
 
 class TEXT_OT_do_comment(bpy.types.Operator):
 
@@ -41,7 +41,7 @@ class TEXT_OT_do_comment(bpy.types.Operator):
             pass
 
         else:
-            ''' lines need to be commented '''        
+            ''' lines need to be commented '''
             # find least indent
             num_spaces = []
             for idx, l in enumerate(copied_lines):
@@ -64,32 +64,4 @@ class TEXT_OT_do_comment(bpy.types.Operator):
             wm.clipboard = lines_to_paste
             bpy.ops.text.paste()
 
-
         return {'FINISHED'}
-
-
-def add_keymap2():
-    wm = bpy.context.window_manager
-
-    TE = wm.keyconfigs.default.keymaps.get('Text')
-    if TE:
-        keymaps = TE.keymap_items
-        if not ('text.do_comment' in keymaps):
-            keymaps.new('text.do_comment', 'SLASH', 'PRESS', ctrl=True)
-    else:
-        kc = wm.keyconfigs.addon
-        print(' nope, TEXT will not work, adding:..')
-        km = kc.keymaps.new(name='Text', space_type="TEXT_EDITOR")
-        km.keymap_items.new('text.do_comment', 'SLASH', 'PRESS', ctrl=True)
-
-
-add_keymap2()
-
-# def register():
-#     bpy.utils.register_class(TEXT_OT_do_comment)
-#     add_keymap2()
-
-
-# def unregister():
-#     bpy.utils.unregister_class(TEXT_OT_do_comment)
-
