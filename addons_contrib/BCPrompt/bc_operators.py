@@ -11,7 +11,8 @@ from BCPrompt.bc_utils import (
     get_sv_times, get_sv_times_all,
     bcp_justbrowse,
     throw_manual,
-    center_to_selected
+    center_to_selected,
+    write_keys_textfile
 )
 
 from BCPrompt.bc_search_utils import (
@@ -318,6 +319,9 @@ class ConsoleDoAction(bpy.types.Operator):
                 add_scrollback(msg, 'OUTPUT')
             except:
                 rt = 'failed to do: ' + str(lazy_dict[m])
+
+        elif m == 'keys':
+            write_keys_textfile()
 
         return {'FINISHED'}
 

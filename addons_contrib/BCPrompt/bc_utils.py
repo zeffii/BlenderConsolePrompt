@@ -339,6 +339,42 @@ def test_dl_run(packaged):
         getattr(_ops, _name)()  # get and call
 
 
+def write_keys_textfile():
+    arp = """\
+‘NONE’,
+‘LEFTMOUSE’    ‘MIDDLEMOUSE’,  ‘RIGHTMOUSE’      ‘MOUSEROTATE’
+‘BUTTON4MOUSE’ ‘BUTTON5MOUSE’, ‘BUTTON6MOUSE’,   ‘BUTTON7MOUSE’
+‘ACTIONMOUSE’  ‘SELECTMOUSE’,  ‘MOUSEMOVE’,      ‘INBETWEEN_MOUSEMOVE’
+‘WHEELUPMOUSE’, ‘WHEELDOWNMOUSE’, ‘WHEELINMOUSE’, WHEELOUTMOUSE’
+
+ A B C D E ...Z
+
+ ZERO ONE TWO THREE FOUR FIVE SIX SEVEN EIGHT NINE
+
+‘LEFT_CTRL’,  ‘RIGHT_CTRL’
+‘LEFT_ALT’,   ‘RIGHT_ALT’
+‘LEFT_SHIFT’, ‘RIGHT_SHIFT’
+
+‘OSKEY’, ‘GRLESS’, ‘ESC’, ‘TAB’, ‘RET’, ‘SPACE’, ‘LINE_FEED’, ‘BACK_SPACE’, ‘DEL’
+‘SEMI_COLON’, ‘PERIOD’, ‘COMMA’, ‘QUOTE’, ‘ACCENT_GRAVE’
+‘MINUS’, ‘SLASH’, ‘BACK_SLASH’, ‘EQUAL’, ‘LEFT_BRACKET’, ‘RIGHT_BRACKET’
+‘LEFT_ARROW’, ‘DOWN_ARROW’, ‘RIGHT_ARROW’, ‘UP_ARROW’
+
+ NUMPAD_{0..9}
+
+‘NUMPAD_PERIOD’, ‘NUMPAD_SLASH’, ‘NUMPAD_ASTERIX’
+‘NUMPAD_0’, ‘NUMPAD_MINUS’, ‘NUMPAD_ENTER’, ‘NUMPAD_PLUS’
+
+ F1   F2   F3   F4   F5   F6   F7   F8   F9   F10   F11
+ F12  F13  F14  F15  F16  F17  F18  F19
+
+‘PAUSE’, ‘INSERT’, ‘HOME’, ‘PAGE_UP’, ‘PAGE_DOWN’, ‘END’,
+‘TRACKPADPAN’  ‘TRACKPADZOOM’ """
+
+    new_text = bpy.data.texts.new('key codes')
+    new_text.from_string(arp)
+
+
 def register():
     bpy.utils.register_module(__name__)
 
