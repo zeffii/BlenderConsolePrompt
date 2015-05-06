@@ -339,6 +339,19 @@ def test_dl_run(packaged):
         getattr(_ops, _name)()  # get and call
 
 
+def set_datablock_of_active_textwindow(textname):
+    for window in bpy.context.window_manager.windows:
+        for area in window.screen.areas:
+
+            if not area.type == 'TEXT_EDITOR':
+                continue
+
+            for s in area.spaces:
+                if s.type == 'TEXT_EDITOR':
+                    print(dir(s))
+                    s.text = bpy.data.texts[textname]
+
+
 def write_keys_textfile():
     arp = """\
 ‘NONE’,
@@ -373,6 +386,7 @@ def write_keys_textfile():
 
     new_text = bpy.data.texts.new('key codes')
     new_text.from_string(arp)
+    set_datablock_of_active_textwindow(new_text.name)
 
 
 def register():
