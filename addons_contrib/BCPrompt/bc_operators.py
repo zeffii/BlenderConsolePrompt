@@ -42,8 +42,23 @@ from BCPrompt.bc_CAD_utils import perform_face_intersection
 history_append = bpy.ops.console.history_append
 addon_enable = bpy.ops.wm.addon_enable
 
-# use this for one shot - function calls
 
+def lazy_power_download(mod, dl_url, op_path, op_name, invoke_type=None):
+    registers_operator = [op_path, op_name]
+
+    packaged = dict(
+        operator=registers_operator,
+        module_to_enable=mod,
+        url=dl_url
+    )
+
+    if invoke_type:
+        test_dl_run(packaged)
+    else:
+        test_dl_run(packaged, invoke_type=invoke_type)
+
+
+# this to be used for addons which are definitely present..
 lazy_dict = {
     '-imgp': [addon_enable, "io_import_images_as_planes"]
 }
@@ -68,6 +83,7 @@ x?(?)se,   |  x??se searches B3D stackexchange, x?se just regular SE
 vtx, xl    |  enable or trigger tinyCAD vtx (will download)
 ico        |  enables icon addon in texteditor panel (Dev)
 123        |  use 1 2 3 to select vert, edge, face
+-or2s      |  origin to selected.
 -steps     |  download + enable steps script
 -dist      |  gives local distance between two selected verts
 -gist -o x |  uploads all open text views as x to anon gist.
@@ -283,7 +299,6 @@ class ConsoleDoAction(bpy.types.Operator):
             test_dl_run(packaged)
 
         elif m == '-snaps':
-            # https://raw.githubusercontent.com/Mano-Wii/Snap-Utilities-Line/master/mesh_snap_utilities_line.py
             url_prefix = "https://raw.githubusercontent.com/Mano-Wii/Snap-Utilities-Line/master/"
             module_to_enable = "mesh_snap_utilities_line"
             dl_url = url_prefix + (module_to_enable + '.py')
@@ -297,6 +312,18 @@ class ConsoleDoAction(bpy.types.Operator):
             )
 
             test_dl_run(packaged)
+
+        elif m == '-or2s':
+            url_prefix = "https://gist.githubusercontent.com/zeffii/"
+            burp = "5844379/raw/01515bbf679f3f7a7c965d732004086dd40e64c0/"
+            mod = "space_view3d_move_origin"
+            dl_url = url_prefix + burp + mod + '.py'
+            lazy_power_download(
+                mod, dl_url, bpy.ops.object,
+                'origin_to_selected', 'INVOKE_DEFAULT')
+
+            msg = 'start with space-> Origin Move To Selected'
+            add_scrollback(msg, 'INFO')
 
         elif m == '-gh':
             import os
@@ -320,7 +347,7 @@ class ConsoleDoAction(bpy.types.Operator):
             except:
                 rt = 'failed to do: ' + str(lazy_dict[m])
 
-        elif m == 'keys':
+        elif m == '-keys':
             write_keys_textfile()
 
         return {'FINISHED'}

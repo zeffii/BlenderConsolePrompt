@@ -266,7 +266,7 @@ def remove_obj_and_mesh(context):
         meshes.remove(mesh)
 
 
-def test_dl_run(packaged):
+def test_dl_run(packaged, invoke_type=None):
     '''
     This implementation:
     - test if the operator already exists in bpy.ops.xxxx
@@ -286,48 +286,45 @@ def test_dl_run(packaged):
     # first check if the operator exists.
     addon_enabled = _name in dir(_ops)
 
+    def run_addon(_ops, _name, invoke_type):
+        if invoke_type:
+            getattr(_ops, _name)(invoke_type)
+        else:
+            getattr(_ops, _name)()
+
     if not addon_enabled:
         try:
             bpy.ops.wm.addon_enable(module=_module)
-            getattr(_ops, _name)()
+            # getattr(_ops, _name)()
+            run_addon(_ops, _name, invoke_type)
             return
         except:
             print('\'{0}\' addon not found.'.format(_module))
             print('will attempt download: ')
-
-            # wm = bpy.data.window_managers[0]
-            # wm.progress_begin(0, 100)
 
             # I only want the shortest path.
             script_paths = bpy.utils.script_paths()
             sp = list(sorted(script_paths, key=len))[0]
             contrib_path = os.path.join(sp, 'addons_contrib')
 
-            # wm.progress_update(10)
-
-            #
             if not os.path.isdir(contrib_path):
                 print('attempting to make path...')
                 shutil.os.mkdir(contrib_path)
-
-            # wm.progress_update(10)
 
             # path should exist now.
             print('downloading from:', _url)
             filename = _url.split('/')[-1]
             py_destination = os.path.join(contrib_path, filename)
             urlretrieve(_url, py_destination)
-            # wm.progress_update(70)
 
             # must happen or the new script isn't found.
             bpy.utils.refresh_script_paths()
-            # wm.progress_update(10)
-            # wm.progress_end()
 
         # try one last time to enable and run.
         try:
             bpy.ops.wm.addon_enable(module=_module)
-            getattr(_ops, _name)()
+            # getattr(_ops, _name)()
+            run_addon(_ops, _name, invoke_type)
             return
         except:
             msg = 'blender console has failed miserably, let me know'
@@ -336,7 +333,8 @@ def test_dl_run(packaged):
     else:
         # the ops is present, just call it.
         print('STEP 6 operator is present, simply call operator')
-        getattr(_ops, _name)()  # get and call
+        # getattr(_ops, _name)()  # get and call
+        run_addon(_ops, _name, invoke_type)
 
 
 def set_datablock_of_active_textwindow(textname):
