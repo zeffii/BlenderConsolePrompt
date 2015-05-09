@@ -57,19 +57,22 @@ import bpy
 
 
 def add_keymap():
-    wm = bpy.context.window_manager
+    try:
+        wm = bpy.context.window_manager
 
-    console = wm.keyconfigs.user.keymaps.get('Console')
-    if console:
-        keymaps = console.keymap_items
-        if not ('console.do_action' in keymaps):
-            keymaps.new('console.do_action', 'RET', 'PRESS', ctrl=1)
+        console = wm.keyconfigs.user.keymaps.get('Console')
+        if console:
+            keymaps = console.keymap_items
+            if not ('console.do_action' in keymaps):
+                keymaps.new('console.do_action', 'RET', 'PRESS', ctrl=1)
 
-    TE = wm.keyconfigs.user.keymaps.get('Text')
-    if TE:
-        keymaps = TE.keymap_items
-        if not ('text.do_comment' in keymaps):
-            keymaps.new('text.do_comment', 'SLASH', 'PRESS', ctrl=1)
+        TE = wm.keyconfigs.user.keymaps.get('Text')
+        if TE:
+            keymaps = TE.keymap_items
+            if not ('text.do_comment' in keymaps):
+                keymaps.new('text.do_comment', 'SLASH', 'PRESS', ctrl=1)
+    except:
+        print('BCPrompt keymaps maybe already exist, didnt dupe)
 
 
 def register():
