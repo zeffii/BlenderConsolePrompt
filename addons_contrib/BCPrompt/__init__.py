@@ -72,7 +72,7 @@ def add_keymap():
             if not ('text.do_comment' in keymaps):
                 keymaps.new('text.do_comment', 'SLASH', 'PRESS', ctrl=1)
     except:
-        print('BCPrompt keymaps maybe already exist, didnt dupe)
+        print('BCPrompt keymaps maybe already exist, didnt dupe')
 
 
 def register():
