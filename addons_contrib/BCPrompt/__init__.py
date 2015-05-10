@@ -33,10 +33,9 @@ bl_info = {
     "category": "Console"}
 
 if 'bpy' in globals():
-    print(__package__, 'detected reload event! cool.')
+    print('{0}: detected reload event! cool.'.format(__package__))
 
     if 'bc_operators' in globals():
-        print('doing reloads')
         import imp
         imp.reload(bc_operators)
         imp.reload(bc_panels)
@@ -47,6 +46,7 @@ if 'bpy' in globals():
         imp.reload(bc_update_utils)
         imp.reload(bc_CAD_utils)
         imp.reload(bc_TEXT_utils)
+        print('{0}: reloaded.'.format(__package__))
 
 else:
     from BCPrompt import bc_operators

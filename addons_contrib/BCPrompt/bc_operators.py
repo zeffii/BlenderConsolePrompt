@@ -318,9 +318,7 @@ class ConsoleDoAction(bpy.types.Operator):
             burp = "5844379/raw/01515bbf679f3f7a7c965d732004086dd40e64c0/"
             mod = "space_view3d_move_origin"
             dl_url = url_prefix + burp + mod + '.py'
-            lazy_power_download(
-                mod, dl_url, bpy.ops.object,
-                'origin_to_selected', 'INVOKE_DEFAULT')
+            lazy_power_download(mod, dl_url, bpy.ops.object, 'origin_to_selected')
 
             msg = 'start with space-> Origin Move To Selected'
             add_scrollback(msg, 'INFO')
