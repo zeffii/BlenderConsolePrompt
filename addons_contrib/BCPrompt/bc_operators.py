@@ -60,7 +60,8 @@ def lazy_power_download(mod, dl_url, op_path, op_name, invoke_type=None):
 
 # this to be used for addons which are definitely present..
 lazy_dict = {
-    '-imgp': [addon_enable, "io_import_images_as_planes"]
+    '-imgp': [addon_enable, "io_import_images_as_planes"],
+    '-bb2': [addon_enable, "BioBlender"]
 }
 
 
