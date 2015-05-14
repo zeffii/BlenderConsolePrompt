@@ -2,7 +2,6 @@ import bpy
 from console_python import add_scrollback
 
 from BCPrompt.bc_utils import (
-    do_text_glam,
     set_keymap,
     vtx_specials,
     test_dl_run,
@@ -14,6 +13,10 @@ from BCPrompt.bc_utils import (
     center_to_selected,
     write_keys_textfile
 )
+
+from BCPrompt.bc_text_repr_utils import (
+    do_text_glam,
+    do_text_synthax)
 
 from BCPrompt.bc_search_utils import (
     search_blenderscripting,
@@ -164,6 +167,12 @@ class ConsoleDoAction(bpy.types.Operator):
 
         elif m == 'syntax':
             do_text_glam()
+
+        elif m in {'syntax lt', 'syntax dk'}:
+            do_text_glam()
+            theme = m.split()[1]
+            print('theme', theme)
+            do_text_synthax(theme)
 
         # Searches!
 
