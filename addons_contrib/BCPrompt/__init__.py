@@ -50,9 +50,9 @@ if 'bpy' in globals():
         print('{0}: reloaded.'.format(__package__))
 
 else:
-    from BCPrompt import bc_operators
-    from BCPrompt import bc_panels
-    from BCPrompt import bc_TEXT_utils
+    from . import bc_operators
+    from . import bc_panels
+    from . import bc_TEXT_utils
 
 import bpy
 
