@@ -1,7 +1,7 @@
 import bpy
 from console_python import add_scrollback
 
-from BCPrompt.bc_utils import (
+from .bc_utils import (
     set_keymap,
     vtx_specials,
     test_dl_run,
@@ -14,32 +14,32 @@ from BCPrompt.bc_utils import (
     write_keys_textfile
 )
 
-from BCPrompt.bc_text_repr_utils import (
+from .bc_text_repr_utils import (
     do_text_glam,
     do_text_synthax)
 
-from BCPrompt.bc_search_utils import (
+from .bc_search_utils import (
     search_blenderscripting,
     search_bpydocs,
     search_pydocs,
     search_stack,
 )
 
-from BCPrompt.bc_gist_utils import (
+from .bc_gist_utils import (
     find_filenames, to_gist
 )
 
-from BCPrompt.bc_scene_utils import (
+from .bc_scene_utils import (
     select_starting,
     select_starting2,
     distance_check
 )
 
-from BCPrompt.bc_update_utils import (
+from .bc_update_utils import (
     peek_builder_org, process_zip
 )
 
-from BCPrompt.bc_CAD_utils import perform_face_intersection
+from .bc_CAD_utils import perform_face_intersection
 
 
 history_append = bpy.ops.console.history_append
