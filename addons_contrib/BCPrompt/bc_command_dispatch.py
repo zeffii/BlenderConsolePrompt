@@ -304,6 +304,10 @@ def in_modeling_tools(context, m):
     elif m == '-itx':
         perform_face_intersection()
 
+    elif m.startswith('enable '):
+        command, addon = m.split()
+        bpy.ops.wm.addon_enable(module=addon)
+
     else:
         return False
 
