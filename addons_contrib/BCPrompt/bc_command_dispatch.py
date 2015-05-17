@@ -333,6 +333,8 @@ def in_modeling_tools(context, m):
     elif m.startswith('enable '):
         command, addon = m.split()
         bpy.ops.wm.addon_enable(module=addon)
+        msg = 'enabled {0}'.format(addon)
+        add_scrollback(msg, 'INFO')
 
     else:
         return False
