@@ -102,6 +102,17 @@ def in_scene_commands(context, m):
         set_keymap()
         add_scrollback('enabled: 1=VERT_SEL, 2=EDGE_SEL, 3=FACE_SEL', 'OUTPUT')
 
+    elif m.startswith('v2rdim '):
+        vidname = m[7:]
+        sequence = bpy.context.scene.sequence_editor.sequences[vidname]
+        fp = sequence.filepath
+        mv = bpy.data.movieclips.load(fp)
+        named = mv.name
+        x, y = mv.size[:]
+        bpy.data.movieclips.remove(mv)
+        bpy.context.scene.render.resolution_x = x
+        bpy.context.scene.render.resolution_y = y
+
     else:
         return False
 
