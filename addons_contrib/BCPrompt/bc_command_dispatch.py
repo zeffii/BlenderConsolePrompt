@@ -102,16 +102,31 @@ def in_scene_commands(context, m):
         set_keymap()
         add_scrollback('enabled: 1=VERT_SEL, 2=EDGE_SEL, 3=FACE_SEL', 'OUTPUT')
 
-    elif m.startswith('v2rdim '):
-        vidname = m[7:]
-        sequence = bpy.context.scene.sequence_editor.sequences[vidname]
-        fp = sequence.filepath
-        mv = bpy.data.movieclips.load(fp)
-        named = mv.name
-        x, y = mv.size[:]
-        bpy.data.movieclips.remove(mv)
-        bpy.context.scene.render.resolution_x = x
-        bpy.context.scene.render.resolution_y = y
+    elif m.startswith('v2rdim'):
+        SCN = bpy.context.scene
+        SE = SCN.sequence_editor
+
+        if m == 'v2rdim':
+            sequence = SE.active_strip
+        elif m.startswith('v2rdim '):
+            vidname = m[7:]
+            sequence = SE.sequences.get(vidname)
+            if not sequence:
+                print(vidname, 'is not a sequence - check the spelling')
+                return True
+
+        def get_size(sequence):
+            clips = bpy.data.movieclips
+            fp = sequence.filepath
+            mv = clips.load(fp)
+            x, y = mv.size[:]
+            clips.remove(mv)
+            return x, y
+
+        x, y = get_size(sequence)
+        SCN.render.resolution_x = x
+        SCN.render.resolution_y = y
+        SCN.render.resolution_percentage = 100
 
     else:
         return False
