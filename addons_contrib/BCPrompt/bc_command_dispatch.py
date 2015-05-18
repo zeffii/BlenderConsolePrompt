@@ -128,6 +128,23 @@ def in_scene_commands(context, m):
         SCN.render.resolution_y = y
         SCN.render.resolution_percentage = 100
 
+    elif m == 'sel lights':
+        for o in bpy.data.objects:
+            if o.type == 'LAMP':
+                o.select = True
+
+    elif m == 'rm lights':
+        objs = bpy.data.objects
+        named_lights = []
+        for o in objs:
+            if o.type == 'LAMP':
+                named_lights.append(o.name)
+        for n in named_lights:
+            o = objs[n]
+            o.user_clear()
+            bpy.context.scene.objects.unlink(o)
+            objs.remove(o)
+
     else:
         return False
 
@@ -332,8 +349,11 @@ def in_modeling_tools(context, m):
 
     elif m.startswith('enable '):
         command, addon = m.split()
-        bpy.ops.wm.addon_enable(module=addon)
-        msg = 'enabled {0}'.format(addon)
+        t = bpy.ops.wm.addon_enable(module=addon)
+        if t == {'FINISHED'}:
+            msg = 'enabled {0}'.format(addon)
+        elif t == {'CANCELLED'}:
+            msg = 'addon not enabled, is it spelled correctly?'
         add_scrollback(msg, 'INFO')
 
     else:
