@@ -65,3 +65,29 @@ class TEXT_OT_do_comment(bpy.types.Operator):
             bpy.ops.text.paste()
 
         return {'FINISHED'}
+
+
+class TEXT_Cycle_TextBlocks(bpy.types.Operator):
+
+    bl_idname = "text.cycle_textblocks"
+    bl_label = "switch text content of current viewer"
+    bl_options = {'REGISTER', 'UNDO'}
+
+    direction = bpy.props.IntProperty(default=-1)
+
+    def execute(self, context):
+        edit_text = bpy.context.edit_text
+
+        texts = bpy.data.texts
+        num_texts = len(texts)
+
+        def get_index_of_text(text_name):
+            for idx, text in enumerate(texts):
+                if text.name == text_name:
+                    return idx
+
+        current_idx = get_index_of_text(edit_text.name)
+        new_idx = (current_idx + self.direction) % num_texts
+        context.space_data.text = texts[new_idx]
+
+        return {'FINISHED'}
