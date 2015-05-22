@@ -39,7 +39,10 @@ from .bc_update_utils import (
     peek_builder_org, process_zip
 )
 
-from .bc_CAD_utils import perform_face_intersection
+from .bc_CAD_utils import (
+    perform_face_intersection,
+    do_bix2
+)
 
 
 history_append = bpy.ops.console.history_append
@@ -144,6 +147,10 @@ def in_scene_commands(context, m):
             o.user_clear()
             bpy.context.scene.objects.unlink(o)
             objs.remove(o)
+
+    elif m in {'frame_end = frame_current', 'fend=fcur'}:
+        scn = bpy.context.scene
+        scn.frame_end = scn.frame_current
 
     else:
         return False
@@ -355,6 +362,9 @@ def in_modeling_tools(context, m):
         elif t == {'CANCELLED'}:
             msg = 'addon not enabled, is it spelled correctly?'
         add_scrollback(msg, 'INFO')
+
+    elif m == '-bix2':
+        do_bix2()
 
     else:
         return False

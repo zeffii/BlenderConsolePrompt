@@ -1,5 +1,6 @@
 import bpy
 import bmesh
+from mathutils import Vector, Matrix
 from mathutils.geometry import intersect_ray_tri
 from mathutils.geometry import intersect_point_line
 from mathutils.geometry import tessellate_polygon as tessellate
@@ -22,8 +23,8 @@ def perform_face_intersection():
         '''
         indices = [v.index for v in face.verts]
         indices.append(indices[0])  # makes cyclic
-        edges_f = [(indices[i], indices[i+1]) for i in range(len(indices)-1)]  # forward
-        edges_b = [(indices[i+1], indices[i]) for i in range(len(indices)-1)]  # backward
+        edges_f = [(indices[i], indices[i + 1]) for i in range(len(indices) - 1)]  # forward
+        edges_b = [(indices[i + 1], indices[i]) for i in range(len(indices) - 1)]  # backward
         return edges_f + edges_b
 
     def triangulated(face):
@@ -84,5 +85,64 @@ def perform_face_intersection():
 
     for v in vert_set:
         bm.verts.new(v)
+
+    bmesh.update_edit_mesh(me, True)
+
+
+def do_bix2():
+    obj = bpy.context.edit_object
+    me = obj.data
+
+    bm = bmesh.from_edit_mesh(me)
+    bm.verts.ensure_lookup_table()
+    bm.edges.ensure_lookup_table()
+    bm.faces.ensure_lookup_table()
+    bm_verts = bm.verts
+    bm_edges = bm.edges
+    bm_faces = bm.faces
+
+    edges = [e for e in bm_edges if e.select]
+
+    if not len(edges) == 2:
+        print('select only two edges')
+        return
+
+    itxs = [set(e.link_faces) for e in edges]
+    itx = itxs[0] & itxs[1]
+    if not (len(itx) == 1):
+        print('two edges do not share a face..')
+        return
+
+    itx = itx.pop(); print('face idx =', itx.index)
+
+    verts = [set(e.verts) for e in edges]
+    v = verts[0] & verts[1]
+    v = v.pop(); print('vertex index: ', v.index, v.co)
+
+    vopp = verts[0] ^ verts[1]
+    v1 = vopp.pop()
+    v2 = vopp.pop()
+
+    v11 = (v1.co - v.co).normalized()
+    v22 = (v2.co - v.co).normalized()
+    plane_no = v11 - v22
+    plane_co = v.co
+    dist = 0.0001
+
+    print('face to cut', [bm_faces[itx.index]])
+    visible_geom = [g for g in bm.faces[:]
+                    + bm.verts[:] + bm.edges[:] if not g.hide]
+
+
+    bmesh.ops.bisect_plane(
+        bm,
+        # geom=[bm_faces[itx.index]],
+        geom=visible_geom,
+        dist=dist,
+        plane_co=plane_co,
+        plane_no=plane_no,
+        use_snap_center=False,
+        clear_outer=False,
+        clear_inner=False)
 
     bmesh.update_edit_mesh(me, True)
