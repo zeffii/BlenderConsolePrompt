@@ -3,6 +3,7 @@ import bmesh
 from mathutils import Vector, Matrix
 from mathutils.geometry import intersect_ray_tri
 from mathutils.geometry import intersect_point_line
+from mathutils.geometry import intersect_line_line as ILL
 from mathutils.geometry import tessellate_polygon as tessellate
 
 
@@ -129,20 +130,26 @@ def do_bix2():
     plane_co = v.co
     dist = 0.0001
 
-    print('face to cut', [bm_faces[itx.index]])
-    visible_geom = [g for g in bm.faces[:]
-                    + bm.verts[:] + bm.edges[:] if not g.hide]
+    IPL = intersect_point_line
 
+    def find_itersected_edge(v11, v22, plane_co, face):
+        v3 = v11.lerp(v22, 0.5)
+        edge1 = [v3 + plane_co, plane_co]
+        other_edges = list(set(edges) ^ set(face.edges))
 
-    bmesh.ops.bisect_plane(
-        bm,
-        # geom=[bm_faces[itx.index]],
-        geom=visible_geom,
-        dist=dist,
-        plane_co=plane_co,
-        plane_no=plane_no,
-        use_snap_center=False,
-        clear_outer=False,
-        clear_inner=False)
+        for e in other_edges:
+            ev = e.verts
+            pts = ILL(ev[0].co, ev[1].co, *edge1)
+            pt = (pts[0] + pts[1]) / 2
 
+            itx_res = IPL(pt, ev[0].co, ev[1].co)
+            if itx_res:
+                v, dist = itx_res
+                if (0.0 < dist < 1.0):
+                    return e, v, dist
+
+        return None, None, None
+
+    edge, vert, pos = find_itersected_edge(v11, v22, plane_co, itx)
+    bmesh.utils.edge_split(edge, edge.verts[0], pos)
     bmesh.update_edit_mesh(me, True)

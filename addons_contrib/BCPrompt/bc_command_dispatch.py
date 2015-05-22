@@ -52,7 +52,8 @@ addon_enable = bpy.ops.wm.addon_enable
 # this to be used for addons which are definitely present..
 lazy_dict = {
     '-imgp': [addon_enable, "io_import_images_as_planes"],
-    '-bb2': [addon_enable, "BioBlender"]
+    '-bb2': [addon_enable, "BioBlender"],
+    '-idxv': [addon_enable, "view3d_idx_view"]
 }
 
 
