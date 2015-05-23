@@ -151,5 +151,9 @@ def do_bix2():
         return None, None, None
 
     edge, vert, pos = find_itersected_edge(v11, v22, plane_co, itx)
-    bmesh.utils.edge_split(edge, edge.verts[0], pos)
+    new_geom = bmesh.utils.edge_split(edge, edge.verts[0], pos)
+    if new_geom:
+        new_edge, new_vert = new_geom
+        bmesh.utils.face_split(itx, v, new_vert)
+
     bmesh.update_edit_mesh(me, True)
