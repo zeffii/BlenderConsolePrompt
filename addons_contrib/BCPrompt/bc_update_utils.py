@@ -3,7 +3,10 @@ import re
 import os
 import zipfile
 import urllib
+import json
+import bpy
 from urllib.request import urlopen
+from console_python import add_scrollback
 
 '''
 design considerations
@@ -136,3 +139,47 @@ def process_zip(url):
     remove_whitelisted_from_zip(archive_path, wl)
 
 # process_zip(url=None)
+
+'''
+ ----- possibly should be own module
+'''
+
+def get_raw_url_from_gist_id(gist_id):
+    
+    gist_id = str(gist_id)
+    url = 'https://api.github.com/gists/' + gist_id
+    
+    found_json = urlopen(url).readall().decode()
+
+    wfile = json.JSONDecoder()
+    wjson = wfile.decode(found_json)
+
+    # 'files' may contain several - this will mess up gist name.
+    files_flag = 'files'
+    file_names = list(wjson[files_flag].keys())
+    file_name = file_names[0]
+    return wjson[files_flag][file_name]['raw_url']
+
+
+def get_gist_as_string(gist_id):
+    url = get_raw_url_from_gist_id(gist_id)
+    conn = urlopen(url).readall().decode()
+    return conn
+
+def get_sv():
+    add_scrollback('getting sverchok bootstrapper', 'OUTPUT')
+    string_load = get_gist_as_string("5a4440e7455940174ab9")
+    print(string_load[:100])
+    
+    svbl = bpy.data.texts.new('sverchok bootloader')
+    svbl.write(string_load)
+    add_scrollback('execuion bootstrapper complete', 'OUTPUT')
+
+    # until a tidier solution comes along
+    ctx = bpy.context.copy()
+    ctx['edit_text'] = svbl # specify the text datablock to execute
+    # ctx['area'] = area # not actually needed...
+    # ctx['region'] = area.regions[-1] # ... just be nice
+    bpy.ops.text.run_script(ctx)
+
+    

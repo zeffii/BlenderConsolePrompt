@@ -36,7 +36,9 @@ from .bc_scene_utils import (
 )
 
 from .bc_update_utils import (
-    peek_builder_org, process_zip
+    peek_builder_org,
+    process_zip,
+    get_sv
 )
 
 from .bc_CAD_utils import (
@@ -201,6 +203,9 @@ def in_sverchok_commands(context, m):
 
     elif m == 'times':
         get_sv_times_all()
+
+    elif m == 'get sverchok':
+        get_sv()
 
     else:
         return False
