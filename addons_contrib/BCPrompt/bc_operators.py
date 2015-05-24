@@ -20,7 +20,7 @@ for full verbose descriptor use -man
 
 command    |  description
 -----------+----------------
-tt / tb    |  turntable / trackball nav.
+tt | tb    |  turntable / trackball nav.
 cen        |  centers 3d cursor
 cento      |  centers to selected
 cen=<  >   |  center to eval , eg: cen = 2,3,2
