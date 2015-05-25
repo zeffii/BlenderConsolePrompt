@@ -170,11 +170,12 @@ def in_scene_commands(context, m):
         new_empty = parent_selected_to_new_empty()
         if new_empty:
             msg = 'parented selected to {0}'
+            msg.format(new_empty.name)
             output_type = 'OUTPUT'
         else:
             msg = 'no objects selected to parent to'
             output_type = 'ERROR'
-        add_scrollback(msg.format(new_empty.name), output_type)
+        add_scrollback(msg, output_type)
 
     else:
         return False
