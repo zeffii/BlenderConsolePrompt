@@ -79,6 +79,10 @@ class ConsoleDoAction(bpy.types.Operator):
             print_most_useful()
             return DONE
 
+        elif m == 'cl':
+            bpy.ops.console.clear()
+            return DONE
+
         return {'FINISHED'}
 
 
