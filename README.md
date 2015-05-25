@@ -1,13 +1,15 @@
-This is much cooler than you think. tests - and uploads
+This is much cooler than you think. Read on!
 
 # BlenderConsolePrompt
 
 [![Join the chat at https://gitter.im/zeffii/BlenderConsolePrompt](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zeffii/BlenderConsolePrompt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-A small project to add features to blender's python console. We can use the console to execute commands, instead of key-combos. Sometimes we run out of sane key combos or find that they get complex. At the moment only one-shot commands are implemented, but future implementations will be modal/interactive and possibly a bpm (Blender package manager).
+BCP is an addon that allows me to run various scripts from Blender's Python console (REPL). I have many useful code snippets that are too short to warrent all the bloat that comes with writing addon-boilerplate, but that are useful enough that I do want to be able to trigger at will. Instead of writing addons for short snippets I now add them to various snippet files and givem them a short trigger name. This helps maintain workflow and the simple -ls command shows the list of most common commands, the `-man` command shows an exhaustive list of stored commands.
 
-these are the non modal, one shot commands
+At the moment only one-shot commands are implemented, but future implementations will be modal/interactive and possibly a bpm (Blender package manager).
+
+these are some of the non modal, one shot commands
 
 Command String | Description
 -------------- | -------------
@@ -29,8 +31,9 @@ string?bpy | search blender bpy docs ..
 _svc | checking recent sverchok commits (github api) [image](https://github.com/zeffii/BlenderConsolePrompt/issues/3#issuecomment-74256330)
 -gist -o somename | uploads all visible text blocks as a unified github anonymous public gist, then it will open the url in a browser. `-gist -o somename`
 -sel somename | is select=True for all data.objects where `.name.startswith(somename)`
+-psel | make a parent empty for selected objects
 -man | opens github readme.md for the addon
-times treename | treename must be a valid Sverchok Tree name, will spawn a browser with visualization. F.ex `times NodeTree.002`
+
 
 
 
