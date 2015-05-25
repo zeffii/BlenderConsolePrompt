@@ -40,5 +40,25 @@ def distance_check():
     if not len(verts) == 2:
         return 'select 2 only'
     else:
-        dist = (verts[0]-verts[1]).length
+        dist = (verts[0] - verts[1]).length
         return str(dist)
+
+
+def align_view_to_3dcursor():
+    for area in bpy.context.screen.areas:
+        if area.type == 'VIEW_3D':
+            ctx = bpy.context.copy()
+            ctx['area'] = area
+            ctx['region'] = area.regions[-1]
+            bpy.ops.view3d.view_center_cursor(ctx)
+
+    # # for window in bpy.context.window_manager.windows:
+    # #     for area in window.screen.areas:
+
+    # #         if not area.type == 'IMAGE_EDITOR':
+    # #             continue
+
+    # #         for s in area.spaces:
+    # #             if s.type == 'IMAGE_EDITOR':
+    # # for area in bpy.context.screen.areas:
+    # ...

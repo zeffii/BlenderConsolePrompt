@@ -1,6 +1,7 @@
 import bpy
 import bmesh
 from mathutils import Vector
+from console_python import add_scrollback
 
 import os
 import sys
@@ -385,6 +386,27 @@ def write_keys_textfile():
     new_text = bpy.data.texts.new('key codes')
     new_text.from_string(arp)
     set_datablock_of_active_textwindow(new_text.name)
+
+
+def view_types_to_console():
+    content = """\
+bl_<prop>      | allowed
+---------------+-------------------------------------------------------------
+bl_space_type  | 'CLIP_EDITOR', 'CONSOLE', 'DOPESHEET_EDITOR', 'EMPTY',
+               | 'FILE_BROWSER', 'GRAPH_EDITOR', 'IMAGE_EDITOR', 'INFO',
+               | 'LOGIC_EDITOR', 'NLA_EDITOR', 'NODE_EDITOR', 'OUTLINER',
+               | 'PROPERTIES', 'SEQUENCE_EDITOR', 'TEXT_EDITOR', 'TIMELINE',
+               | 'USER_PREFERENCES', 'VIEW_3D'
+---------------+-------------------------------------------------------------
+bl_region_type | 'CHANNELS', 'HEADER', 'PREVIEW', 'TEMPORARY', 'TOOLS',
+               | 'TOOL_PROPS', 'UI', 'WINDOW'
+---------------+-------------------------------------------------------------
+bl_context     | 'armature_edit', 'curve_edit', 'imagepaint', 'lattice_edit',
+               | 'mball_edit', 'mesh_edit', 'objectmode', 'particlemode',
+               | 'posemode', 'sculpt_mode', 'surface_edit', 'text_edit',
+               | 'vertexpaint', 'weightpaint'
+"""
+    add_scrollback(content, 'OUTPUT')
 
 
 def register():

@@ -11,7 +11,8 @@ from .bc_utils import (
     bcp_justbrowse,
     throw_manual,
     center_to_selected,
-    write_keys_textfile
+    write_keys_textfile,
+    view_types_to_console
 )
 
 from .bc_text_repr_utils import (
@@ -32,7 +33,8 @@ from .bc_gist_utils import (
 from .bc_scene_utils import (
     select_starting,
     select_starting2,
-    distance_check
+    distance_check,
+    align_view_to_3dcursor
 )
 
 from .bc_update_utils import (
@@ -78,6 +80,10 @@ def in_scene_commands(context, m):
     if m == "cen":
         '''cursor to center'''
         context.scene.cursor_location = (0.0, 0.0, 0.0)
+
+    if m == 'cenv':
+        context.scene.cursor_location = (0.0, 0.0, 0.0)
+        align_view_to_3dcursor()
 
     elif m == 'cento':
         center_to_selected(context)
@@ -276,6 +282,9 @@ def in_core_dev_commands(context, m):
         _root = os.path.dirname(__file__)
         f = [os.path.join(_root, 'tmp', 'github_start.bat')]
         subprocess.call(f)
+
+    elif m == 'bl<':
+        view_types_to_console()
 
     else:
         return False
