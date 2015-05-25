@@ -51,3 +51,22 @@ def align_view_to_3dcursor():
             ctx['area'] = area
             ctx['region'] = area.regions[-1]
             bpy.ops.view3d.view_center_cursor(ctx)
+
+
+def parent_selected_to_new_empty():
+    context = bpy.context
+    scene = context.scene
+    objects = bpy.data.objects
+
+    selected_objects = context.selected_objects.copy()
+
+    if not selected_objects:
+        return
+
+    mt = objects.new('parent_empty', None)
+    scene.objects.link(mt)
+
+    for o in selected_objects:
+        o.parent = mt
+
+    return mt

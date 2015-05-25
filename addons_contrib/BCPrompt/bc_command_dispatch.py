@@ -34,7 +34,8 @@ from .bc_scene_utils import (
     select_starting,
     select_starting2,
     distance_check,
-    align_view_to_3dcursor
+    align_view_to_3dcursor,
+    parent_selected_to_new_empty
 )
 
 from .bc_update_utils import (
@@ -47,6 +48,10 @@ from .bc_CAD_utils import (
     perform_face_intersection,
     do_bix2
 )
+
+"""
+permitted for scrollabck are : INPUT OUTPUT INFO ERROR
+"""
 
 
 history_append = bpy.ops.console.history_append
@@ -160,6 +165,16 @@ def in_scene_commands(context, m):
     elif m in {'frame_end = frame_current', 'fend=fcur'}:
         scn = bpy.context.scene
         scn.frame_end = scn.frame_current
+
+    elif m == 'psel':
+        new_empty = parent_selected_to_new_empty()
+        if new_empty:
+            msg = 'parented selected to {0}'
+            output_type = 'OUTPUT'
+        else:
+            msg = 'no objects selected to parent to'
+            output_type = 'ERROR'
+        add_scrollback(msg.format(new_empty.name), output_type)
 
     else:
         return False
