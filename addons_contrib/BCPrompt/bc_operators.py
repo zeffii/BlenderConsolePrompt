@@ -22,21 +22,25 @@ command    |  description
 -----------+----------------
 tt | tb    |  turntable / trackball nav.
 cen        |  centers 3d cursor
+cenv       |  centers 3d cursor, aligns views to it
 cento      |  centers to selected
-cen=<  >   |  center to eval , eg: cen = 2,3,2
 endswith!  |  copy current console line if ends with exclm.
 x?bpy      |  search blender python for x
 x?bs       |  search blenderscripting.blogspot for x
 x?py       |  search python docs for x
-x?(?)se,   |  x??se searches B3D stackexchange, x?se just regular SE
+x?(?)se    |  x??se searches B3D stackexchange, x?se just regular SE
 vtx, xl    |  enable or trigger tinyCAD vtx (will download)
 ico        |  enables icon addon in texteditor panel (Dev)
 123        |  use 1 2 3 to select vert, edge, face
+-img2p     |  enabled image to plane import addon
 -or2s      |  origin to selected.
--steps     |  download + enable steps script
 -dist      |  gives local distance between two selected verts
 -gist -o x |  uploads all open text views as x to anon gist.
--debug     |  dl + enable extended mesh index visualiser. it's awesome.'''
+-debug     |  dl + enable extended mesh index visualiser. it's awesome.
+-----------+----------------------------------------------------------
+-idxv      |  enable by shortcut name (user defined)
+enable <named addon>  |  package name or folder name
+'''
 
     add_scrollback(content, 'OUTPUT')
 

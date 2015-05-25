@@ -51,14 +51,3 @@ def align_view_to_3dcursor():
             ctx['area'] = area
             ctx['region'] = area.regions[-1]
             bpy.ops.view3d.view_center_cursor(ctx)
-
-    # # for window in bpy.context.window_manager.windows:
-    # #     for area in window.screen.areas:
-
-    # #         if not area.type == 'IMAGE_EDITOR':
-    # #             continue
-
-    # #         for s in area.spaces:
-    # #             if s.type == 'IMAGE_EDITOR':
-    # # for area in bpy.context.screen.areas:
-    # ...
