@@ -170,7 +170,7 @@ def in_scene_commands(context, m):
         new_empty = parent_selected_to_new_empty()
         if new_empty:
             msg = 'parented selected to {0}'
-            msg.format(new_empty.name)
+            msg = msg.format(new_empty.name)
             output_type = 'OUTPUT'
         else:
             msg = 'no objects selected to parent to'
