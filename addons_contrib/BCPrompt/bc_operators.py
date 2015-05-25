@@ -28,7 +28,8 @@ endswith!  |  copy current console line if ends with exclm.
 x?bpy      |  search blender python for x
 x?bs       |  search blenderscripting.blogspot for x
 x?py       |  search python docs for x
-x?(?)se    |  x??se searches B3D stackexchange, x?se just regular SE
+x?se       |  search B3D StackExchange
+x??se      |  regular StackExchange search
 vtx, xl    |  enable or trigger tinyCAD vtx (will download)
 ico        |  enables icon addon in texteditor panel (Dev)
 123        |  use 1 2 3 to select vert, edge, face
