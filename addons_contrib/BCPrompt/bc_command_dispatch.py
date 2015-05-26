@@ -229,6 +229,17 @@ def in_sverchok_commands(context, m):
     elif m == 'get sverchok':
         get_sv()
 
+    elif m == 'sv blossom':
+        addon_name = 'sverchok'
+        addon = bpy.context.user_preferences.addons.get(addon_name)
+        if addon:
+            prefs = addon.preferences
+            prefs.sv_theme = 'nipon_blossom'
+            bpy.ops.node.sverchok_apply_theme()
+            add_scrollback('enabled nipon!', 'OUTPUT')
+        else:
+            add_scrollback('sverchok not found', 'ERROR')
+
     else:
         return False
 
