@@ -7,7 +7,8 @@ from .bc_command_dispatch import (
     in_sverchok_commands,
     in_core_dev_commands,
     in_modeling_tools,
-    in_upgrade_commands)
+    in_upgrade_commands,
+    in_bpm_commands)
 
 history_append = bpy.ops.console.history_append
 addon_enable = bpy.ops.wm.addon_enable
@@ -72,7 +73,8 @@ class ConsoleDoAction(bpy.types.Operator):
             in_sverchok_commands(context, m),
             in_core_dev_commands(context, m),
             in_modeling_tools(context, m),
-            in_upgrade_commands(context, m)
+            in_upgrade_commands(context, m),
+            in_bpm_commands(context, m)
         ]):
             return DONE
 

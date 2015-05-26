@@ -1,6 +1,8 @@
 import bpy
 from console_python import add_scrollback
 
+from .blender_package_manager import in_bpm_commands
+
 from .bc_utils import (
     set_keymap,
     vtx_specials,
