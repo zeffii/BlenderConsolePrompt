@@ -210,6 +210,7 @@ def in_search_commands(context, m):
 
 
 def in_sverchok_commands(context, m):
+
     if m.startswith('_svc_'):
             bcp_justbrowse('https://github.com/nortikin/sverchok/commits/master')
 
@@ -231,16 +232,22 @@ def in_sverchok_commands(context, m):
     elif m == 'get sverchok':
         get_sv()
 
-    elif m == 'sv blossom':
+    elif m.startswith('sv '):
         addon_name = 'sverchok'
         addon = bpy.context.user_preferences.addons.get(addon_name)
-        if addon:
-            prefs = addon.preferences
+        if not addon:
+            add_scrollback('sverchok not found', 'ERROR')
+            # end early for sanity for the following code
+            return True
+
+        prefs = addon.preferences
+        if m == 'sv blossom':
             prefs.sv_theme = 'nipon_blossom'
             bpy.ops.node.sverchok_apply_theme()
             add_scrollback('enabled nipon!', 'OUTPUT')
-        else:
-            add_scrollback('sverchok not found', 'ERROR')
+        elif m == 'sv icons':
+            prefs.show_icons = not prefs.show_icons
+            add_scrollback('set icons = {0}'.format(prefs.show_icons), 'OUTPUT')
 
     else:
         return False
