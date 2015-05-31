@@ -14,7 +14,8 @@ from .bc_utils import (
     throw_manual,
     center_to_selected,
     write_keys_textfile,
-    view_types_to_console
+    view_types_to_console,
+    make_animated_gif
 )
 
 from .bc_text_repr_utils import (
@@ -146,6 +147,9 @@ def in_scene_commands(context, m):
         SCN.render.resolution_x = x
         SCN.render.resolution_y = y
         SCN.render.resolution_percentage = 100
+
+    elif m.startswith("gif ") and (len(m) > 5):
+        make_animated_gif(m[4:])
 
     elif m == 'sel lights':
         for o in bpy.data.objects:

@@ -49,6 +49,7 @@ if 'bpy' in globals():
         imp.reload(bc_text_repr_utils)
         imp.reload(bc_package_manager)
         imp.reload(bc_command_dispatch)
+        imp.reload(sub_util)
         print('{0}: reloaded.'.format(__package__))
 
 else:

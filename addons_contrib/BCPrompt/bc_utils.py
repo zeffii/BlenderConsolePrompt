@@ -11,6 +11,8 @@ import traceback
 import webbrowser
 from urllib.request import (urlopen, urlretrieve)
 
+from .sub_util import make_animated_gif
+
 
 def center_to_selected(context):
 
