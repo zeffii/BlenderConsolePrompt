@@ -4,6 +4,7 @@ from console_python import add_scrollback
 import os
 import sys
 import subprocess
+import threading
 
 
 def make_animated_gif(m):
@@ -19,3 +20,20 @@ def make_animated_gif(m):
         add_scrollback('failed.. - with errors', 'ERROR')
 
     os.chdir(initial_location)
+
+
+class Controller_Thread(threading.Thread):
+    def __init__(self, commands):
+        self.commands = commands
+        threading.Thread.__init__(self)
+
+    def run(self):
+        print("starting controlled thread")
+        subprocess.Popen(self.commands)
+        print("ended controlled thread")
+
+
+def cmd_controller(m):
+    ''' this may need to do os checking, but i can only test on linux atm '''
+    th = Controller_Thread(m.split())
+    th.start()

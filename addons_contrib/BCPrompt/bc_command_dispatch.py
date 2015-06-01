@@ -15,7 +15,8 @@ from .bc_utils import (
     center_to_selected,
     write_keys_textfile,
     view_types_to_console,
-    make_animated_gif
+    make_animated_gif,
+    cmd_controller
 )
 
 from .bc_text_repr_utils import (
@@ -325,6 +326,10 @@ def in_core_dev_commands(context, m):
 
     elif m == 'bl<':
         view_types_to_console()
+
+    elif m.startswith("!"):
+        ''' dispatch a threaded worker '''
+        cmd_controller(m[1:])
 
     else:
         return False
