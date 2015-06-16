@@ -29,6 +29,7 @@ class Controller_Thread(threading.Thread):
 
     def run(self):
         print("starting controlled thread")
+        print(__file__)
         subprocess.Popen(self.commands)
         print("ended controlled thread")
 

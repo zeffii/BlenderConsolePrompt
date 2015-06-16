@@ -66,7 +66,8 @@ addon_enable = bpy.ops.wm.addon_enable
 lazy_dict = {
     '-img2p': [addon_enable, "io_import_images_as_planes"],
     '-bb2': [addon_enable, "BioBlender"],
-    '-idxv': [addon_enable, "view3d_idx_view"]
+    '-idxv': [addon_enable, "view3d_idx_view"],
+    '-comprendo': [addon_enable, "image_editor_flatten"]
 }
 
 
@@ -400,6 +401,16 @@ def in_modeling_tools(context, m):
         lazy_power_download(mod, dl_url, bpy.ops.object, 'origin_to_selected')
 
         msg = 'start with space-> Origin Move To Selected'
+        add_scrollback(msg, 'INFO')
+
+    elif m == 'get comprendo':
+        url_prefix = "https://gist.githubusercontent.com/zeffii/"
+        burp = "eff101fca227ac706d9b/raw/53360a0e4ac6af8d371ed2d91c77ea6d83e12ad0/"
+        mod = "image_editor_flatten"
+        dl_url = url_prefix + burp + mod + '.py'
+        lazy_power_download(mod, dl_url, bpy.ops.image, 'tkd_callback_operator')
+
+        msg = 'downloaded or checked if composite+render is present'
         add_scrollback(msg, 'INFO')
 
     elif m in lazy_dict:
