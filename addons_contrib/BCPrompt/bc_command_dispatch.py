@@ -53,6 +53,8 @@ from .bc_CAD_utils import (
     do_bix2
 )
 
+from .bc_operator_loaders import run_operator_register
+
 """
 permitted for scrollabck are : INPUT OUTPUT INFO ERROR
 """
@@ -461,6 +463,16 @@ def in_upgrade_commands(context, m):
         else:
             msg = 'too many zips, narrow down!'
             add_scrollback(msg, 'INFO')
+    else:
+        return False
+
+    return True
+
+
+def in_fast_ops_commands(context, m):
+    if m.startswith('--plex'):
+        run_operator_register("fast_ops", "node_plex.py")
+
     else:
         return False
 
