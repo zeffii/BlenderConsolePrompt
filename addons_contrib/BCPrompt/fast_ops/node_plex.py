@@ -15,7 +15,7 @@ def main(caller, context):
     add = new_node("ShaderNodeVectorMath")
     noise = new_node("ShaderNodeTexNoise")
 
-    x, y = caller.x, caller.y
+    x, y = context.space_data.cursor_location
 
     geometry.location = Vector((0.000 + x, 0.0000 + y))
     add.location = Vector((190.2 + x, -92.20 + y))
@@ -42,9 +42,6 @@ class NodePlexOperator(bpy.types.Operator):
     bl_idname = "node.add_noise_plex"
     bl_label = "Simple Plex Add"
 
-    x = bpy.props.IntProperty()
-    y = bpy.props.IntProperty()
-
     @classmethod
     def poll(cls, context):
         space = context.space_data
@@ -55,8 +52,6 @@ class NodePlexOperator(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        self.x = event.mouse_x
-        self.y = event.mouse_y
         return self.execute(context)
 
 
