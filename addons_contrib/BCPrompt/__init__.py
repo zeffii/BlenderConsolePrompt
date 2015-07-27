@@ -50,12 +50,14 @@ if 'bpy' in globals():
         imp.reload(bc_package_manager)
         imp.reload(bc_command_dispatch)
         imp.reload(sub_util)
+        imp.reload(fast_ops.curve_handle_equalizer)
         print('{0}: reloaded.'.format(__package__))
 
 else:
     from . import bc_operators
     from . import bc_panels
     from . import bc_TEXT_utils
+    from .fast_ops import curve_handle_equalizer
 
 import bpy
 
