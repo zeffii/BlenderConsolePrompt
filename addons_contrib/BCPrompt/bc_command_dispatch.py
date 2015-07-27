@@ -172,7 +172,7 @@ def in_scene_commands(context, m):
             bpy.context.scene.objects.unlink(o)
             objs.remove(o)
 
-    elif m in {'frame_end = frame_current', 'fend=fcur'}:
+    elif m in {'frame_end = frame_current', 'fend=fcur', 'fc'}:
         scn = bpy.context.scene
         scn.frame_end = scn.frame_current
 

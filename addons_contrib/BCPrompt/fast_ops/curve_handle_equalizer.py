@@ -33,7 +33,7 @@ def adjust_bezier_controls(context, instruction='average'):
 
 class CurveHandleEqualizer(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "object.curve_handle_eq"
+    bl_idname = "curve.curve_handle_eq"
     bl_label = "Curve Handle Equalizer"
 
     @classmethod

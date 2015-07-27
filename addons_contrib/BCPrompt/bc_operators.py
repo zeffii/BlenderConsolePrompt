@@ -44,6 +44,7 @@ ico        |  enables icon addon in texteditor panel (Dev)
 -idxv      |  enable by shortcut name (user defined)
 enable <named addon>  |  package name or folder name
 v2rdim     |  sets render dimensions to current strip.
+fc         |  fcurrent -> end.frame
 '''
 
     add_scrollback(content, 'OUTPUT')

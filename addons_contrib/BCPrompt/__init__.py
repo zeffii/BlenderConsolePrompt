@@ -51,6 +51,7 @@ if 'bpy' in globals():
         imp.reload(bc_command_dispatch)
         imp.reload(sub_util)
         imp.reload(fast_ops.curve_handle_equalizer)
+        imp.reload(keymaps.console_keymaps)
         print('{0}: reloaded.'.format(__package__))
 
 else:
@@ -58,44 +59,21 @@ else:
     from . import bc_panels
     from . import bc_TEXT_utils
     from .fast_ops import curve_handle_equalizer
+    from .keymaps import console_keymaps
 
 import bpy
 
 
-def add_keymap():
-    operators_registered = 'do_action' in dir(bpy.ops.console)
-    print(__package__, ': operators registered')
-    try:
-        wm = bpy.context.window_manager
-
-        console = wm.keyconfigs.user.keymaps.get('Console')
-        if console:
-            keymaps = console.keymap_items
-            if not ('console.do_action' in keymaps):
-                keymaps.new('console.do_action', 'RET', 'PRESS', ctrl=1)
-
-        TE = wm.keyconfigs.user.keymaps.get('Text')
-        if TE:
-            keymaps = TE.keymap_items
-            if not ('text.do_comment' in keymaps):
-                keymaps.new('text.do_comment', 'SLASH', 'PRESS', ctrl=1)
-
-            cycle_textblocks = 'text.cycle_textblocks'
-            if not (cycle_textblocks in keymaps):
-                m = keymaps.new(cycle_textblocks, 'WHEELUPMOUSE', 'PRESS', alt=1)
-                m.properties.direction = 1
-
-                m = keymaps.new(cycle_textblocks, 'WHEELDOWNMOUSE', 'PRESS', alt=1)
-                m.properties.direction = -1
-
-    except:
-        print('BCPrompt keymaps maybe already exist, didnt dupe')
+def menu_func(self, context):
+    self.layout.operator("curve.curve_handle_eq")
 
 
 def register():
     bpy.utils.register_module(__name__)
-    add_keymap()
+    console_keymaps.add(__package__)
+    bpy.types.VIEW3D_MT_edit_curve_specials.append(menu_func)
 
 
 def unregister():
     bpy.utils.unregister_module(__name__)
+    bpy.types.VIEW3D_MT_edit_curve_specials.remove(menu_func)
