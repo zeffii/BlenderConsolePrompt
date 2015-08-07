@@ -115,6 +115,17 @@ def in_scene_commands(context, m):
         # history_append(text=m, current_character=0, remove_duplicates=True)
         history_append(text=m, remove_duplicates=True)
 
+    elif m == 'wipe+':
+        remove_obj_and_mesh(context)
+        [bpy.data.materials.remove(i) for i in bpy.data.materials]
+        add_scrollback('wiped objects, meshes, and materials', 'OUTPUT')
+        history_append(text=m, remove_duplicates=True)
+
+    elif m == 'wipem':
+        [bpy.data.materials.remove(i) for i in bpy.data.materials]
+        add_scrollback('wiped materials only', 'OUTPUT')
+        history_append(text=m, remove_duplicates=True)
+
     elif m in {'tt', 'tb'}:
         prefs = context.user_preferences
         method = {'tb': 'TRACKBALL', 'tt': 'TURNTABLE'}.get(m)
