@@ -1,5 +1,5 @@
 import bpy
-from console_python import add_scrollback
+from console_python import add_scrollback, get_console
 
 from .bc_package_manager import in_bpm_commands
 
@@ -277,16 +277,19 @@ def in_sverchok_commands(context, m):
 def in_core_dev_commands(context, m):
 
     if m.endswith('??'):
-        # print inline
-        m = m[:-2]
-        f = str(eval('dir({0})'.format(m)))
-        add_scrollback(f, 'OUTPUT')
 
-    elif m.endswith('?'):
-        # print to std out
-        m = m[:-1]
-        print(eval('dir({0})'.format(m)))
-        add_scrollback('check console', 'OUTPUT')
+        m = m[:-2]
+        console, stdout, stderr = get_console(hash(context.region))
+
+        if m in console.locals.keys():
+            f = str(dir(console.locals[m]))
+        else:
+            try:
+                f = str(eval('dir({0})'.format(m)))
+            except:
+                f = 'failed to find reference..'
+
+        add_scrollback(f, 'OUTPUT')
 
     elif m.endswith('!'):
         '''copy current line to clipboard'''
