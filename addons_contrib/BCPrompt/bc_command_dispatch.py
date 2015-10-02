@@ -275,7 +275,20 @@ def in_sverchok_commands(context, m):
 
 
 def in_core_dev_commands(context, m):
-    if m.endswith('!'):
+
+    if m.endswith('??'):
+        # print inline
+        m = m[:-2]
+        f = str(eval('dir({0})'.format(m)))
+        add_scrollback(f, 'OUTPUT')
+
+    elif m.endswith('?'):
+        # print to std out
+        m = m[:-1]
+        print(eval('dir({0})'.format(m)))
+        add_scrollback('check console', 'OUTPUT')
+
+    elif m.endswith('!'):
         '''copy current line to clipboard'''
         m = m[:-1]
         context.window_manager.clipboard = m
