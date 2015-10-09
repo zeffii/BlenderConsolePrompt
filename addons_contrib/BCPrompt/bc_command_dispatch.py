@@ -163,6 +163,13 @@ def in_scene_commands(context, m):
         SCN.render.resolution_y = y
         SCN.render.resolution_percentage = 100
 
+    elif m in {'crop to active', 'cta'}:
+        se = bpy.context.scene.sequence_editor
+        start = se.active_strip.frame_start
+        duration = se.active_strip.frame_duration
+        bpy.context.scene.frame_start = start
+        bpy.context.scene.frame_end = start + duration
+
     elif m.startswith("gif ") and (len(m) > 5):
         make_animated_gif(m[4:])
 
