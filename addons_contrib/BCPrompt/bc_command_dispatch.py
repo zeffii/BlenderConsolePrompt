@@ -399,6 +399,13 @@ def in_modeling_tools(context, m):
         test_dl_run(packaged)
 
     elif m == '-debug':  # formerly -debug_mesh
+
+        if 'index_visualiser' in dir(bpy.ops.view3d):
+            # bpy.ops.wm.addon_enable(module='view3d_idx_view')
+            # msg = 'enabled modified debugger in N panel'
+            # add_scrollback(msg, 'OUTPUT')
+            return True
+
         registers_operator = [bpy.ops.view3d, 'index_visualiser']
         module_to_enable = 'view3d_idx_view'
         url_prefix = 'https://gist.githubusercontent.com/zeffii/9451340/raw'
@@ -506,7 +513,8 @@ def in_upgrade_commands(context, m):
 def in_fast_ops_commands(context, m):
     if m.startswith('--plex'):
         run_operator_register("fast_ops", "node_plex.py")
-
+    elif m.startswith('--sort'):
+        run_operator_register("fast_ops", "mesh_plex.py")
     else:
         return False
 

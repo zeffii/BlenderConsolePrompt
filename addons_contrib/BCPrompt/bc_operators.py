@@ -40,6 +40,7 @@ ico        |  enables icon addon in texteditor panel (Dev)
 -dist      |  gives local distance between two selected verts
 -gist -o x |  uploads all open text views as x to anon gist.
 -debug     |  dl + enable extended mesh index visualiser. it's awesome.
+--sort     |  sorting operator: sorts open edgeloop, by index handy for polyline export
 -----------+----------------------------------------------------------
 -idxv      |  enable by shortcut name (user defined)
 enable <named addon>  |  package name or folder name
