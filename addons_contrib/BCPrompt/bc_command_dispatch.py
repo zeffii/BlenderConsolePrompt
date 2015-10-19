@@ -39,7 +39,8 @@ from .bc_scene_utils import (
     select_starting2,
     distance_check,
     align_view_to_3dcursor,
-    parent_selected_to_new_empty
+    parent_selected_to_new_empty,
+    add_mesh_2_json
 )
 
 from .bc_update_utils import (
@@ -136,6 +137,10 @@ def in_scene_commands(context, m):
     elif m == '123':
         set_keymap()
         add_scrollback('enabled: 1=VERT_SEL, 2=EDGE_SEL, 3=FACE_SEL', 'OUTPUT')
+
+    elif m == 'mesh2json':
+        add_mesh_2_json()
+        add_scrollback('added mesh 2 json script to text editor! remember to triangulate first', 'OUTPUT')
 
     elif m.startswith('v2rdim'):
         SCN = bpy.context.scene
