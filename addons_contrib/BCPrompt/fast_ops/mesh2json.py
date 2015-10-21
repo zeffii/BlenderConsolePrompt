@@ -1,11 +1,15 @@
 import bpy
 
-obj = bpy.data.objects['XW']
+obj = bpy.context.active_object
+obj = bpy.data.objects['terrain2']
 
-with open('/home/zeffii/Desktop/sw/geom_file.tkg', 'w') as ofile:
+filename = '/home/zeffii/Desktop/sw/geom_terrain2.tkg'
+filename = '/home/zeffii/Desktop/sw/{0}.tkg'.format(obj.name)
+
+with open(filename, 'w') as ofile:
 
     # verts
-    ofile.write('obj = {\n')
+    ofile.write('var {0} = {{\n'.format(obj.name))
     ofile.write('  verts: [')
     verts = obj.data.vertices
     for v in verts[:-1]:
@@ -26,4 +30,4 @@ with open('/home/zeffii/Desktop/sw/geom_file.tkg', 'w') as ofile:
         ofile.write('%i, %i, ' % edge.vertices[:])
     ofile.write('%i, %i]\n' % edges_subset[-1].vertices[:])
 
-    ofile.write('}\n')
+    ofile.write('};\n')
