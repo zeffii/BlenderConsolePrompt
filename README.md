@@ -5,7 +5,7 @@ This is much cooler than you think. Read on!
 [![Join the chat at https://gitter.im/zeffii/BlenderConsolePrompt](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zeffii/BlenderConsolePrompt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-BCP is an addon that allows various scripts to execute from Blender's Python console (REPL). Many useful code snippets generated over the years are often too short to be an addon, but are useful enough that I do want to be able to trigger them from a snippet dispatcher. This helps maintain workflow and the simple `-ls` command shows the list of most common commands, the `-man` command shows an exhaustive list of stored commands.
+BCP is an addon that allows scripts to execute from Blender's Python console (REPL). I have many snippets that don't need a full addon status, but are useful enough that I do want to be able to have fast access to them. The simple `-ls` command shows a list of most common commands, the `-man` command shows a more exhaustive list of stored commands.
 
 The following commands can be executed straight for the Blender Python console by pressing ctrl+enter after entering the command. You can alter the execute keyboard shortcut by changing it yourself in UserPreferences (or more permanently in the code.. tho I should probably add addonpreferences for this)
 
