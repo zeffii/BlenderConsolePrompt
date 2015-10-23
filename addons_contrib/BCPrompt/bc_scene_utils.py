@@ -73,10 +73,16 @@ def parent_selected_to_new_empty():
     return mt
 
 
-def add_mesh_2_json():
+def add_mesh_2_json(kind):
     temp_root = os.path.dirname(__file__)
-    fp = os.path.join(temp_root, 'fast_ops', 'mesh2json.py')
+
+    file_by_name = {
+        'zup': 'mesh2json.py',
+        'yup': 'mesh2json2.py'
+    }.get(kind)
+
+    fp = os.path.join(temp_root, 'fast_ops', file_by_name)
     with open(fp) as ofile:
         fullstr = ''.join(ofile)
-        nf = bpy.data.texts.new('mesh2json.py')
+        nf = bpy.data.texts.new(file_by_name)
         nf.from_string(fullstr)

@@ -139,8 +139,12 @@ def in_scene_commands(context, m):
         add_scrollback('enabled: 1=VERT_SEL, 2=EDGE_SEL, 3=FACE_SEL', 'OUTPUT')
 
     elif m == 'mesh2json':
-        add_mesh_2_json()
+        add_mesh_2_json('zup')
         add_scrollback('added mesh 2 json script to text editor! remember to triangulate first', 'OUTPUT')
+
+    elif m == 'mesh2json2':
+        add_mesh_2_json('yup')
+        add_scrollback('added mesh 2 json (y up) script to text editor! remember to triangulate first', 'OUTPUT')
 
     elif m.startswith('v2rdim'):
         SCN = bpy.context.scene
