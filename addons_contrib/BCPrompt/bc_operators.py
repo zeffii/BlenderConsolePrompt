@@ -46,6 +46,7 @@ ico        |  enables icon addon in texteditor panel (Dev)
 enable <named addon>  |  package name or folder name
 v2rdim     |  sets render dimensions to current strip.
 fc         |  fcurrent -> end.frame
+gif <dir>  |  make animated gif of content of dir
 '''
 
     add_scrollback(content, 'OUTPUT')
