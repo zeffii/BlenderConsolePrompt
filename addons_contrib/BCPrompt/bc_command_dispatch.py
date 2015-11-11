@@ -21,7 +21,8 @@ from .bc_utils import (
 
 from .bc_text_repr_utils import (
     do_text_glam,
-    do_text_synthax)
+    do_text_synthax,
+    do_console_rewriter)
 
 from .bc_search_utils import (
     search_blenderscripting,
@@ -376,6 +377,9 @@ def in_core_dev_commands(context, m):
     elif m.startswith("!"):
         ''' dispatch a threaded worker '''
         cmd_controller(m[1:])
+
+    elif m.startswith('obj='):
+        do_console_rewriter(context, m)
 
     else:
         return False
