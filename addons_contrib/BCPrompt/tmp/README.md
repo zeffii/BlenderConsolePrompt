@@ -1,36 +1,41 @@
-This is much cooler than you think. tests - and uploads
+This is much cooler than you think. Read on!
 
 # BlenderConsolePrompt
 
 [![Join the chat at https://gitter.im/zeffii/BlenderConsolePrompt](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zeffii/BlenderConsolePrompt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-A small project to add features to blender's python console. We can use the console to execute commands, instead of key-combos. Sometimes we run out of sane key combos or find that they get complex. At the moment only one-shot commands are implemented, but future implementations will be modal/interactive and possibly a bpm (Blender package manager).
+BCP is an addon that allows scripts to execute from Blender's Python console (REPL). I have many snippets that don't need a full addon status, but are useful enough that I do want to be able to have fast access to them. The simple `-ls` command shows a list of most common commands, the `-man` command shows a more exhaustive list of stored commands.
 
-these are the non modal, one shot commands
+The following commands can be executed straight for the Blender Python console by pressing ctrl+enter after entering the command. You can alter the execute keyboard shortcut by changing it yourself in UserPreferences (or more permanently in the code.. tho I should probably add addonpreferences for this)
+
+At the moment only one-shot commands are implemented, but future implementations will be modal/interactive and possibly a bpm (Blender package manager).
+
+these are some of the non modal, one shot commands
 
 Command String | Description
 -------------- | -------------
 cen | centers 3d cursor
+cenv | centers 3d cursor and aligns all 3d views to it.
 cen=some_value | where some value can be evalled, 3d cursor will be placed at it
 vtx | sees if tinyCAD is enabled and performs VTX, (or first enables it)
 xl (XL) | sees if tinyCAD is enabled and performs XALL, (or first enables it)
 ico | sees if developers icons addon is enabled (enables if not) [image](https://cloud.githubusercontent.com/assets/619340/5883599/368909cc-a354-11e4-9a8e-f442ebb8621e.gif)
 wipe | un-links and removes objects, and all meshes
-tt | turntable
-tb | trackball
--debug_mesh | downloads / enables index visualizer with polygon bg
+tt / tb | turntable, trackball
+-debug | downloads / enables index visualizer with polygon bg
 syntax | sets text editor to syntax highlighting, wrap, linenumber, margin
 string! | anything followed by an exclamation mark is copied to buffer
 string?se | search blender.stackexchange for everything infront of the ?
 string??se | search stackoverflow for everything infront of the ??
 string?py | search py docs ..
 string?bpy | search blender bpy docs ..
-_svc | checking recent sverchok commits (github api) [image](https://github.com/zeffii/BlenderConsolePrompt/issues/3#issuecomment-74256330)
--gist -o somename | uploads all visible text blocks as a unified github anonymous public gist, then it will open the url in a browser. `-gist -o somename`
+psel | make a parent empty for selected objects
 -sel somename | is select=True for all data.objects where `.name.startswith(somename)`
+-gist -o somename | uploads all visible text blocks as a unified github anonymous public gist, then it will open the url in a browser. `-gist -o somename`
+_svc | checking recent sverchok commits (github api) [image](https://github.com/zeffii/BlenderConsolePrompt/issues/3#issuecomment-74256330)
 -man | opens github readme.md for the addon
-times treename | treename must be a valid Sverchok Tree name, will spawn a browser with visualization. F.ex `times NodeTree.002`
+
 
 
 

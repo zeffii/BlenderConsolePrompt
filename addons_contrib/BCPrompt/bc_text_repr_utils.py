@@ -78,7 +78,7 @@ def do_console_rewriter(ctx, m):
     elif (len(m) > 5) and (m[5:] in bpy.data.objects):
         msg = "obj = bpy.data.objects['{0}']".format(m[5:])
 
-    add_scrollback(msg, 'OUTPUT')
+    add_scrollback(m + ' --> ' + msg, 'OUTPUT')
     history_append(text=m, remove_duplicates=True)
     if not (msg == fail):
         ctx.space_data.history[-1].body = msg
