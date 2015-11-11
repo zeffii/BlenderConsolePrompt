@@ -30,10 +30,10 @@ string?se | search blender.stackexchange for everything infront of the ?
 string??se | search stackoverflow for everything infront of the ??
 string?py | search py docs ..
 string?bpy | search blender bpy docs ..
-_svc | checking recent sverchok commits (github api) [image](https://github.com/zeffii/BlenderConsolePrompt/issues/3#issuecomment-74256330)
--gist -o somename | uploads all visible text blocks as a unified github anonymous public gist, then it will open the url in a browser. `-gist -o somename`
+psel | make a parent empty for selected objects
 -sel somename | is select=True for all data.objects where `.name.startswith(somename)`
--psel | make a parent empty for selected objects
+-gist -o somename | uploads all visible text blocks as a unified github anonymous public gist, then it will open the url in a browser. `-gist -o somename`
+_svc | checking recent sverchok commits (github api) [image](https://github.com/zeffii/BlenderConsolePrompt/issues/3#issuecomment-74256330)
 -man | opens github readme.md for the addon
 
 

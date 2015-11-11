@@ -178,7 +178,7 @@ def in_scene_commands(context, m):
         start = se.active_strip.frame_start
         duration = se.active_strip.frame_duration
         bpy.context.scene.frame_start = start
-        bpy.context.scene.frame_end = start + duration
+        bpy.context.scene.frame_end = start + duration - 1
 
     elif m.startswith("gif ") and (len(m) > 5):
         make_animated_gif(m[4:])
