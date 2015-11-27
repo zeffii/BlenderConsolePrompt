@@ -36,7 +36,7 @@ if 'bpy' in globals():
 
     msg = ": detected reload event! cool."
     if 'bc_utils' in globals():
-        print_addon_msg(__package__, msg)
+        bc_utils.print_addon_msg(__package__, msg)
     else:
         print(__package__ + msg)
 
