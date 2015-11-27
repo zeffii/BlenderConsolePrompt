@@ -47,7 +47,7 @@ enable x      |  where 'x' is package name or folder name
 v2rdim        |  sets render dimensions to current strip.
 fc            |  fcurrent -> end.frame
 gif dir       |  make animated gif of *.png sequence found in dir's path
-nodeview whie | set bg col of nodeview
+nodeview whie |  set bg col of nodeview
 '''
 
     add_scrollback(content, 'OUTPUT')
