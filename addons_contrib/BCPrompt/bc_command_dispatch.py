@@ -215,6 +215,11 @@ def in_scene_commands(context, m):
             output_type = 'ERROR'
         add_scrollback(msg, output_type)
 
+    elif m == 'nodeview white':
+        current_theme = bpy.context.user_preferences.themes.items()[0][0]
+        editor = bpy.context.user_preferences.themes[current_theme].node_editor
+        editor.space.back = (1, 1, 1)
+
     else:
         return False
 
