@@ -53,7 +53,11 @@ if 'bpy' in globals():
         imp.reload(fast_ops.curve_handle_equalizer)
         imp.reload(fast_ops.curve_nurbs_to_polyline)
         imp.reload(keymaps.console_keymaps)
-        print('{0}: reloaded.'.format(__package__))
+
+        from .bc_utils import print_addon_msg
+        # print('{0}: reloaded.'.format(__package__))
+        print_addon_msg(__package__, ': reloaded')
+
 
 else:
     from . import bc_operators

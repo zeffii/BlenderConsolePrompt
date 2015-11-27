@@ -411,6 +411,13 @@ bl_context     | 'armature_edit', 'curve_edit', 'imagepaint', 'lattice_edit',
     add_scrollback(content, 'OUTPUT')
 
 
+def print_addon_msg(origin, msg):
+    can_paint = os.name in {'posix'}
+    with_color = "\033[1;32m{0}\033[0m" if can_paint else "{0}"
+    print(with_color.format(origin), end='')
+    print(msg)
+
+
 def register():
     bpy.utils.register_module(__name__)
 

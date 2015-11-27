@@ -1,9 +1,19 @@
 import bpy
+import os
+
+from ..bc_utils import print_addon_msg
+
+# def print_addon_msg(origin, msg):
+#     can_paint = os.name in {'posix'}
+#     with_color = "\033[1;32m{0}\033[0m" if can_paint else "{0}"
+#     print(with_color.format(origin), end='')
+#     print(msg)
 
 
 def add(origin):
     operators_registered = 'do_action' in dir(bpy.ops.console)
-    print(origin, ': operators registered')
+    # print(origin + ': operators registered')
+    print_addon_msg(origin, ': operators registered')
     try:
         wm = bpy.context.window_manager
 
