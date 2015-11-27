@@ -33,7 +33,12 @@ bl_info = {
     "category": "Console"}
 
 if 'bpy' in globals():
-    print('{0}: detected reload event! cool.'.format(__package__))
+
+    msg = ": detected reload event! cool."
+    if 'bc_utils' in globals():
+        print_addon_msg(__package__, msg)
+    else:
+        print(__package__ + msg)
 
     if 'bc_operators' in globals():
         import imp
@@ -55,7 +60,6 @@ if 'bpy' in globals():
         imp.reload(keymaps.console_keymaps)
 
         from .bc_utils import print_addon_msg
-        # print('{0}: reloaded.'.format(__package__))
         print_addon_msg(__package__, ': reloaded')
 
 
