@@ -71,12 +71,18 @@ def menu_func(self, context):
     self.layout.operator("curve.nurbs_to_polyline")
 
 
+def console_buttons_func(self, context):
+    self.layout.operator('wm.set_editmode_shortcuts', text='123')
+
+
 def register():
     bpy.utils.register_module(__name__)
     console_keymaps.add(__package__)
     bpy.types.VIEW3D_MT_edit_curve_specials.append(menu_func)
+    bpy.types.CONSOLE_HT_header.append(console_buttons_func)
 
 
 def unregister():
     bpy.utils.unregister_module(__name__)
     bpy.types.VIEW3D_MT_edit_curve_specials.remove(menu_func)
+    bpy.types.CONSOLE_HT_header.remove(console_buttons_func)

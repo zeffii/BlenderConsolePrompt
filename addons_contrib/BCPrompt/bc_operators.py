@@ -11,6 +11,9 @@ from .bc_command_dispatch import (
     in_bpm_commands,
     in_fast_ops_commands)
 
+from .bc_utils import set_keymap
+
+
 history_append = bpy.ops.console.history_append
 addon_enable = bpy.ops.wm.addon_enable
 
@@ -93,6 +96,15 @@ class ConsoleDoAction(bpy.types.Operator):
             bpy.ops.console.clear()
             return DONE
 
+        return {'FINISHED'}
+
+
+class ConsoleShortCutButtons(bpy.types.Operator):
+    bl_label = "ConsoleEditModePushButton"
+    bl_idname = "wm.set_editmode_shortcuts"
+
+    def execute(self, context):
+        set_keymap()
         return {'FINISHED'}
 
 
