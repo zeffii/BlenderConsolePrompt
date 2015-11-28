@@ -1,4 +1,8 @@
+# ignore
 __pycache__/
 tmp/
 *.py[cod]
 *.tmp
+
+# allow
+!/tmp/gifbatch.sh

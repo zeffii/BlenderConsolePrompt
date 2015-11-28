@@ -16,6 +16,7 @@ from .bc_utils import (
     write_keys_textfile,
     view_types_to_console,
     make_animated_gif,
+    make_optimized_animated_gif,
     cmd_controller
 )
 
@@ -182,6 +183,9 @@ def in_scene_commands(context, m):
 
     elif m.startswith("gif ") and (len(m) > 5):
         make_animated_gif(m[4:])
+
+    elif m.startswith("ogif ") and (len(m) > 6):
+        make_optimized_animated_gif(m[5:])
 
     elif m == 'sel lights':
         for o in bpy.data.objects:
