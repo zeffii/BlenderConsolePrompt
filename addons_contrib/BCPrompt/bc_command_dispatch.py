@@ -43,7 +43,8 @@ from .bc_scene_utils import (
     align_view_to_3dcursor,
     parent_selected_to_new_empty,
     add_mesh_2_json,
-    crop_to_active
+    crop_to_active,
+    v2rdim
 )
 
 from .bc_update_utils import (
@@ -149,39 +150,16 @@ def in_scene_commands(context, m):
         add_mesh_2_json('yup')
         add_scrollback('added mesh 2 json (y up) script to text editor! remember to triangulate first', 'OUTPUT')
 
-    elif m.startswith('v2rdim'):
-        SCN = bpy.context.scene
-        SE = SCN.sequence_editor
-
-        if m == 'v2rdim':
-            sequence = SE.active_strip
-        elif m.startswith('v2rdim '):
-            vidname = m[7:]
-            sequence = SE.sequences.get(vidname)
-            if not sequence:
-                print(vidname, 'is not a sequence - check the spelling')
-                return True
-
-        def get_size(sequence):
-            clips = bpy.data.movieclips
-            fp = sequence.filepath
-            mv = clips.load(fp)
-            x, y = mv.size[:]
-            clips.remove(mv)
-            return x, y
-
-        x, y = get_size(sequence)
-        SCN.render.resolution_x = x
-        SCN.render.resolution_y = y
-        SCN.render.resolution_percentage = 100
+    elif m == 'v2rdim':
+        v2rdim()
 
     elif m in {'crop to active', 'cta'}:
-        # se = bpy.context.scene.sequence_editor
-        # start = se.active_strip.frame_start
-        # duration = se.active_strip.frame_duration
-        # bpy.context.scene.frame_start = start
-        # bpy.context.scene.frame_end = start + duration - 1
         crop_to_active()
+
+    elif m == 'dandc':
+        v2rdim()
+        crop_to_active()
+        add_scrollback('set render dims and cropped timeline', 'OUTPUT')
 
     elif m.startswith("gif ") and (len(m) > 5):
         make_animated_gif(m[4:])

@@ -94,3 +94,31 @@ def crop_to_active():
     duration = se.active_strip.frame_duration
     bpy.context.scene.frame_start = start
     bpy.context.scene.frame_end = start + duration - 1
+
+
+def v2rdim():
+    SCN = bpy.context.scene
+    SE = SCN.sequence_editor
+
+    # if m == 'v2rdim':
+    #     sequence = SE.active_strip
+    # elif m.startswith('v2rdim '):
+    #     vidname = m[7:]
+    #     sequence = SE.sequences.get(vidname)
+    #     if not sequence:
+    #         print(vidname, 'is not a sequence - check the spelling')
+    #         return True
+
+    def get_size(sequence):
+        clips = bpy.data.movieclips
+        fp = sequence.filepath
+        mv = clips.load(fp)
+        x, y = mv.size[:]
+        clips.remove(mv)
+        return x, y
+
+    sequence = SE.active_strip
+    x, y = get_size(sequence)
+    SCN.render.resolution_x = x
+    SCN.render.resolution_y = y
+    SCN.render.resolution_percentage = 100
