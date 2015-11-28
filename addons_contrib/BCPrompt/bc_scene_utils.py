@@ -86,3 +86,11 @@ def add_mesh_2_json(kind):
         fullstr = ''.join(ofile)
         nf = bpy.data.texts.new(file_by_name)
         nf.from_string(fullstr)
+
+
+def crop_to_active():
+    se = bpy.context.scene.sequence_editor
+    start = se.active_strip.frame_start
+    duration = se.active_strip.frame_duration
+    bpy.context.scene.frame_start = start
+    bpy.context.scene.frame_end = start + duration - 1

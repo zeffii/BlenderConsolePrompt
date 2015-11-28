@@ -42,7 +42,8 @@ from .bc_scene_utils import (
     distance_check,
     align_view_to_3dcursor,
     parent_selected_to_new_empty,
-    add_mesh_2_json
+    add_mesh_2_json,
+    crop_to_active
 )
 
 from .bc_update_utils import (
@@ -175,11 +176,12 @@ def in_scene_commands(context, m):
         SCN.render.resolution_percentage = 100
 
     elif m in {'crop to active', 'cta'}:
-        se = bpy.context.scene.sequence_editor
-        start = se.active_strip.frame_start
-        duration = se.active_strip.frame_duration
-        bpy.context.scene.frame_start = start
-        bpy.context.scene.frame_end = start + duration - 1
+        # se = bpy.context.scene.sequence_editor
+        # start = se.active_strip.frame_start
+        # duration = se.active_strip.frame_duration
+        # bpy.context.scene.frame_start = start
+        # bpy.context.scene.frame_end = start + duration - 1
+        crop_to_active()
 
     elif m.startswith("gif ") and (len(m) > 5):
         make_animated_gif(m[4:])
