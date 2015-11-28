@@ -44,7 +44,8 @@ from .bc_scene_utils import (
     parent_selected_to_new_empty,
     add_mesh_2_json,
     crop_to_active,
-    v2rdim
+    v2rdim,
+    render_to_filepath
 )
 
 from .bc_update_utils import (
@@ -160,6 +161,11 @@ def in_scene_commands(context, m):
         v2rdim()
         crop_to_active()
         add_scrollback('set render dims and cropped timeline', 'OUTPUT')
+
+    elif m.startswith('anim '):
+        fp = m[5:]
+        add_scrollback('going to render to ' + fp, 'OUTPUT')
+        render_to_filepath(fp)
 
     elif m.startswith("gif ") and (len(m) > 5):
         make_animated_gif(m[4:])

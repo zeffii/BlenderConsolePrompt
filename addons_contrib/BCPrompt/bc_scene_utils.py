@@ -122,3 +122,8 @@ def v2rdim():
     SCN.render.resolution_x = x
     SCN.render.resolution_y = y
     SCN.render.resolution_percentage = 100
+
+
+def render_to_filepath(fp):
+    bpy.context.scene.render.filepath = fp
+    bpy.ops.render.opengl(animation=True, sequencer=True)
