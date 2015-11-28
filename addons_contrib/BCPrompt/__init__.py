@@ -85,12 +85,13 @@ def console_buttons_func(self, context):
 
 def register():
     bpy.utils.register_module(__name__)
-    console_keymaps.add(__package__)
     bpy.types.VIEW3D_MT_edit_curve_specials.append(menu_func)
     bpy.types.CONSOLE_HT_header.append(console_buttons_func)
+    console_keymaps.add_keymap(__package__)
 
 
 def unregister():
+    console_keymaps.remove_keymap()
     bpy.utils.unregister_module(__name__)
     bpy.types.VIEW3D_MT_edit_curve_specials.remove(menu_func)
     bpy.types.CONSOLE_HT_header.remove(console_buttons_func)
