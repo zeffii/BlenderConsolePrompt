@@ -45,7 +45,8 @@ from .bc_scene_utils import (
     add_mesh_2_json,
     crop_to_active,
     v2rdim,
-    render_to_filepath
+    render_to_filepath,
+    process_size_query
 )
 
 from .bc_update_utils import (
@@ -172,6 +173,9 @@ def in_scene_commands(context, m):
 
     elif m.startswith("ogif ") and (len(m) > 6):
         make_optimized_animated_gif(m[5:])
+
+    elif m.startswith('sizeof'):
+        process_size_query(m)
 
     elif m == 'sel lights':
         for o in bpy.data.objects:

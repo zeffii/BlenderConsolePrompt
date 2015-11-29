@@ -127,3 +127,24 @@ def v2rdim():
 def render_to_filepath(fp):
     bpy.context.scene.render.filepath = fp
     bpy.ops.render.opengl(animation=True, sequencer=True)
+
+
+def process_size_query(m):
+
+    def path_iterator(path_name, filetype):
+        for fp in os.listdir(path_name):
+            if fp.endswith("." + filetype):
+                yield fp
+
+    if m == 'sizeof':
+        # this means user knows path is set and wants to list size of gifs
+        fp = bpy.context.scene.render.filepath
+        print(fp)
+        for path in path_iterator(fp, 'gif'):
+            fullpath = os.path.join(fp, path)
+            print('---', path, 'kb =', os.stat(fullpath).st_size)
+
+    # make this when you need it - not before.
+    # elif len(m.split(' ')) == 2:
+    #    # if you have spaces in your filename or path you are an idiot.
+    #    path = m.split(' ')[1]
