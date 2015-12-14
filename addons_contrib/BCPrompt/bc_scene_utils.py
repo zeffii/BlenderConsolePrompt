@@ -110,6 +110,11 @@ def v2rdim():
     #         return True
 
     def get_size(sequence):
+
+        if hasattr(sequence, "sequences") and len(sequence.sequences) > 0:
+            # just pick first.
+            sequence = sequence.sequences[0]
+
         clips = bpy.data.movieclips
         fp = sequence.filepath
         mv = clips.load(fp)
