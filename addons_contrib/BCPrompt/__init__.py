@@ -79,6 +79,11 @@ def menu_func(self, context):
     self.layout.operator("curve.nurbs_to_polyline")
 
 
+def text_toolblock_func(self, context):
+    self.layout.separator()
+    self.layout.operator("text.duplicate_textblock", text="Duplicate TextBlock")
+
+
 def console_buttons_func(self, context):
     self.layout.operator('wm.set_editmode_shortcuts', text='123')
 
@@ -87,6 +92,7 @@ def register():
     bpy.utils.register_module(__name__)
     bpy.types.VIEW3D_MT_edit_curve_specials.append(menu_func)
     bpy.types.CONSOLE_HT_header.append(console_buttons_func)
+    bpy.types.TEXT_MT_toolbox.prepend(text_toolblock_func)
     console_keymaps.add_keymap(__package__)
 
 
@@ -95,3 +101,4 @@ def unregister():
     bpy.utils.unregister_module(__name__)
     bpy.types.VIEW3D_MT_edit_curve_specials.remove(menu_func)
     bpy.types.CONSOLE_HT_header.remove(console_buttons_func)
+    bpy.types.TEXT_MT_toolbox.remove(text_toolblock_func)
