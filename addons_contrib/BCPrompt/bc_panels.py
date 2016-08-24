@@ -16,8 +16,6 @@ class TextSyncPanel(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         row = layout.row()
-
-        row = layout.row()
         row.scale_y = 4
 
         # show the operator if the text has
