@@ -377,7 +377,7 @@ def in_core_dev_commands(context, m):
         ''' dispatch a threaded worker '''
         cmd_controller(m[1:])
 
-    elif m.startswith('obj='):
+    elif m.startswith('obj=') or m.startswith('n='):
         do_console_rewriter(context, m)
 
     elif m == 'git help':
