@@ -81,6 +81,8 @@ def do_console_rewriter(ctx, m):
         msg = 'nodes = bpy.data.node_groups[\'NodeTree\'].nodes'
     elif (m == 'n=['):
         msg = 'ng = bpy.data.node_groups[\''
+    elif m == 'fem':
+        msg = 'bm = bmesh.from_edit_mesh(C.object.data)'
 
     add_scrollback(m + ' --> ' + msg, 'OUTPUT')
     history_append(text=m, remove_duplicates=True)
