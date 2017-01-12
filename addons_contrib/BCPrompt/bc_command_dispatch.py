@@ -215,6 +215,10 @@ def in_scene_commands(context, m):
         editor.space.back = (1, 1, 1)
 
     elif m.startswith('theme') and '_' in m and len(m) > 6:
+        
+        history_append(text=m, remove_duplicates=True)
+        add_scrollback('From the following list pick an index and type "theme_<idx>"', 'INFO')
+
         import os
         fullpath = bpy.app.binary_path
         directory = os.path.dirname(fullpath)
