@@ -222,44 +222,13 @@ def in_scene_commands(context, m):
 
     elif m in {'nodeview white', 'nv white', 'nv111'}:
         set_nodewhite(context, '')
-        # current_theme = bpy.context.user_preferences.themes.items()[0][0]
-        # editor = bpy.context.user_preferences.themes[current_theme].node_editor
-        # editor.space.back = (1, 1, 1)
 
     elif m.startswith('theme') and '_' in m and len(m) > 6:
         set_theme(context, m)        
-        # history_append(text=m, remove_duplicates=True)
-        # add_scrollback('From the following list pick an index and type "theme_<idx>"', 'INFO')
-
-        # import os
-        # fullpath = bpy.app.binary_path
-        # directory = os.path.dirname(fullpath)
-        # fullext_path = "2.78/scripts/presets/interface_theme".split("/")
-        # seekable_path = os.path.join(directory, *fullext_path)
-
-        # def path_iterator(path_name, kind):
-        #     for fp in os.listdir(path_name):
-        #         if fp.endswith("." + kind):
-        #             yield fp
-
-        # themes = list(path_iterator(seekable_path, 'xml'))
-        # if m.split('_')[1] == 'list':
-        #     print(themes)
-        #     for idx, line in enumerate(themes):
-        #         add_scrollback('[{0}] - '.format(idx) + line[:-4], 'OUTPUT')
-        # elif m.split('_')[1].strip().isnumeric():
-        #     idx = int(m.split('_')[1].strip())
-        #     fullest_path = os.path.join(seekable_path, themes[idx])
-        #     bpy.ops.script.execute_preset('INVOKE_DEFAULT', filepath=fullest_path, menu_idname="USERPREF_MT_interface_theme_presets")
-
 
     elif m in {'3dv easy', '3de', 'sde'}:
         set_3de(context, '')
-        # current_theme = bpy.context.user_preferences.themes.items()[0][0]
-        # editor = bpy.context.user_preferences.themes[current_theme].view_3d
-        # editor.grid = [0.533277, 0.533277, 0.533277]
-        # editor.space.gradients.show_grad = False
-        # editor.space.gradients.high_gradient = [0.701102, 0.701102, 0.701102]
+
     else:
         return False
 
