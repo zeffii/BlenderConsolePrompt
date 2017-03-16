@@ -12,17 +12,13 @@ def search_blenderscripting(input_string):
 
 def search_bpydocs(input_string):
     try:
-        from urllib.request import urlopen
-        d = urlopen('http://www.blender.org/documentation/250PythonDoc')
-        d = d.read()
-        s_path = str(d).split("/")[2]
-
+        # https://docs.blender.org/api/blender_python_api_current/search.html
         import webbrowser
-        s_head = 'http://www.blender.org/documentation/'
-        s_slug = '/search.html?q='
+        s_head = 'https://docs.blender.org/api/blender_python_api_current/'
+        s_slug = 'search.html?q='
         s_tail = '&check_keywords=yes&area=default'
         s_term = input_string
-        webbrowser.open(''.join([s_head, s_path, s_slug, s_term, s_tail]))
+        webbrowser.open(''.join([s_head, s_slug, s_term, s_tail]))
     except:
         print('unable to browse docs online')
 
