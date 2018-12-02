@@ -73,7 +73,7 @@ class TEXT_Cycle_TextBlocks(bpy.types.Operator):
     bl_label = "switch text content of current viewer"
     bl_options = {'REGISTER', 'UNDO'}
 
-    direction = bpy.props.IntProperty(default=-1)
+    direction: bpy.props.IntProperty(default=-1)
 
     def execute(self, context):
         edit_text = bpy.context.edit_text
