@@ -106,3 +106,7 @@ class TEXT_Duplicate_Textblock(bpy.types.Operator):
         t.from_string(edit_text.as_string())
         context.space_data.text = t
         return {'FINISHED'}
+
+
+classes = [TEXT_Duplicate_Textblock, TEXT_Cycle_TextBlocks, TEXT_OT_do_comment]
+register, unregister = bpy.utils.register_classes_factory(classes)
