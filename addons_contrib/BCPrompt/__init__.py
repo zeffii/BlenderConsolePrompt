@@ -41,7 +41,7 @@ if 'bpy' in globals():
         print(__package__ + msg)
 
     if 'bc_operators' in globals():
-        import imp
+        import importlib as imp
         imp.reload(bc_operators)
         imp.reload(bc_panels)
         imp.reload(bc_utils)
