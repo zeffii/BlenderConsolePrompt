@@ -112,4 +112,4 @@ def unregister():
     bpy.types.CONSOLE_HT_header.remove(console_buttons_func)
     bpy.types.TEXT_MT_toolbox.remove(text_toolblock_func)
     for module in module_files[::-1]:
-        module.register()    
+        module.unregister()    
