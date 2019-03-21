@@ -99,7 +99,7 @@ def register():
     for module in module_files:
         module.register()
 
-    bpy.types.VIEW3D_MT_edit_curve_specials.append(menu_func)
+    bpy.types.VIEW3D_MT_edit_curve_context_menu.append(menu_func)
     bpy.types.CONSOLE_HT_header.append(console_buttons_func)
     bpy.types.TEXT_MT_toolbox.prepend(text_toolblock_func)
     console_keymaps.add_keymap(__package__)
@@ -108,7 +108,7 @@ def register():
 def unregister():
     console_keymaps.remove_keymap()
 
-    bpy.types.VIEW3D_MT_edit_curve_specials.remove(menu_func)
+    bpy.types.VIEW3D_MT_edit_curve_context_menu.remove(menu_func)
     bpy.types.CONSOLE_HT_header.remove(console_buttons_func)
     bpy.types.TEXT_MT_toolbox.remove(text_toolblock_func)
     for module in module_files[::-1]:
