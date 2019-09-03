@@ -1,9 +1,9 @@
 import bpy
 
 
-class Text_PT_SyncPanel(bpy.types.Panel):
+class TEXT_PT_SyncPanel(bpy.types.Panel):
     """Creates a Panel in the Object properties window"""
-    bl_idname = "Text_PT_SyncPanel"
+    bl_idname = "TEXT_PT_SyncPanel"
     bl_label = "text sync checker"
     bl_space_type = "TEXT_EDITOR"
     bl_region_type = "UI"
@@ -23,5 +23,5 @@ class Text_PT_SyncPanel(bpy.types.Panel):
         if context.edit_text.is_modified:
             row.operator("text.text_upsync")
 
-classes = [Text_PT_SyncPanel]
+classes = [TEXT_PT_SyncPanel]
 register, unregister = bpy.utils.register_classes_factory(classes)
