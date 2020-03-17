@@ -90,6 +90,8 @@ def console_buttons_func(self, context):
     row = self.layout.row()
     row.alert = True
     row.operator("script.reload", text="Refresh Python")
+    row = self.layout.row()
+    row.operator("wm.save_homefile", text="mk-default.blend", icon="BLENDER")
 
 # this files have ops that need registration
 module_files = [bc_operators, bc_panels, bc_TEXT_utils]
