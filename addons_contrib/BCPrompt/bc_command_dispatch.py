@@ -105,10 +105,10 @@ def lazy_power_download(mod, dl_url, op_path, op_name, invoke_type=None):
 def in_scene_commands(context, m):
     if m == "cen":
         '''cursor to center'''
-        context.scene.cursor_location = (0.0, 0.0, 0.0)
+        context.scene.cursor.location = (0.0, 0.0, 0.0)
 
     if m == 'cenv':
-        context.scene.cursor_location = (0.0, 0.0, 0.0)
+        context.scene.cursor.location = (0.0, 0.0, 0.0)
         align_view_to_3dcursor()
 
     elif m == 'cento':
