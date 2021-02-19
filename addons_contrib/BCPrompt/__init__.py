@@ -86,7 +86,7 @@ def text_toolblock_func(self, context):
 
 
 def console_buttons_func(self, context):
-    self.layout.operator('wm.set_editmode_shortcuts', text='123')
+    # self.layout.operator('wm.set_editmode_shortcuts', text='123')
     row = self.layout.row()
     row.alert = True
     row.operator("script.reload", text="Refresh Python")
