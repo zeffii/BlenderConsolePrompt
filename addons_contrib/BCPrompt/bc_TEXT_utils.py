@@ -1,5 +1,5 @@
 import bpy
-
+import re
 
 def detect_comments(lines):
     for line in lines:
@@ -33,12 +33,29 @@ class TEXT_OT_do_comment(bpy.types.Operator):
         copied_text = wm.clipboard
         copied_lines = copied_text.split('\n')
 
-        # are all lines essentially comments?
+        # are all lines essentially comments? # test
         comment_mode = detect_comments(copied_lines)
+
+        def paste_replacement(lines):
+            wm = bpy.context.window_manager
+            lines_to_paste = '\n'.join(lines)
+            wm.clipboard = lines_to_paste
+            bpy.ops.text.paste()
+
+        def uncomment(line, pattern):
+            return re.sub(pattern, "", line, count=1)
 
         if comment_mode:
             ''' lines are all comments '''
-            pass
+            print("current select is a pure comment")
+            replacement_lines = []
+            for line in copied_lines:
+                if line.strip().startswith("# "):
+                    replacement_lines.append(uncomment(line, "# "))
+                else:
+                    replacement_lines.append(line)
+            
+            paste_replacement(replacement_lines)
 
         else:
             ''' lines need to be commented '''
@@ -60,9 +77,7 @@ class TEXT_OT_do_comment(bpy.types.Operator):
             for idx, l in enumerate(copied_lines):
                 copied_lines[idx] = indent + "# " + l[min_space:]
 
-            lines_to_paste = '\n'.join(copied_lines)
-            wm.clipboard = lines_to_paste
-            bpy.ops.text.paste()
+            paste_replacement(copied_lines)
 
         return {'FINISHED'}
 
