@@ -132,7 +132,7 @@ class TEXT_OT_execute_plus(bpy.types.Operator):
     def execute(self, context):
         try:
             import sverchok
-            from sverchok.utils.console_print import console_print as print
+            from sverchok.utils.console_print import console_print as prin
         except:
             print("nope..sverchok needs to be installed")
             return {'CANCELLED'}
