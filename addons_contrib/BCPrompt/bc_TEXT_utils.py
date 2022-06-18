@@ -123,5 +123,33 @@ class TEXT_Duplicate_Textblock(bpy.types.Operator):
         return {'FINISHED'}
 
 
-classes = [TEXT_Duplicate_Textblock, TEXT_Cycle_TextBlocks, TEXT_OT_do_comment]
+class TEXT_OT_execute_plus(bpy.types.Operator):
+
+    bl_idname = "text.execute_plus"
+    bl_label = "executes code using local printing to console"
+    bl_options = {'REGISTER'}
+
+    def execute(self, context):
+        try:
+            import sverchok
+            from sverchok.utils.console_print import console_print as print
+        except:
+            print("nope..sverchok needs to be installed")
+            return {'CANCELLED'}
+
+        edit_text = bpy.context.edit_text
+        strs = edit_text.as_string()
+        wm = bpy.context.window_manager
+        filename = edit_text.name
+        try:
+            exec(compile(strs, filename, 'exec'), locals())
+
+        except Exception as err:
+            print(err, kind='ERROR')
+
+
+        return {'FINISHED'}
+
+
+classes = [TEXT_Duplicate_Textblock, TEXT_Cycle_TextBlocks, TEXT_OT_do_comment, TEXT_OT_execute_plus]
 register, unregister = bpy.utils.register_classes_factory(classes)

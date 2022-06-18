@@ -45,6 +45,9 @@ def add_keymap(origin):
     new_shortcut.properties.direction = -1
     addon_keymaps.append((km, new_shortcut))
 
+    new_shortcut = kmi.new("text.execute_plus", 'P', 'PRESS', ctrl=1, alt=1)
+    addon_keymaps.append((km, new_shortcut))
+
 
 def remove_keymap():
     for km, kmi in addon_keymaps:
