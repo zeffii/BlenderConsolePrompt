@@ -145,7 +145,7 @@ class TEXT_OT_execute_plus(bpy.types.Operator):
             exec(compile(strs, filename, 'exec'), locals())
 
         except Exception as err:
-            print(err, kind='ERROR')
+            prin(err, kind='ERROR')
 
 
         return {'FINISHED'}
