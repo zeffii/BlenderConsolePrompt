@@ -1,7 +1,7 @@
 import bpy
 import bmesh
 from mathutils import Vector
-from console_python import add_scrollback
+from .bc_console import add_scrollback
 
 import os
 import sys

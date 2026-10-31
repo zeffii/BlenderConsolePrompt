@@ -1,7 +1,7 @@
 import ast
 
 import bpy
-from console_python import add_scrollback
+from .bc_console import add_scrollback
 
 from .bc_update_utils import get_gist_as_string
 

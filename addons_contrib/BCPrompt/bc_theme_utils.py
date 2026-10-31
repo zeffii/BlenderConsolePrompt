@@ -1,5 +1,5 @@
 import bpy
-from console_python import add_scrollback, get_console
+from .bc_console import add_scrollback, get_console
 
 history_append = bpy.ops.console.history_append
 

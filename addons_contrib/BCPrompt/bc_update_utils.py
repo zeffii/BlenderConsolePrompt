@@ -6,7 +6,7 @@ import urllib
 import json
 import bpy
 from urllib.request import urlopen
-from console_python import add_scrollback
+from .bc_console import add_scrollback
 
 '''
 design considerations
@@ -64,7 +64,7 @@ def peek_builder_org(search_target):
     d = d.split('\n')
 
     hrefs = []
-    pattern = 'href=\"(.*)\"\>'
+    pattern = r'href="(.*)">'
 
     if len(search_target) == 1:
         '''

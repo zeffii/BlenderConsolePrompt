@@ -1,5 +1,5 @@
 import bpy
-from console_python import add_scrollback
+from .bc_console import add_scrollback
 
 from .bc_command_dispatch import (
     in_scene_commands,
